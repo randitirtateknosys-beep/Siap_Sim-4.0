@@ -21,6 +21,10 @@
             overflow-x: hidden;
             transition: background-color 0.3s;
         }
+body.dark-theme {
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
 
         /* --- HERO HEADER PT TIRTA TEKNOSYS --- */
         .hero-header {
@@ -35,7 +39,9 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             position: relative;
             overflow: hidden;
+            transition: background 2s ease-in-out; 
         }
+        
         .hero-brand, .hero-clock { position: relative; z-index: 10; }
         .hero-brand { display: flex; align-items: center; gap: 15px; }
         
@@ -66,6 +72,50 @@
         .parallax > use:nth-child(3) { animation-delay: -4s; animation-duration: 13s; fill: rgba(30, 41, 59, 0.7); }
         .parallax > use:nth-child(4) { animation-delay: -5s; animation-duration: 20s; fill: #1e293b; }
         
+        /* --- EFEK MATAHARI & TEMA WAKTU DINAMIS --- */
+        .sun-glow {
+            position: absolute;
+            right: 10%; 
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            z-index: 0; 
+            transition: all 2s ease-in-out; 
+        }
+
+        /* 1. Tema Pagi (Sunrise 05:00 - 08:00) */
+        .hero-header.theme-sunrise { background: linear-gradient(135deg, #0f172a 0%, #4c1d95 40%, #ea580c 100%); }
+        .hero-header.theme-sunrise .sun-glow { 
+            bottom: 10px; 
+            background: radial-gradient(circle, #fef08a, #ea580c, transparent); 
+            box-shadow: 0 0 60px #ea580c; 
+            opacity: 0.9;
+        }
+
+        /* 2. Tema Siang (Day 08:00 - 16:00) */
+        .hero-header.theme-day { background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 50%, #0369a1 100%); }
+        .hero-header.theme-day .sun-glow { 
+            bottom: 120px; 
+            background: radial-gradient(circle, #ffffff, #fde047, transparent); 
+            box-shadow: 0 0 80px #fde047; 
+            opacity: 1;
+        }
+
+        /* 3. Tema Sore (Sunset 16:00 - 18:30) */
+        .hero-header.theme-sunset { background: linear-gradient(135deg, #1e1b4b 0%, #9f1239 50%, #b91c1c 100%); }
+        .hero-header.theme-sunset .sun-glow { 
+            bottom: 0px; 
+            background: radial-gradient(circle, #fde047, #f43f5e, transparent); 
+            box-shadow: 0 0 60px #f43f5e; 
+            opacity: 0.8;
+        }
+
+        /* 4. Tema Malam (Night 18:30 - 05:00) */
+        .hero-header.theme-night { background: linear-gradient(135deg, #020617 0%, #0f172a 50%, #1e3a8a 100%); }
+        .hero-header.theme-night .sun-glow { 
+            bottom: -100px; 
+            opacity: 0; 
+        }
         @keyframes wave-move { 0% { transform: translate3d(-90px, 0, 0); } 100% { transform: translate3d(85px, 0, 0); } }
 
         .global-nav {
@@ -83,7 +133,22 @@
 
         /* --- HALAMAN 1 CSS --- */
         #page1 { padding: 20px; display: block; }
-        .container { max-width: 1100px; margin: 0 auto; background: #fff; padding: 25px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); box-sizing: border-box; }
+        .container { 
+            max-width: 1100px; 
+            margin: 0 auto; 
+            background: #fff; 
+            padding: 25px; 
+            border-radius: 8px; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+            box-sizing: border-box; 
+            transition: background 2s ease, color 2s ease; 
+        }
+
+        /* Tema Malam untuk Container */
+        .dark-theme .container {
+            background-color: #1e293b !important; 
+            color: #f8fafc !important; 
+        }
         .container h2, .container h3 { color: #2c3e50; border-bottom: 2px solid #eef2f5; padding-bottom: 10px; }
         .container h2 { text-align: center; margin-top: 0; }
         .section { margin-bottom: 40px; }
@@ -217,7 +282,9 @@
         
         .pump-visual { width: 50px; height: 50px; border: 4px dashed #64748b; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; transition: 0.3s; }
         .pump-visual.running { border-color: #38bdf8; animation: spin 0.5s linear infinite; background: rgba(56,189,248,0.15); }
-        
+        @keyframes spin { 
+            100% { transform: rotate(360deg); } 
+        }
         .switch-toggle { padding: 4px 8px; background: #0f172a; border: 1px solid #475569; border-radius: 12px; cursor: pointer; font-weight: bold; font-size: 10px; color: #38bdf8; transition: 0.2s; }
         .switch-toggle:hover { border-color: #38bdf8; }
         
@@ -315,6 +382,27 @@
         .bpmt-main-table th { background-color: #f1f5f9; font-weight: bold; color: black !important; vertical-align: middle; }
         
         .bpmt-input-cell { border: none; outline: none; width: 100%; text-align: center; font-family: Arial, sans-serif; font-size: 12px; background: transparent; box-sizing: border-box; min-width: 0; }
+	/* Class khusus untuk sel tabel yang mendukung Wrap Text */
+.bpmt-input-wrap {
+    border: none;
+    outline: none;
+    width: 100%;
+    text-align: left;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    background: transparent;
+    box-sizing: border-box;
+    min-height: 18px; /* Tinggi minimal sel */
+    white-space: pre-wrap; /* Kunci utama fitur Wrap Text */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    padding: 2px 4px;
+}
+
+/* Memunculkan garis bawah putus-putus saat sel sedang diketik, sama seperti input lainnya */
+.bpmt-input-wrap:focus, .bpmt-input-wrap:active {
+    border-bottom: 1px dotted black;
+}
         .bpmt-input-cell.left { text-align: left; padding-left: 5px; }
         
         /* Signatures */
@@ -340,10 +428,9 @@
 
         /* --- 1. TABLET (Portrait & Landscape kecil) - max 1024px --- */
         @media screen and (max-width: 1024px) {
-            .calc-grid { grid-template-columns: 1fr; } /* Tumpuk kalkulator atas-bawah */
-            .sidebar { width: 250px; } /* Perkecil gudang komponen di simulator */
+            .calc-grid { grid-template-columns: 1fr; } 
+            .sidebar { width: 250px; } 
             
-            /* Penyesuaian Kertas Form BPMT agar tidak memotong layar */
             #page3 { padding: 10px; }
             .bpmt-paper { width: 100%; min-height: auto; padding: 15px; }
             .info-flex { flex-direction: column; gap: 15px; }
@@ -352,7 +439,6 @@
 
         /* --- 2. SMARTPHONE (Umum) - max 768px --- */
         @media screen and (max-width: 768px) {
-            /* Header & Navigasi Utama */
             .hero-header { flex-direction: column; text-align: center; padding: 15px 15px 40px 15px; }
             .hero-brand { flex-direction: column; gap: 10px; }
             .hero-text h1 { font-size: 18px; line-height: 1.3; }
@@ -360,14 +446,12 @@
             .global-nav { flex-direction: column; padding: 0; }
             .nav-tab { width: 100%; justify-content: center; border-bottom: 1px solid #334155; }
 
-            /* Halaman 1: Kalkulator & Pencarian Pompa */
             .search-input-group { flex-direction: column; }
             .search-input-group input, .search-input-group select { width: 100%; max-width: 100%; }
             .filter-section { flex-direction: column; align-items: stretch; }
             .filter-section select { width: 100%; }
             .search-pump-header { flex-direction: column; text-align: left; align-items: flex-start; }
 
-            /* Halaman 2: Simulator Kelistrikan */
             #page2 { height: auto; min-height: calc(100vh - 200px); }
             .ecad-header { flex-direction: column; align-items: stretch; text-align: center; padding: 15px 10px; }
             .ecad-title { justify-content: center; margin-bottom: 10px; }
@@ -380,7 +464,6 @@
             .footer-content { flex-direction: column; height: auto; }
             .status-box { width: 100%; box-sizing: border-box; margin-top: 10px; }
 
-            /* Halaman 3: Form BPMT */
             .iso-header-flex { flex-direction: column; border: none; }
             .iso-col-1, .iso-col-2, .iso-col-3 { width: 100%; border: 1.5px solid black; border-bottom: none; padding: 10px; }
             .iso-col-3 { border-bottom: 1.5px solid black; }
@@ -391,11 +474,10 @@
 
         /* --- 3. SMARTPHONE KECIL - max 480px --- */
         @media screen and (max-width: 480px) {
-            .pump-specs-grid { grid-template-columns: 1fr 1fr; } /* Badge spesifikasi jadi 2 kolom */
-            .result-item { font-size: 13px; } /* Perkecil teks hasil kalkulator */
+            .pump-specs-grid { grid-template-columns: 1fr 1fr; } 
+            .result-item { font-size: 13px; } 
             .btn-apply-spec { font-size: 12px; padding: 8px; white-space: normal; }
             
-            /* Penyesuaian tombol di header form BPMT */
             .no-print div { flex-direction: column; align-items: stretch; }
             .no-print div select, .no-print div button { width: 100%; margin-bottom: 5px; }
         }
@@ -404,6 +486,7 @@
 <body>
 
 <div class="hero-header">
+<div class="sun-glow"></div>
     <div class="hero-brand">
         <div class="logo-box" title="Logo PT. Tirta Teknosys">
             <img src="https://i.ibb.co.com/4RKfYsJW/images.png" alt="Logo PT Tirta Teknosys">
@@ -783,7 +866,7 @@
                 <input type="text" id="playerName" class="challenge-input" placeholder="Masukkan Nama Anda...">
                 <div class="timer-display" id="challengeTimerDisplay">00:00:00</div>
                 <div style="display:flex; gap:5px;">
-                    <button class="btn btn-gold" style="flex:1; justify-content:center;" onclick="startChallenge()">▶ START</button>
+                    <button class="btn btn-gold" style="flex:1; justify-content:center;" onclick="startLevel1()">▶ START LEVEL 1</button>
                     <button class="btn btn-red" style="flex:1; justify-content:center;" onclick="stopChallenge()">⏹ STOP</button>
                 </div>
                 <div class="leaderboard-box" id="leaderboardList"></div>
@@ -848,9 +931,8 @@
         <div class="workspace" id="workspace" ondrop="dropComponent(event)" ondragover="allowDrop(event)">
             <div class="din-rail rail-1"></div><div class="din-rail rail-2"></div><div class="din-rail rail-3"></div><div class="din-rail rail-4"></div>
             <svg id="svgLayer">
-                <line id="tempWire" x1="0" y1="0" x2="0" y2="0" stroke="#38bdf8" stroke-width="4" stroke-dasharray="6,6" style="display: none; pointer-events: none; filter: drop-shadow(0 0 4px #fff);" />
+                <path id="tempWire" d="" stroke="#38bdf8" stroke-width="4" stroke-dasharray="6,6" fill="none" style="display: none; pointer-events: none; filter: drop-shadow(0 0 4px #fff);" />
             </svg>
-
             <div class="comp-box active-power" id="comp_supply" style="left: 30px; top: 30px; width: 175px;">
                 <div class="comp-header" style="background:#1e3a8a; cursor:default;">⚡ SUMBER DAYA 3-PHASE</div>
                 <div class="comp-body" style="color:#60a5fa; font-weight:bold;">SUPPLY PLN 380V / 220V<br><small style="color:#94a3b8;">R - S - T - N - PE</small></div>
@@ -995,7 +1077,51 @@
     }
     setInterval(updateClock, 1000);
 
-    // --- FUNGSI NAVIGASI HALAMAN (TAB SWITCHER) ---
+// --- FUNGSI TEMA WAKTU OTOMATIS (NATURAL TRANSITION) ---
+    function updateTimeTheme() {
+        const hour = new Date().getHours();
+        const minute = new Date().getMinutes();
+        const timeFloat = hour + (minute / 60); 
+        const header = document.querySelector('.hero-header');
+        const container = document.body; 
+        
+        // 1. Tentukan target class tema berdasarkan jam
+        let targetClass = '';
+        if (timeFloat >= 5 && timeFloat < 8) targetClass = 'theme-sunrise';
+        else if (timeFloat >= 8 && timeFloat < 16) targetClass = 'theme-day';
+        else if (timeFloat >= 16 && timeFloat < 18.5) targetClass = 'theme-sunset';
+        else targetClass = 'theme-night';
+        
+        // 2. Terapkan class ke header
+        if (!header.classList.contains(targetClass)) {
+            header.classList.remove('theme-sunrise', 'theme-day', 'theme-sunset', 'theme-night');
+            header.classList.add(targetClass);
+            console.log("Transisi waktu ke:", targetClass);
+        }
+
+        // 3. Terapkan tema gelap (dark-theme) untuk body saat malam
+        const isNight = (hour >= 18 || hour < 5); 
+        if (isNight) {
+            container.classList.add('dark-theme');
+            // Pastikan jika ada di Halaman 1, background langsung gelap
+            if (document.getElementById('page1').style.display !== 'none') {
+                document.body.style.backgroundColor = '#0f172a';
+            }
+        } else {
+            container.classList.remove('dark-theme');
+            // Pastikan jika ada di Halaman 1, background langsung terang
+            if (document.getElementById('page1').style.display !== 'none') {
+                document.body.style.backgroundColor = '#f4f7f6';
+            }
+        }
+    }
+
+    // Panggil fungsi saat web pertama dimuat
+    updateTimeTheme();
+    // Ulangi pengecekan setiap 1 menit (60000 ms)
+    setInterval(updateTimeTheme, 60000);
+
+// --- FUNGSI NAVIGASI HALAMAN (TAB SWITCHER) ---
     function switchPage(pageId) {
         document.getElementById('page1').style.display = (pageId === 'page1') ? 'block' : 'none';
         document.getElementById('page2').style.display = (pageId === 'page2') ? 'flex' : 'none';
@@ -1005,16 +1131,21 @@
         document.getElementById('tab-page2').classList.toggle('active', pageId === 'page2');
         document.getElementById('tab-page3').classList.toggle('active', pageId === 'page3');
 
+        // Pengaturan Background berdasarkan tab aktif
         if (pageId === 'page2') {
-            document.body.style.backgroundColor = '#0f172a';
+            document.body.style.backgroundColor = '#0f172a'; // Selalu gelap di Halaman 2
             setTimeout(updateAllWires, 100);
         } else if (pageId === 'page3') {
-            document.body.style.backgroundColor = '#cbd5e1';
+            document.body.style.backgroundColor = '#cbd5e1'; // Selalu abu-abu di Halaman 3
         } else {
-            document.body.style.backgroundColor = '#f4f7f6';
+            // Khusus Halaman 1, cek apakah sedang mode malam atau siang
+            if (document.body.classList.contains('dark-theme')) {
+                document.body.style.backgroundColor = '#0f172a';
+            } else {
+                document.body.style.backgroundColor = '#f4f7f6';
+            }
         }
     }
-
     function toggleSidebar() {
         const sb = document.getElementById('gudangSidebar');
         const btn = document.getElementById('btnToggleSidebar');
@@ -1065,7 +1196,7 @@
         "CDMF 5-5 (3-Phase)": { model: "CNP CDMF 5-5 (3-Phase)", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.86, head: "5 m³/h @ 35 meter" },
         "CDMF 10-6 (3-Phase)": { model: "CNP CDMF 10-6 (3-Phase)", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.87, head: "10 m³/h @ 48 meter" },
         "CDMF 15-4 (3-Phase)": { model: "CNP CDMF 15-4 (3-Phase)", kw: 4.0, hp: 5.5, phase: 3, volt: "380V", cos: 0.87, head: "15 m³/h @ 45 meter" },
-        "CDMF 20-5 (3-Phase)": { model: "CNP CDMF 20-5 (3-Phase)", kw: 5.5, hp: 7.5, phase: 3, volt: "380V", cos: 0.87, head: "20 m³/h @ 60 meter" },
+        "CDMF 20-5 (3-Phase)": { model: "CNP CDMF 20-5 (3-Phase)", kw: 5.5, hp: 7.5, phase: 3, volt: "380V", cos: 0.87, head: "20 m³/h @ 50 meter" },
         "CDMF 32-3 (3-Phase)": { model: "CNP CDMF 32-3 (3-Phase)", kw: 5.5, hp: 7.5, phase: 3, volt: "380V", cos: 0.87, head: "32 m³/h @ 45 meter" },
         "CDMF 42-3 (3-Phase)": { model: "CNP CDMF 42-3 (3-Phase)", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.88, head: "42 m³/h @ 65 meter" },
         "CDMF 65-2 (3-Phase)": { model: "CNP CDMF 65-2 (3-Phase)", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.88, head: "65 m³/h @ 50 meter" },
@@ -1311,37 +1442,88 @@
         } catch (e) { localStorage.setItem('siapsim_lb', '[]'); }
     }
 
-    function startChallenge() {
-        const name = document.getElementById('playerName').value.trim();
-        if(!name) { alert('Masukkan nama dulu sebelum mulai!'); return; }
-        if(challengeActive) return;
-        
-        clearWorkspace(); 
-        challengeActive = true; challengeStartTime = Date.now(); document.getElementById('playerName').disabled = true;
-        
-        challengeInterval = setInterval(() => {
-            currentElapsed = Date.now() - challengeStartTime;
-            document.getElementById('challengeTimerDisplay').innerText = formatTime(currentElapsed);
-        }, 10);
-        addLog(`🏁 TANTANGAN DIMULAI! Pemain: ${name}. Rangkai komponen secepatnya!`);
-    }
 
-    function stopChallenge(isSuccess = false) {
-        if(!challengeActive) return;
-        clearInterval(challengeInterval); challengeActive = false; document.getElementById('playerName').disabled = false;
-        if (isSuccess) {
-            const name = document.getElementById('playerName').value.trim();
-            const timeStr = formatTime(currentElapsed);
-            addLog(`🎉 SELAMAT! ${name} berhasil menyalakan sistem dalam waktu ${timeStr}!`);
-            try {
-                let lb = JSON.parse(localStorage.getItem('siapsim_lb') || '[]');
-                lb.push({ name: name, ms: currentElapsed, timeStr: timeStr });
-                lb.sort((a,b) => a.ms - b.ms); lb = lb.slice(0, 10); 
-                localStorage.setItem('siapsim_lb', JSON.stringify(lb)); 
-                renderLeaderboard();
-            } catch(e) {}
-        } else { addLog("⏹️ Tantangan dihentikan secara manual."); }
+// ==========================================
+// 🏆 Mode Tantangan: Level 1 "Shift Pagi yang Sibuk"
+// ==========================================
+function startLevel1() {
+    const playerName = document.getElementById('playerName').value.trim();
+    if(!playerName) {
+        alert('⚠️ Harap masukkan nama Anda terlebih dahulu sebelum memulai shift!');
+        return;
     }
+    if(challengeActive) return;
+
+    // 1. Bersihkan meja kerja dan mulai waktu
+    clearWorkspace();
+    challengeActive = true;
+    challengeStartTime = Date.now();
+    document.getElementById('playerName').disabled = true;
+
+    addLog(`⏳ 【Tantangan Level 1】Dimulai! Teknisi: ${playerName}. Segera rangkai DOL untuk menyalakan Pompa Air Utama!`);
+
+    // 2. Munculkan komponen yang dibutuhkan secara otomatis di layar
+    createComponentBox('MCB_1P', 150, 100);
+    createComponentBox('KONTAKTOR', 400, 150);
+    createComponentBox('PUMP_1P', 650, 200);
+
+    // 3. Sistem Pemantau (Mengecek keberhasilan & kegagalan)
+    challengeInterval = setInterval(() => {
+        currentElapsed = Date.now() - challengeStartTime;
+        document.getElementById('challengeTimerDisplay').innerText = formatTime(currentElapsed);
+
+        // Cari pompa dan kontaktor di papan kerja
+        let pump = components.find(c => c.type === 'PUMP_1P');
+        let contactor = components.find(c => c.type === 'KONTAKTOR');
+
+        // Syarat Utama: Pompa harus menyala dan kontaktor harus ada
+        if (pump && pump.state.running && contactor) {
+            
+            // Hambatan: Cek apakah fasa dan netral terbalik di koil (A1 & A2)
+            // Mengecek status 'live' (beraliran fasa/api) dari terminal
+            let a1Live = document.getElementById(`term_${contactor.id}_top_0`).classList.contains('live');
+            let a2Live = document.getElementById(`term_${contactor.id}_bot_0`).classList.contains('live');
+
+            if (a2Live && !a1Live) {
+                // 💥 GAGAL: Fasa masuk ke A2 (Netral)
+                clearInterval(challengeInterval);
+                challengeActive = false;
+                document.getElementById('playerName').disabled = false;
+                isSystemLocked = true; // Kunci sistem dari fungsi Anda
+                if (isPowerOn) toggleMainPower(); // Matikan MCB Utama secara otomatis
+
+                lastDiagnosticIssue = "Kabel pada koil kontaktor terbalik! (Fasa masuk ke A2, Netral ke A1).";
+                lastDiagnosticSolution = "Pilih fitur 'Hapus Kabel' di atas, lalu gunakan palet 'WARNA KABEL' yang benar di sebelah kiri (Merah untuk Fasa, Biru untuk Netral) untuk memasang ulang jalurnya.";
+                
+                showTripModal("⚠️ SISTEM TRIP: Polaritas Terbalik!", lastDiagnosticIssue);
+                addLog("💥 SISTEM TRIP! Kabel fasa dan netral pada koil kontaktor dipasang terbalik.");
+                
+            } else if (a1Live && !a2Live) {
+                // 🎉 BERHASIL: A1 terhubung ke Fasa, A2 ke Netral
+                clearInterval(challengeInterval);
+                challengeActive = false;
+                document.getElementById('playerName').disabled = false;
+
+                const timeStr = formatTime(currentElapsed);
+                
+                // Sistem Penilaian: Selesai di bawah 60.000 ms (1 menit) dapat Bintang
+                let starBadge = currentElapsed < 60000 ? " ⭐" : "";
+                
+                addLog(`🎉 SELAMAT! ${playerName} berhasil menyalakan pompa air dalam waktu ${timeStr}!${starBadge}`);
+
+                // Simpan nilai ke Leaderboard
+                try {
+                    let lb = JSON.parse(localStorage.getItem('siapsim_lb') || '[]');
+                    lb.push({ name: playerName + starBadge, ms: currentElapsed, timeStr: timeStr });
+                    lb.sort((a,b) => a.ms - b.ms); 
+                    lb = lb.slice(0, 10); 
+                    localStorage.setItem('siapsim_lb', JSON.stringify(lb)); 
+                    renderLeaderboard();
+                } catch(e) {}
+            }
+        }
+    }, 100);
+}
 
     function updatePumpLoad(slider) {
         let compBox = slider.closest('.comp-box');
@@ -1516,7 +1698,7 @@
     
     function setWireColor(hex, el) { selectedWireColor = hex; document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('active')); el.classList.add('active'); }
 
-    function handleTerminalClick(termEl, termId, label) {
+   function handleTerminalClick(termEl, termId, label) {
         if (isPowerOn) { addLog("⚠️ Matikan tegangan utama (MCB) sebelum merangkai kabel!"); return; }
         const rect = termEl.getBoundingClientRect(); const ws = document.getElementById('workspace');
         const cx = rect.left - ws.getBoundingClientRect().left + ws.scrollLeft + (rect.width/2);
@@ -1526,19 +1708,33 @@
             activeWireStart = { termEl, termId, x: cx, y: cy }; termEl.style.transform = "scale(1.4)";
             document.getElementById('tempWire').style.display = 'block'; document.getElementById('btnCancelWire').style.display = 'flex';
             document.onmousemove = (ev) => {
-                document.getElementById('tempWire').setAttribute('x1', activeWireStart.x); document.getElementById('tempWire').setAttribute('y1', activeWireStart.y);
-                document.getElementById('tempWire').setAttribute('x2', ev.clientX - ws.getBoundingClientRect().left + ws.scrollLeft); document.getElementById('tempWire').setAttribute('y2', ev.clientY - ws.getBoundingClientRect().top + ws.scrollTop);
+                const x2 = ev.clientX - ws.getBoundingClientRect().left + ws.scrollLeft;
+                const y2 = ev.clientY - ws.getBoundingClientRect().top + ws.scrollTop;
+                // Rumus garis siku-siku untuk animasi tarik kabel
+                const midY = activeWireStart.y + (y2 - activeWireStart.y) / 2;
+                const pathStr = `M ${activeWireStart.x} ${activeWireStart.y} L ${activeWireStart.x} ${midY} L ${x2} ${midY} L ${x2} ${y2}`;
+                document.getElementById('tempWire').setAttribute('d', pathStr);
             };
         } else {
             if (activeWireStart.termId !== termId) {
                 const lid = 'wire_' + Date.now();
                 const g = document.createElementNS('http://www.w3.org/2000/svg', 'g'); g.id = lid; g.className.baseVal = 'wire-group'; g.onclick = (e) => { e.stopPropagation(); deleteWire(lid); };
-                const h = document.createElementNS('http://www.w3.org/2000/svg', 'line'); h.className.baseVal = 'wire-hitbox';
-                const v = document.createElementNS('http://www.w3.org/2000/svg', 'line'); v.className.baseVal = 'wire-visible'; v.setAttribute('stroke', selectedWireColor);
-                [h, v].forEach(el => { el.setAttribute('x1', activeWireStart.x); el.setAttribute('y1', activeWireStart.y); el.setAttribute('x2', cx); el.setAttribute('y2', cy); g.appendChild(el); });
+                
+                // UBAH DARI <line> MENJADI <path> AGAR BISA SIKU-SIKU
+                const h = document.createElementNS('http://www.w3.org/2000/svg', 'path'); h.className.baseVal = 'wire-hitbox'; h.setAttribute('fill', 'none');
+                const v = document.createElementNS('http://www.w3.org/2000/svg', 'path'); v.className.baseVal = 'wire-visible'; v.setAttribute('stroke', selectedWireColor); v.setAttribute('fill', 'none');
+                
+                const midY = activeWireStart.y + (cy - activeWireStart.y) / 2;
+                const pathStr = `M ${activeWireStart.x} ${activeWireStart.y} L ${activeWireStart.x} ${midY} L ${cx} ${midY} L ${cx} ${cy}`;
+                
+                [h, v].forEach(el => { 
+                    el.setAttribute('d', pathStr); 
+                    g.appendChild(el); 
+                });
+                
                 document.getElementById('svgLayer').appendChild(g);
-                wires.push({ lineId: lid, from: activeWireStart.termId, to: termId }); updateTerminalStates();
-            }
+                wires.push({ lineId: lid, from: activeWireStart.termId, to: termId, color: selectedWireColor }); 
+updateTerminalStates();            }
             cancelWireDrawing();
         }
     }
@@ -1546,21 +1742,63 @@
     function cancelWireDrawing() { if(activeWireStart) activeWireStart.termEl.style.transform = ""; activeWireStart = null; document.getElementById('tempWire').style.display = 'none'; document.getElementById('btnCancelWire').style.display = 'none'; document.onmousemove = null; }
     function deleteWire(id) { if (isPowerOn) return; document.getElementById(id)?.remove(); wires = wires.filter(w => w.lineId !== id); updateTerminalStates(); }
     function clearAllWires() { if (isPowerOn) return; wires.forEach(w => document.getElementById(w.lineId)?.remove()); wires = []; updateTerminalStates(); }
-    function updateTerminalStates() { document.querySelectorAll('.term-port').forEach(t => t.classList.remove('connected')); wires.forEach(w => { document.getElementById('term_'+w.from)?.classList.add('connected'); document.getElementById('term_'+w.to)?.classList.add('connected'); }); }
+
+    function updateTerminalStates() {
+        // 1. Reset semua terminal kembali ke warna default (abu-abu/kosong)
+        document.querySelectorAll('.terminal').forEach(t => {
+            t.style.removeProperty('background-color'); // Hapus warna
+            t.style.removeProperty('box-shadow'); // Hapus efek cahaya
+            t.classList.remove('connected');
+            t.title = ''; // Hapus alamat label
+        });
+        
+        // 2. Beri warna & alamat pada terminal yang terhubung
+        wires.forEach(w => {
+            const termF = document.getElementById('term_' + w.from);
+            const termT = document.getElementById('term_' + w.to);
+            
+            // Logika pewarnaan terminal asal (From)
+            if (termF) {
+                // Gunakan !important agar mengalahkan warna hijau bawaan CSS
+                termF.style.setProperty('background-color', w.color, 'important');
+                termF.style.setProperty('box-shadow', `0 0 8px ${w.color}`, 'important');
+                termF.classList.add('connected');
+                // Fitur Alamat Kabel: Muncul saat di-hover
+                termF.title = `🔌 Titik ini terhubung ke: [ ${w.to.toUpperCase()} ]`;
+            }
+            
+            // Logika pewarnaan terminal tujuan (To)
+            if (termT) {
+                termT.style.setProperty('background-color', w.color, 'important');
+                termT.style.setProperty('box-shadow', `0 0 8px ${w.color}`, 'important');
+                termT.classList.add('connected');
+                // Fitur Alamat Kabel: Muncul saat di-hover
+                termT.title = `🔌 Titik ini terhubung ke: [ ${w.from.toUpperCase()} ]`;
+            }
+        });
+    }
     
     function updateAllWires() {
         const wsRect = document.getElementById('workspace').getBoundingClientRect(); const sL = document.getElementById('workspace').scrollLeft; const sT = document.getElementById('workspace').scrollTop;
-        wires.forEach(w => {
+        wires.forEach((w, index) => {
             const elF = document.getElementById('term_' + w.from); const elT = document.getElementById('term_' + w.to); const g = document.getElementById(w.lineId);
             if (elF && elT && g) {
                 const r1 = elF.getBoundingClientRect(); const r2 = elT.getBoundingClientRect();
                 const x1 = r1.left - wsRect.left + sL + (r1.width/2); const y1 = r1.top - wsRect.top + sT + (r1.height/2);
                 const x2 = r2.left - wsRect.left + sL + (r2.width/2); const y2 = r2.top - wsRect.top + sT + (r2.height/2);
-                g.querySelectorAll('line').forEach(l => { l.setAttribute('x1', x1); l.setAttribute('y1', y1); l.setAttribute('x2', x2); l.setAttribute('y2', y2); });
+                
+                // Rumus Jalur Siku-siku (Orthogonal) dengan Offset agar tidak numpuk
+                const offset = ((index % 12) * 8) - 40; 
+                const midY = y1 + (y2 - y1) / 2 + offset;
+                
+                const pathStr = `M ${x1} ${y1} L ${x1} ${midY} L ${x2} ${midY} L ${x2} ${y2}`;
+                
+                g.querySelectorAll('path').forEach(p => { 
+                    p.setAttribute('d', pathStr); 
+                });
             }
         });
     }
-
     function toggleMainPower() {
         if (!isPowerOn && isSystemLocked) {
             showTripModal("🛑 GAGAL START: DIAGNOSA PENYAKIT", `Sistem dikunci karena riwayat kerusakan belum di-reset!\n\n🔴 Penyakit:\n${lastDiagnosticIssue}\n\n💡 Solusi:\n${lastDiagnosticSolution}\n\nHarap klik tombol "🔧 RESET PENYAKIT" setelah Anda memperbaiki jalur kabel atau beban fisiknya.`);
@@ -2335,7 +2573,7 @@
     
     // 1. Array Data Barang (PASTE 3000 BARIS DARI EXCEL ANDA DI SINI)
     const databaseBarang = [
-       {  kode: "AUT000017", nama: "1265 Series ByPass Valve; Single Pack (PN: 1040930)" },
+    {  kode: "AUT000017", nama: "1265 Series ByPass Valve; Single Pack (PN: 1040930)" },
 	{ kode: "BRT000006", nama: "1434 Almond Brine Tank Drillled & Cover; 5-PK (PN: 34618); 1 	Pack isi 5 Pcs; Merk: Pentair (Part of BRT000002)" },
 	{ kode: "BRT000007", nama: "1434 Blue Brine Tank Drillled & Cover; 5-PK (PN: 34620); 1 	Pack isi 5 Pcs; Merk: Pentair (Part of BRT000003)" },
 	{ kode: "UVL100001", nama: "16w Replacement Ballast for SDE-016 (PN: EB-G16)" },
@@ -5538,22 +5776,25 @@
         const barisTerkait = elemenInput.closest('tr');
         const inputKode = barisTerkait.querySelector('.input-kode');
         const inputNama = barisTerkait.querySelector('.input-nama');
+        const divNama = barisTerkait.querySelector('.div-nama'); // 新增：抓取负责换行的显示层
         const kataKunci = elemenInput.value.trim();
 
-        if (kataKunci === "") return; // Jika kosong, batalkan
+        if (kataKunci === "") return;
 
         if (pencarianBerdasarkan === 'nama') {
             const dataDitemukan = databaseBarang.find(item => item.nama === kataKunci);
             if (dataDitemukan) { inputKode.value = dataDitemukan.kode; }
         } else if (pencarianBerdasarkan === 'kode') {
             const dataDitemukan = databaseBarang.find(item => item.kode === kataKunci);
-            if (dataDitemukan) { inputNama.value = dataDitemukan.nama; }
+            if (dataDitemukan) { 
+                inputNama.value = dataDitemukan.nama; 
+                if (divNama) divNama.innerText = dataDitemukan.nama; // 新增：将文字同步给显示层
+            }
         }
     }
-
     let bpmtRowCounter = 0;
     
-    function addBpmtRow() {
+ function addBpmtRow() {
         bpmtRowCounter++;
         const tbody = document.getElementById('bpmtBody');
         const tr = document.createElement('tr');
@@ -5562,18 +5803,25 @@
         tr.innerHTML = `
             <td>${bpmtRowCounter}</td>
             <td><input type="text" class="bpmt-input-cell left input-kode" placeholder="Ketik Kode..." list="listKodeBarang" onchange="prosesAutoFill(this, 'kode')"></td>
-            <td><input type="text" class="bpmt-input-cell left input-nama" placeholder="Ketik Nama..." list="listNamaBarang" onchange="prosesAutoFill(this, 'nama')"></td>
+            
+            <!-- 核心魔法：点击时切换为 input 呼出下拉菜单，失去焦点时切换回 div 实现多行文本自动换行 -->
+            <td style="cursor: text; position: relative;" onclick="this.querySelector('.div-nama').style.display='none'; const inp = this.querySelector('.input-nama'); inp.style.display='block'; inp.focus();">
+                <div class="bpmt-input-wrap left div-nama" style="min-height: 18px;"></div>
+                <input type="text" class="bpmt-input-cell left input-nama" placeholder="Ketik Nama..." list="listNamaBarang" style="display:none; width: 100%;" onchange="prosesAutoFill(this, 'nama'); this.previousElementSibling.innerText = this.value;" onblur="this.style.display='none'; this.previousElementSibling.style.display='block'; this.previousElementSibling.innerText = this.value;">
+            </td>
+            
             <td><input type="text" class="bpmt-input-cell" placeholder="....."></td>
             <td><input type="text" class="bpmt-input-cell" placeholder="....."></td>
             <td><input type="checkbox" style="transform: scale(1.2);"></td>
             <td><input type="checkbox" style="transform: scale(1.2);"></td>
-            <td><input type="text" class="bpmt-input-cell left" placeholder="....."></td>
+            
+            <td><textarea class="bpmt-input-wrap" oninput="this.style.height=''; this.style.height=this.scrollHeight+'px'" style="resize:none; overflow:hidden; width:100%; background:transparent; font-family:Arial; font-size:12px;"></textarea></td>
+            
             <td class="no-print"><button onclick="removeBpmtRow('${tr.id}')" style="background:#ef4444; color:white; border:none; padding:4px 8px; border-radius:4px; cursor:pointer; font-weight:bold;">X</button></td>
         `;
         tbody.appendChild(tr);
         reindexBpmtRows();
     }
-
     function removeBpmtRow(rowId) {
         document.getElementById(rowId).remove();
         reindexBpmtRows();
@@ -5629,8 +5877,7 @@
         const rows = document.querySelectorAll('#bpmtBody tr');
         const tableData = Array.from(rows).map(row => {
             const rowValues = [];
-            row.querySelectorAll('input').forEach(input => {
-                if (input.type === 'checkbox') { rowValues.push(input.checked); } 
+            row.querySelectorAll('input, textarea').forEach(input => {                if (input.type === 'checkbox') { rowValues.push(input.checked); } 
                 else { rowValues.push(input.value); }
             });
             return rowValues;
@@ -5669,14 +5916,19 @@
             data.tableData.forEach((rowData) => {
                 addBpmtRow(); // Panggil fungsi bawaan aplikasi untuk bikin baris
                 const newRow = tbody.lastElementChild;
-                const rowInputs = newRow.querySelectorAll('input');
+                const rowInputs = newRow.querySelectorAll('input, textarea');
                 rowData.forEach((val, index) => {
                     if (rowInputs[index]) {
                         if (rowInputs[index].type === 'checkbox') rowInputs[index].checked = val;
                         else rowInputs[index].value = val;
+                        
+                        // 新增逻辑：如果当前渲染的是 input-nama，则将值同步给它前面的 div
+                        if (rowInputs[index].classList.contains('input-nama')) {
+                            rowInputs[index].previousElementSibling.innerText = val;
+                        }
                     }
-                });
-            });
+                });           
+ });
         }
 
         // Load Tanda Tangan
@@ -5721,6 +5973,5 @@
         <button class="modal-btn" onclick="closeTripModal()">Paham & Perbaiki</button>
     </div>
 </div>
-
 </body>
 </html>
