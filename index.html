@@ -6275,7 +6275,7 @@ updateTerminalStates();            }
     }
 
 // --- FUNGSI REAL-TIME SIMPAN & MUAT BPMT KE GOOGLE SHEETS ---
-    
+    const BPMT_API_URL = "https://script.google.com/macros/s/AKfycbxkRi2sEoGIM93GBJKv87lvkkjc0akS1BVDxbodlg-KjRft7TG9rBsNQdlI-H0I-Ua1/exec";
     async function saveBpmtData() {
         const inputs = document.querySelectorAll('#page3 .bpmt-input');
         const noBpmtVal = inputs[0] ? inputs[0].value.trim() : "";
