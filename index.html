@@ -6274,6 +6274,118 @@ updateTerminalStates();            }
         });
     }
 
+// --- FUNGSI REAL-TIME SIMPAN & MUAT BPMT KE GOOGLE SHEETS ---
+    
+    async function saveBpmtData() {
+        const inputs = document.querySelectorAll('#page3 .bpmt-input');
+        const noBpmtVal = inputs[0] ? inputs[0].value.trim() : "";
+        
+        if(!noBpmtVal) {
+            alert("⚠️ Harap isi No. BPMT terlebih dahulu sebelum menyimpan!");
+            return;
+        }
+
+        // Kumpulkan data dari input form Halaman 3
+        const payload = {
+            action: "saveBpmt",
+            noBpmt: noBpmtVal,
+            namaSso: inputs[1] ? inputs[1].value : "",
+            namaCust: inputs[2] ? inputs[2].value : "",
+            alamatCust: inputs[3] ? inputs[3].value : "",
+            tglMinta: inputs[4] ? inputs[4].value : "",
+            tglPakai: inputs[5] ? inputs[5].value : "",
+            jenisPekerjaan: inputs[6] ? inputs[6].value : "",
+            noSj: inputs[7] ? inputs[7].value : "",
+            noSpp: inputs[8] ? inputs[8].value : ""
+        };
+
+        try {
+            const btnSimpan = document.querySelector('#page3 button.btn-green');
+            const origText = btnSimpan.innerText;
+            btnSimpan.innerText = "⏳ Menyimpan...";
+
+            const response = await fetch(APPS_SCRIPT_URL, {
+                method: "POST",
+                headers: { "Content-Type": "text/plain;charset=utf-8" },
+                body: JSON.stringify(payload)
+            });
+            
+            const result = await response.json();
+            if(result.status === "success" || response.ok) {
+                alert("✅ Data BPMT berhasil disimpan secara real-time!");
+                loadBpmtHistoriList();
+            } else {
+                alert("⚠️ Gagal menyimpan data ke server.");
+            }
+            btnSimpan.innerText = origText;
+        } catch (error) {
+            console.error("Error saving BPMT:", error);
+            alert("❌ Terjadi kesalahan koneksi saat menyimpan data.");
+            document.querySelector('#page3 button.btn-green').innerText = "💾 Simpan Pekerjaan";
+        }
+    }
+
+    async function loadBpmtHistoriList() {
+        try {
+            const response = await fetch(APPS_SCRIPT_URL + "?type=getBpmt");
+            const data = await response.json();
+            window.cachedBpmtList = data; // Simpan cache data
+            
+            const select = document.getElementById('savedBpmtList');
+            select.innerHTML = '<option value="">-- Pilih Histori Tersimpan --</option>';
+            
+            if(Array.isArray(data)) {
+                data.forEach((item, index) => {
+                    let opt = document.createElement('option');
+                    opt.value = index;
+                    opt.textContent = `BPMT: ${item.noBpmt} - ${item.namaCust || 'Customer'}`;
+                    select.appendChild(opt);
+                });
+            }
+        } catch (e) {
+            console.error("Gagal memuat histori BPMT:", e);
+        }
+    }
+
+    function loadBpmtData() {
+        const index = document.getElementById('savedBpmtList').value;
+        if(index === "" || !window.cachedBpmtList) {
+            alert("⚠️ Silakan pilih salah satu histori terlebih dahulu dari dropdown!");
+            return;
+        }
+        
+        const item = window.cachedBpmtList[index];
+        const inputs = document.querySelectorAll('#page3 .bpmt-input');
+        
+        if(inputs[0]) inputs[0].value = item.noBpmt || "";
+        if(inputs[1]) inputs[1].value = item.namaSso || "";
+        if(inputs[2]) inputs[2].value = item.namaCust || "";
+        if(inputs[3]) inputs[3].value = item.alamatCust || "";
+        if(inputs[4]) inputs[4].value = item.tglMinta || "";
+        if(inputs[5]) inputs[5].value = item.tglPakai || "";
+        if(inputs[6]) inputs[6].value = item.jenisPekerjaan || "";
+        if(inputs[7]) inputs[7].value = item.noSj || "";
+        if(inputs[8]) inputs[8].value = item.noSpp || "";
+        
+        alert("📂 Data histori berhasil dimuat ke form!");
+    }
+
+    function deleteBpmtData() {
+        const select = document.getElementById('savedBpmtList');
+        if(select.value === "") {
+            alert("⚠️ Pilih histori yang ingin dihapus.");
+            return;
+        }
+        if(confirm("Apakah Anda yakin ingin menghapus histori ini?")) {
+            select.remove(select.selectedIndex);
+            alert("🗑️ Histori berhasil dibersihkan dari tampilan.");
+        }
+    }
+
+    // Jalankan pemuatan list saat halaman selesai dimuat
+    window.addEventListener('DOMContentLoaded', () => {
+        loadBpmtHistoriList();
+    });
     // ==========================================
     // LOGIKA PENYIMPANAN (SAVE/LOAD) FORM BPMT
     // ==========================================
