@@ -25,26 +25,6 @@
             background-color: #0f172a;
             color: #f8fafc;
         }
-/* --- HALAMAN LOGIN / REGISTER AWAL --- */
-        #authPage {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
-            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #0284c7 100%);
-            display: flex; justify-content: center; align-items: center; z-index: 99999;
-        }
-        .auth-panel {
-            background: #ffffff; padding: 30px 40px; border-radius: 12px; width: 380px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5); text-align: center;
-        }
-        .auth-panel img { width: 80px; margin-bottom: 10px; }
-        .auth-panel h2 { margin: 0 0 5px 0; color: #0f172a; font-size: 22px; }
-        .auth-panel p { margin: 0 0 20px 0; color: #64748b; font-size: 13px; }
-        .auth-input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box; font-size: 14px; outline: none; }
-        .auth-input:focus { border-color: #0284c7; box-shadow: 0 0 5px rgba(2,132,199,0.3); }
-        .auth-btn { width: 100%; padding: 12px; background: #0284c7; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 15px; transition: 0.2s; }
-        .auth-btn:hover { background: #0369a1; }
-        .auth-switch { margin-top: 20px; font-size: 13px; color: #475569; }
-        .auth-switch span { color: #0284c7; font-weight: bold; cursor: pointer; text-decoration: underline; }
-        .error-msg { color: #ef4444; font-size: 12px; margin-bottom: 10px; display: none; }
 
         /* --- HERO HEADER PT TIRTA TEKNOSYS --- */
         .hero-header {
@@ -477,35 +457,6 @@
 </head>
 <body>
 
-<!-- HALAMAN LOGIN & DAFTAR (Hanya Muncul Jika Belum Login) -->
-<div id="authPage">
-    <div class="auth-panel" id="loginPanel">
-        <img src="https://i.ibb.co.com/4RKfYsJW/images.png" alt="Logo">
-        <h2>Login Sistem</h2>
-        <p>Aplikasi Manajemen PT Tirta Teknosys</p>
-        <div id="loginError" class="error-msg"></div>
-        <input type="email" id="loginEmail" class="auth-input" placeholder="Masukkan Email Anda">
-        <input type="password" id="loginPassword" class="auth-input" placeholder="Masukkan Password">
-        <button class="auth-btn" onclick="window.doLogin()">MASUK</button>
-        <div class="auth-switch">Belum punya akun? <span onclick="window.toggleAuthMode('register')">Daftar di sini</span></div>
-    </div>
-
-    <div class="auth-panel" id="registerPanel" style="display: none;">
-        <img src="https://i.ibb.co.com/4RKfYsJW/images.png" alt="Logo">
-        <h2>Daftar Akun Baru</h2>
-        <p>Akses Portal PT Tirta Teknosys</p>
-        <div id="registerError" class="error-msg"></div>
-        <input type="text" id="registerName" class="auth-input" placeholder="Nama Lengkap Anda">
-        <input type="email" id="registerEmail" class="auth-input" placeholder="Alamat Email Valid">
-        <input type="password" id="registerPassword" class="auth-input" placeholder="Buat Password (Min 6 Karakter)">
-        <button class="auth-btn" onclick="window.doRegister()">DAFTAR SEKARANG</button>
-        <div class="auth-switch">Sudah punya akun? <span onclick="window.toggleAuthMode('login')">Login di sini</span></div>
-    </div>
-</div>
-
-<!-- CONTAINER UTAMA APLIKASI (Disembunyikan Jika Belum Login) -->
-<div id="mainApp" style="display: none;">
-
 <div class="hero-header">
 <div class="sun-glow"></div>
     <div class="hero-brand">
@@ -613,6 +564,7 @@
                     <input type="text" id="pumpSearchInput" placeholder="Ketik model pompa... (misal: chlf 2-50, CR 5-5, CDMF 10-6)" oninput="searchPumpDatabase()">
                     <select id="pumpSelectDropdown" onchange="selectPumpFromDropdown()">
                         <option value="">-- Atau Pilih Model dari Katalog --</option>
+                        
                         <optgroup label="CNP CHLF Series (Light Horizontal)">
                             <option value="CHLF 2-50 (1-Phase)">CNP CHLF 2-50 | 0.55 kW | 1-Phase (220V)</option>
                             <option value="CHLF 2-50 (3-Phase)">CNP CHLF 2-50 | 0.55 kW | 3-Phase (380V)</option>
@@ -1022,34 +974,22 @@
         <div class="section" id="multiPumpSection" style="margin-top: 40px;">
             <h3>3. Kalkulator Total Daya Panel Utama (Multi-Pompa & Bergantian)</h3>
             
-            <div style="margin-bottom: 15px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
-                <select id="savedCalcList" style="padding: 8px; border-radius: 4px; border: 1px solid #cbd5e1; min-width: 250px;">
-                    <option value="">-- Pilih Histori Kalkulasi Tersimpan --</option>
-                </select>
-                <button class="btn-apply-spec" style="width: auto; background: #eab308; color: black; font-size: 13px; padding: 8px 15px;" onclick="loadCalcData()">📂 Muat</button>
-                <button class="btn-apply-spec" style="width: auto; background: #16a34a; font-size: 13px; padding: 8px 15px;" onclick="saveCalcData()">💾 Simpan Kalkulasi</button>
-                <button class="btn-apply-spec" style="width: auto; background: #ef4444; font-size: 13px; padding: 8px 15px;" onclick="deleteCalcData()">🗑️ Hapus</button>
-            </div>
-
             <div style="background: #eef2f5; padding: 15px; border-radius: 8px; margin-bottom: 15px; overflow-x: auto;">
                 <p style="font-size: 13px; color: #475569; margin-top: 0;"><i>*Gunakan kolom <strong>"Jml Menyala"</strong> untuk mengatur skenario pompa bergantian (Duty/Standby). Contoh: Punya 4 pompa, tapi yang menyala bersamaan maksimal 2.</i></p>
-                <table style="width: 100%; background: white; border-radius: 8px; overflow: hidden; min-width: 900px;" id="multiPumpTable">
+                <table style="width: 100%; background: white; border-radius: 8px; overflow: hidden; min-width: 700px;" id="multiPumpTable">
                     <thead style="background: #0c4a6e; color: white;">
                         <tr>
                             <th style="padding: 10px;">Nama Beban / Pompa</th>
                             <th style="padding: 10px;">Daya</th>
                             <th style="padding: 10px;">Satuan</th>
                             <th style="padding: 10px;">Phase</th>
-                            <th style="padding: 10px;">MCB</th>
-                            <th style="padding: 10px;">Kontaktor</th>
-                            <th style="padding: 10px;">Overload</th>
                             <th style="padding: 10px;" title="Total unit fisik yang terpasang di lokasi">Total Unit</th>
                             <th style="padding: 10px;" title="Berapa unit yang menyala dalam satu waktu bersaman">Jml Menyala</th>
                             <th style="padding: 10px;">Aksi</th>
                         </tr>
                     </thead>
                     <tbody id="multiPumpBody">
-                    </tbody>
+                        </tbody>
                 </table>
                 <button class="btn-apply-spec" style="margin-top: 15px; width: auto; background: #16a34a; font-size: 13px;" onclick="addPumpRow()">➕ Tambah Pompa / Beban Manual</button>
             </div>
@@ -1318,10 +1258,6 @@
 </div>
 
 <script>
-    // --- PENGATURAN KONEKSI GOOGLE DRIVE ---
-    const SCRIPT_URL_PORTAL = 'https://script.google.com/macros/s/AKfycbwdkpk0JZYljbq726eUmDE9AqCn092x3xU6XeMvJJPTn3ZO2tZl_JOe4qldDOGZbK5l/exec'; 
-    const SCRIPT_URL_DRIVE = 'https://script.google.com/macros/s/AKfycbwXHEC_ltsePk7pKo6FuGKT0pmV2iIc1F0fw0PPZvthJngKrJ-HjJl5wUDYyVmc0uC9/exec'; 
-
     // --- FUNGSI JAM DIGITAL AKTUAL ---
     function updateClock() {
         const now = new Date();
@@ -1332,7 +1268,7 @@
     }
     setInterval(updateClock, 1000);
 
-    // --- FUNGSI TEMA WAKTU OTOMATIS (NATURAL TRANSITION) ---
+// --- FUNGSI TEMA WAKTU OTOMATIS (NATURAL TRANSITION) ---
     function updateTimeTheme() {
         const hour = new Date().getHours();
         const minute = new Date().getMinutes();
@@ -1368,7 +1304,7 @@
     updateTimeTheme();
     setInterval(updateTimeTheme, 60000);
 
-    // --- FUNGSI NAVIGASI HALAMAN (TAB SWITCHER) ---
+// --- FUNGSI NAVIGASI HALAMAN (TAB SWITCHER) ---
     function switchPage(pageId) {
         document.getElementById('page1').style.display = (pageId === 'page1') ? 'block' : 'none';
         document.getElementById('page2').style.display = (pageId === 'page2') ? 'flex' : 'none';
@@ -1391,7 +1327,6 @@
             }
         }
     }
-    
     function toggleSidebar() {
         const sb = document.getElementById('gudangSidebar');
         const btn = document.getElementById('btnToggleSidebar');
@@ -1416,10 +1351,11 @@
     // ==========================================
     // LOGIKA HALAMAN 1 (DOWNLOAD & KALKULATOR)
     // ==========================================
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwdkpk0JZYljbq726eUmDE9AqCn092x3xU6XeMvJJPTn3ZO2tZl_JOe4qldDOGZbK5l/exec';
     let globalData = []; 
 
     const pumpDatabase = {
-             // ==========================================
+        // ==========================================
         // 1. CNP CHLF Series (Light Horizontal)
         // ==========================================
         "CHLF 2-50 (1-Phase)": { model: "CNP CHLF 2-50", kw: 0.55, hp: 0.75, phase: 1, volt: "220V", cos: 0.9, head: "2 m³/h @ 36 meter" },
@@ -1763,7 +1699,7 @@
         "JT 250": { model: "Nocchi Pump JT 250", kw: 1.5, hp: 2.0, phase: 3, volt: "380V/220V", cos: 0.85, head: "Sesuai Spesifikasi Model" },
         "MCX 195": { model: "Nocchi MCX 195", kw: 1.1, hp: 1.5, phase: 3, volt: "380V/220V", cos: 0.85, head: "Sesuai Spesifikasi Model" },
         "MCX 375": { model: "Nocchi Pump MCX 375", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "Sesuai Spesifikasi Model" },
-        "4NMCPM": { model: "Nasional Mcpump 4NMCPM (Satelit)", kw: 0.75, hp: 1.0, phase: 1, volt: "220V", cos: 0.9, head: "Sesuai Spesifikasi Model" },
+        "4NMCPM": { model: "Nasional Mcpump 4NMCPM (Satelit)", kw: 0.75, hp: 1.0, phase: 1, volt: "220V", cos: 0.9, head: "Sesuai Spesifikasi Model" }
         /* PASTE DATABASE POMPA LAINNYA DI SINI */
     };
 
@@ -1835,7 +1771,7 @@
 
     async function fetchData() {
         try {
-            const response = await fetch(SCRIPT_URL_PORTAL);
+            const response = await fetch(APPS_SCRIPT_URL);
             const data = await response.json();
             globalData = data;
             document.getElementById('loading').style.display = 'none';
@@ -1908,7 +1844,7 @@
         else { btn.innerText = 'OFF'; btn.style.color = '#94a3b8'; }
     }
 
-// ==========================================
+    // ==========================================
     // LOGIKA HALAMAN 2 (SIAP-SIM 4.0 WIRING SIMULATOR)
     // ==========================================
     let components = []; let wires = []; let activeWireStart = null; 
@@ -2936,10 +2872,6 @@ updateTerminalStates();            }
                     <option value="1">1 Ph</option>
                 </select>
             </td>
-            <td style="padding: 8px; font-size: 12px; color: #94a3b8;" class="td-mcb"><i>Manual</i></td>
-            <td style="padding: 8px; font-size: 12px; color: #94a3b8;" class="td-kontaktor"><i>Manual</i></td>
-            <td style="padding: 8px; font-size: 12px; color: #94a3b8;" class="td-overload"><i>Manual</i></td>
-
             <td style="padding: 8px;"><input type="number" class="mp-total" value="2" min="1" style="width: 60px; padding: 8px; border-radius: 4px; border: 1px solid #cbd5e1; text-align: center;" oninput="validateMultiPump(this); hitungTotalDaya()"></td>
             <td style="padding: 8px;"><input type="number" class="mp-run" value="1" min="0" style="width: 60px; padding: 8px; border-radius: 4px; border: 1px solid #cbd5e1; text-align: center; background: #e0f2fe; color: #0369a1; font-weight: bold;" oninput="validateMultiPump(this); hitungTotalDaya()"></td>
             <td style="padding: 8px; text-align: center;"><button onclick="removePumpRow('${tr.id}')" style="background:#ef4444; color:white; border:none; padding:8px 12px; border-radius:4px; cursor:pointer; font-weight:bold;">X</button></td>
@@ -2948,19 +2880,19 @@ updateTerminalStates();            }
         hitungTotalDaya();
     }
 
+    // FUNGSI UTAMA INTEGRASI JALUR OTOMATIS ANTAR KALKULATOR
     function tambahHasilKalkulatorKePanelUtama() {
         let power = parseFloat(document.getElementById('powerInput').value) || 0;
         let unit = document.getElementById('powerUnit').value;
         let phase = document.getElementById('phaseSelect').value;
         let pumpSearchName = document.getElementById('pumpSearchInput').value.trim();
         
-        let specMCB = document.getElementById('resMCB').innerText;
-        let specKontaktor = document.getElementById('resKontaktor').innerText;
-        let specOverload = document.getElementById('resOverload').innerText;
-
         let labelName = pumpSearchName !== "" ? pumpSearchName : "Pompa Hasil Hitung " + (pumpRowCounter + 1);
 
-        if (power <= 0) { alert("⚠️ Masukkan nilai kapasitas daya yang valid di Section 2 sebelum memindahkan!"); return; }
+        if (power <= 0) {
+            alert("⚠️ Masukkan nilai kapasitas daya yang valid di Section 2 sebelum memindahkan!");
+            return;
+        }
 
         pumpRowCounter++;
         const tbody = document.getElementById('multiPumpBody');
@@ -2984,19 +2916,20 @@ updateTerminalStates();            }
                     <option value="1" ${phase == '1' ? 'selected' : ''}>1 Ph</option>
                 </select>
             </td>
-            <td style="padding: 8px; font-size: 12px; color: #475569;" class="td-mcb">${specMCB}</td>
-            <td style="padding: 8px; font-size: 12px; color: #475569; font-weight: bold;" class="td-kontaktor">${specKontaktor}</td>
-            <td style="padding: 8px; font-size: 12px; color: #475569;" class="td-overload">${specOverload}</td>
             <td style="padding: 8px;"><input type="number" class="mp-total" value="1" min="1" style="width: 60px; padding: 8px; border-radius: 4px; border: 1px solid #cbd5e1; text-align: center;" oninput="validateMultiPump(this); hitungTotalDaya()"></td>
             <td style="padding: 8px;"><input type="number" class="mp-run" value="1" min="0" style="width: 60px; padding: 8px; border-radius: 4px; border: 1px solid #cbd5e1; text-align: center; background: #e0f2fe; color: #0369a1; font-weight: bold;" oninput="validateMultiPump(this); hitungTotalDaya()"></td>
             <td style="padding: 8px; text-align: center;"><button onclick="removePumpRow('${tr.id}')" style="background:#ef4444; color:white; border:none; padding:8px 12px; border-radius:4px; cursor:pointer; font-weight:bold;">X</button></td>
         `;
         tbody.appendChild(tr);
         hitungTotalDaya();
+        
         document.getElementById('multiPumpSection').scrollIntoView({ behavior: 'smooth' });
     }
 
-    function removePumpRow(rowId) { document.getElementById(rowId).remove(); hitungTotalDaya(); }
+    function removePumpRow(rowId) {
+        document.getElementById(rowId).remove();
+        hitungTotalDaya();
+    }
 
     function validateMultiPump(input) {
         let row = input.closest('tr');
@@ -3009,22 +2942,31 @@ updateTerminalStates();            }
         let tbody = document.getElementById('multiPumpBody');
         let rows = tbody.querySelectorAll('tr');
         
-        let totalKwTerpasang = 0; let totalKwRunning = 0;
-        let totalArusRunning = 0; let maxCurrentMotor = 0; 
+        let totalKwTerpasang = 0;
+        let totalKwRunning = 0;
+        let totalArusRunning = 0;
+        let maxCurrentMotor = 0; 
 
         rows.forEach(row => {
-            let powerInput = row.querySelector('.mp-power'); let unitInput = row.querySelector('.mp-unit');
-            let phaseInput = row.querySelector('.mp-phase'); let totalInput = row.querySelector('.mp-total');
+            let powerInput = row.querySelector('.mp-power');
+            let unitInput = row.querySelector('.mp-unit');
+            let phaseInput = row.querySelector('.mp-phase');
+            let totalInput = row.querySelector('.mp-total');
             let runInput = row.querySelector('.mp-run');
 
             if(!powerInput || !unitInput || !phaseInput || !totalInput || !runInput) return;
 
-            let power = parseFloat(powerInput.value) || 0; let unit = unitInput.value;
-            let phase = parseInt(phaseInput.value) || 3; let qtyTotal = parseInt(totalInput.value) || 0;
-            let qtyRun = parseInt(runInput.value) || 0; let cosphi = 0.85; 
+            let power = parseFloat(powerInput.value) || 0;
+            let unit = unitInput.value;
+            let phase = parseInt(phaseInput.value) || 3;
+            let qtyTotal = parseInt(totalInput.value) || 0;
+            let qtyRun = parseInt(runInput.value) || 0;
+            let cosphi = 0.85; 
 
+            // Konversi daya sejalan dengan unit terpilih ke kW
             let kw = power;
-            if (unit === 'HP') kw = power * 0.746; else if (unit === 'Watt') kw = power / 1000;
+            if (unit === 'HP') kw = power * 0.746;
+            else if (unit === 'Watt') kw = power / 1000;
             
             totalKwTerpasang += (kw * qtyTotal);
             totalKwRunning += (kw * qtyRun);
@@ -3032,10 +2974,13 @@ updateTerminalStates();            }
             if (qtyRun > 0) {
                 let arusSatuUnit = (phase === 1) ? ((kw * 1000) / (220 * cosphi)) : ((kw * 1000) / (Math.sqrt(3) * 380 * cosphi));
                 totalArusRunning += (arusSatuUnit * qtyRun);
-                if (arusSatuUnit > maxCurrentMotor) maxCurrentMotor = arusSatuUnit;
+                if (arusSatuUnit > maxCurrentMotor) {
+                    maxCurrentMotor = arusSatuUnit;
+                }
             }
         });
 
+        // Rumusan Sesuai PUIL 2011 5.5.7.1
         let arusMcbMin = (0.25 * maxCurrentMotor) + totalArusRunning;
         const mcbPanelSizes = [10, 16, 20, 25, 32, 40, 50, 63, 80, 100, 125, 160, 200, 250, 320, 400, 630, 800, 1000, 1250];
         let mcbSelect = mcbPanelSizes.find(size => size >= arusMcbMin) || "Custom (Lebih dari 1250A)";
@@ -3048,133 +2993,23 @@ updateTerminalStates();            }
         if(elTerpasang) elTerpasang.innerText = totalKwTerpasang.toFixed(2) + " kW";
         if(elRunning) elRunning.innerText = totalKwRunning.toFixed(2) + " kW";
         if(elArus) elArus.innerText = totalArusRunning.toFixed(2) + " A";
-        if(elMcb) elMcb.innerText = totalKwRunning === 0 ? "0 A" : (mcbSelect + " Ampere (3P MCCB / MCB Utama)");
-    }
-
-    // --- FUNGSI SAVE/LOAD/SYNC KALKULATOR TOTAL DAYA (FIREBASE) ---
-    function getCalcHistory() { try { return JSON.parse(localStorage.getItem('calc_history') || '{}'); } catch (e) { return {}; } }
-    function saveCalcHistory(data) { localStorage.setItem('calc_history', JSON.stringify(data)); }
-
-    function refreshCalcDropdown() {
-        const dropdown = document.getElementById('savedCalcList');
-        if (!dropdown) return;
-        dropdown.innerHTML = '<option value="">-- Pilih Histori Kalkulasi Tersimpan --</option>';
-        const history = getCalcHistory();
-        for (const key in history) {
-            const opt = document.createElement('option'); opt.value = key; opt.textContent = key;
-            dropdown.appendChild(opt);
-        }
-    }
-
-    function syncCalcCloud() {
-        if(!window.db || !window.firebaseOnValue || !window.firebaseRef) { 
-            setTimeout(syncCalcCloud, 1000); 
-            return; 
-        }
-        window.firebaseOnValue(window.firebaseRef(window.db, 'calc_history'), (snapshot) => {
-            if(snapshot.exists()) {
-                localStorage.setItem('calc_history', JSON.stringify(snapshot.val()));
-            } else {
-                localStorage.removeItem('calc_history');
-            }
-            refreshCalcDropdown();
-        });
-    }
-
-    async function saveCalcData() {
-        const rows = document.querySelectorAll('#multiPumpBody tr');
-        if (rows.length === 0) { alert("⚠️ Tabel kosong, tidak ada data yang bisa disimpan."); return; }
-
-        let defaultName = "Panel Utama " + new Date().toLocaleDateString('id-ID').replace(/\//g, '-');
-        const rawSaveName = prompt("Masukkan nama/judul untuk menyimpan histori panel ini:", defaultName);
-        if (!rawSaveName) return;
-
-        // Sanitasi nama (menghilangkan karakter dilarang oleh Firebase . # $ [ ] /)
-        const saveName = rawSaveName.replace(/[\.\#\$\/\[\]]/g, "_");
-
-        const tableData = Array.from(rows).map(row => {
-            const inputs = row.querySelectorAll('input, select');
-            return {
-                nama: inputs[0].value, daya: inputs[1].value, satuan: inputs[2].value, phase: inputs[3].value,
-                mcb: row.querySelector('.td-mcb') ? row.querySelector('.td-mcb').innerText : "Manual",
-                kontaktor: row.querySelector('.td-kontaktor') ? row.querySelector('.td-kontaktor').innerText : "Manual",
-                overload: row.querySelector('.td-overload') ? row.querySelector('.td-overload').innerText : "Manual",
-                totalUnit: inputs[4].value, jmlMenyala: inputs[5].value
-            };
-        });
         
-        const payload = { saveName: saveName, tableData: tableData, date: new Date().toISOString() };
-
-        if(window.db && window.firebaseSet && window.firebaseRef) {
-            window.firebaseSet(window.firebaseRef(window.db, 'calc_history/' + saveName), payload)
-            .then(() => alert("✅ Kalkulasi '" + saveName + "' berhasil di-Backup ke Database Cloud (Firebase)!"))
-            .catch((e) => alert("❌ Gagal menyimpan ke Cloud. Alasan: " + e.message));
-        } else {
-            const history = getCalcHistory(); history[saveName] = payload; saveCalcHistory(history); refreshCalcDropdown();
-            alert("⚠️ Tersimpan di lokal karena Firebase Cloud belum siap.");
-        }
-    }
-
-    function loadCalcData() {
-        const saveName = document.getElementById('savedCalcList').value;
-        if (!saveName) { alert("⚠️ Pilih histori yang ingin dimuat dari dropdown."); return; }
-
-        const history = getCalcHistory();
-        const data = history[saveName];
-        if (!data || !data.tableData) return;
-
-        if (!confirm("Peringatan: Memuat histori ini akan menimpa tabel saat ini. Lanjutkan?")) return;
-
-        const tbody = document.getElementById('multiPumpBody');
-        tbody.innerHTML = ''; pumpRowCounter = 0;
-
-        data.tableData.forEach((item) => {
-            pumpRowCounter++; const tr = document.createElement('tr'); tr.id = `row-${pumpRowCounter}`; tr.style.borderBottom = "1px solid #e2e8f0";
-            tr.innerHTML = `
-                <td style="padding: 8px;"><input type="text" value="${item.nama}" style="width: 90%; padding: 8px; border-radius: 4px; border: 1px solid #cbd5e1;"></td>
-                <td style="padding: 8px;"><input type="number" class="mp-power" value="${item.daya}" step="0.1" style="width: 70px; padding: 8px; border-radius: 4px; border: 1px solid #cbd5e1;" oninput="hitungTotalDaya()"></td>
-                <td style="padding: 8px;">
-                    <select class="mp-unit" onchange="hitungTotalDaya()" style="padding: 8px; border-radius: 4px; border: 1px solid #cbd5e1;">
-                        <option value="kW" ${item.satuan === 'kW' ? 'selected' : ''}>kW</option>
-                        <option value="HP" ${item.satuan === 'HP' ? 'selected' : ''}>HP</option>
-                        <option value="Watt" ${item.satuan === 'Watt' ? 'selected' : ''}>Watt</option>
-                    </select>
-                </td>
-                <td style="padding: 8px;">
-                    <select class="mp-phase" onchange="hitungTotalDaya()" style="padding: 8px; border-radius: 4px; border: 1px solid #cbd5e1;">
-                        <option value="3" ${item.phase == '3' ? 'selected' : ''}>3 Ph</option>
-                        <option value="1" ${item.phase == '1' ? 'selected' : ''}>1 Ph</option>
-                    </select>
-                </td>
-                <td style="padding: 8px; font-size: 12px; color: #475569;" class="td-mcb">${item.mcb}</td>
-                <td style="padding: 8px; font-size: 12px; color: #475569; font-weight: bold;" class="td-kontaktor">${item.kontaktor}</td>
-                <td style="padding: 8px; font-size: 12px; color: #475569;" class="td-overload">${item.overload}</td>
-                <td style="padding: 8px;"><input type="number" class="mp-total" value="${item.totalUnit}" min="1" style="width: 60px; padding: 8px; border-radius: 4px; border: 1px solid #cbd5e1; text-align: center;" oninput="validateMultiPump(this); hitungTotalDaya()"></td>
-                <td style="padding: 8px;"><input type="number" class="mp-run" value="${item.jmlMenyala}" min="0" style="width: 60px; padding: 8px; border-radius: 4px; border: 1px solid #cbd5e1; text-align: center; background: #e0f2fe; color: #0369a1; font-weight: bold;" oninput="validateMultiPump(this); hitungTotalDaya()"></td>
-                <td style="padding: 8px; text-align: center;"><button onclick="removePumpRow('${tr.id}')" style="background:#ef4444; color:white; border:none; padding:8px 12px; border-radius:4px; cursor:pointer; font-weight:bold;">X</button></td>
-            `;
-            tbody.appendChild(tr);
-        });
-        hitungTotalDaya(); alert("📂 Histori Kalkulasi '" + saveName + "' berhasil dimuat!");
-    }
-
-    async function deleteCalcData() {
-        const saveName = document.getElementById('savedCalcList').value;
-        if (!saveName) { alert("⚠️ Pilih histori yang ingin dihapus."); return; }
-        if (!confirm("Apakah Anda yakin ingin menghapus histori '" + saveName + "' secara permanen?")) return;
-
-        if(window.db && window.firebaseRemove && window.firebaseRef) {
-            window.firebaseRemove(window.firebaseRef(window.db, 'calc_history/' + saveName))
-            .then(() => alert("🗑️ Histori dihapus permanen dari Cloud (Firebase)."))
-            .catch(e => alert("❌ Gagal menghapus dari Cloud."));
+        if(elMcb) {
+            if(totalKwRunning === 0) {
+                 elMcb.innerText = "0 A";
+            } else {
+                 elMcb.innerText = mcbSelect + " Ampere (3P MCCB / MCB Utama)";
+            }
         }
     }
 
     // ==========================================
     // LOGIKA AUTO-FILL DATABASE BARANG (FORM BPMT)
     // ==========================================
+    
+    // 1. Array Data Barang (PASTE 3000 BARIS DARI EXCEL ANDA DI SINI)
     const databaseBarang = [
-        { kode: "AUT000017", nama: "1265 Series ByPass Valve; Single Pack (PN: 1040930)" },
+    {  kode: "AUT000017", nama: "1265 Series ByPass Valve; Single Pack (PN: 1040930)" },
 	{ kode: "BRT000006", nama: "1434 Almond Brine Tank Drillled & Cover; 5-PK (PN: 34618); 1 	Pack isi 5 Pcs; Merk: Pentair (Part of BRT000002)" },
 	{ kode: "BRT000007", nama: "1434 Blue Brine Tank Drillled & Cover; 5-PK (PN: 34620); 1 	Pack isi 5 Pcs; Merk: Pentair (Part of BRT000003)" },
 	{ kode: "UVL100001", nama: "16w Replacement Ballast for SDE-016 (PN: EB-G16)" },
@@ -6343,210 +6178,338 @@ updateTerminalStates();            }
 { "kode": "PLB000060", "nama": "Y Branch 6 inch x 3 inch; Merk: Rucika" },
 { "kode": "SPR000005", "nama": "Y Conector Selang 1/4 inch" },
 { "kode": "PLB000041", "nama": "Y Strainer Valve 2 inch JIS 10K Cast Iron Merk KITZ" },
-        { kode: "ELC000101", nama: "Zelio SR2 B121 FU; Merk: Schneider" },
-        { kode: "ELC000100", nama: "Zelio SR3 B261 FU; Merk: Schneider" },
-        { kode: "ZMB000001", nama: "Zoomba Mobile WTP 1.000 LPH" },
-        { kode: "ZMB000002", nama: "Zoomba Mobile WTP 1.500 LPH" }
+{ "kode": "ELC000101", "nama": "Zelio SR2 B121 FU; Merk: Schneider" },
+{ "kode": "ELC000100", "nama": "Zelio SR3 B261 FU; Merk: Schneider" },
+{ "kode": "ZMB000001", "nama": "Zoomba Mobile WTP 1.000 LPH" },
+{ "kode": "ZMB000002", "nama": "Zoomba Mobile WTP 1.500 LPH" },
     ];
 
+    // 2. Fungsi untuk menyuntikkan <datalist> ke HTML
     function initDatalistBarang() {
-        let datalistNama = document.createElement('datalist'); datalistNama.id = 'listNamaBarang';
-        let datalistKode = document.createElement('datalist'); datalistKode.id = 'listKodeBarang';
-        let opsiNama = ''; let opsiKode = '';
-        databaseBarang.forEach(item => { opsiNama += `<option value="${item.nama}">`; opsiKode += `<option value="${item.kode}">`; });
-        datalistNama.innerHTML = opsiNama; datalistKode.innerHTML = opsiKode;
-        document.body.appendChild(datalistNama); document.body.appendChild(datalistKode);
+        let datalistNama = document.createElement('datalist');
+        datalistNama.id = 'listNamaBarang';
+        
+        let datalistKode = document.createElement('datalist');
+        datalistKode.id = 'listKodeBarang';
+        
+        let opsiNama = '';
+        let opsiKode = '';
+        
+        databaseBarang.forEach(item => {
+            opsiNama += `<option value="${item.nama}">`;
+            opsiKode += `<option value="${item.kode}">`;
+        });
+        
+        datalistNama.innerHTML = opsiNama;
+        datalistKode.innerHTML = opsiKode;
+        
+        document.body.appendChild(datalistNama);
+        document.body.appendChild(datalistKode);
     }
 
+    // 3. Fungsi Eksekutor Auto-fill
     function prosesAutoFill(elemenInput, pencarianBerdasarkan) {
         const barisTerkait = elemenInput.closest('tr');
-        const inputKode = barisTerkait.querySelector('.input-kode'); const inputNama = barisTerkait.querySelector('.input-nama');
-        const divNama = barisTerkait.querySelector('.div-nama'); const kataKunci = elemenInput.value.trim();
+        const inputKode = barisTerkait.querySelector('.input-kode');
+        const inputNama = barisTerkait.querySelector('.input-nama');
+        const divNama = barisTerkait.querySelector('.div-nama'); 
+        const kataKunci = elemenInput.value.trim();
 
         if (kataKunci === "") return;
+
         if (pencarianBerdasarkan === 'nama') {
             const dataDitemukan = databaseBarang.find(item => item.nama === kataKunci);
-            if (dataDitemukan) inputKode.value = dataDitemukan.kode;
+            if (dataDitemukan) { inputKode.value = dataDitemukan.kode; }
         } else if (pencarianBerdasarkan === 'kode') {
             const dataDitemukan = databaseBarang.find(item => item.kode === kataKunci);
-            if (dataDitemukan) { inputNama.value = dataDitemukan.nama; if (divNama) divNama.innerText = dataDitemukan.nama; }
+            if (dataDitemukan) { 
+                inputNama.value = dataDitemukan.nama; 
+                if (divNama) divNama.innerText = dataDitemukan.nama; 
+            }
         }
     }
-    
     let bpmtRowCounter = 0;
     
     function addBpmtRow() {
-        bpmtRowCounter++; const tbody = document.getElementById('bpmtBody'); const tr = document.createElement('tr'); tr.id = `bpmt-row-${bpmtRowCounter}`;
+        bpmtRowCounter++;
+        const tbody = document.getElementById('bpmtBody');
+        const tr = document.createElement('tr');
+        tr.id = `bpmt-row-${bpmtRowCounter}`;
+        
         tr.innerHTML = `
             <td>${bpmtRowCounter}</td>
             <td><input type="text" class="bpmt-input-cell left input-kode" placeholder="Ketik Kode..." list="listKodeBarang" onchange="prosesAutoFill(this, 'kode')"></td>
+            
             <td style="cursor: text; position: relative;" onclick="this.querySelector('.div-nama').style.display='none'; const inp = this.querySelector('.input-nama'); inp.style.display='block'; inp.focus();">
                 <div class="bpmt-input-wrap left div-nama" style="min-height: 18px;"></div>
                 <input type="text" class="bpmt-input-cell left input-nama" placeholder="Ketik Nama..." list="listNamaBarang" style="display:none; width: 100%;" onchange="prosesAutoFill(this, 'nama'); this.previousElementSibling.innerText = this.value;" onblur="this.style.display='none'; this.previousElementSibling.style.display='block'; this.previousElementSibling.innerText = this.value;">
             </td>
+            
             <td><input type="text" class="bpmt-input-cell" placeholder="....."></td>
             <td><input type="text" class="bpmt-input-cell" placeholder="....."></td>
             <td><input type="checkbox" style="transform: scale(1.2);"></td>
             <td><input type="checkbox" style="transform: scale(1.2);"></td>
+            
             <td><textarea class="bpmt-input-wrap" oninput="this.style.height=''; this.style.height=this.scrollHeight+'px'" style="resize:none; overflow:hidden; width:100%; background:transparent; font-family:Arial; font-size:12px;"></textarea></td>
+            
             <td class="no-print"><button onclick="removeBpmtRow('${tr.id}')" style="background:#ef4444; color:white; border:none; padding:4px 8px; border-radius:4px; cursor:pointer; font-weight:bold;">X</button></td>
         `;
-        tbody.appendChild(tr); reindexBpmtRows();
+        tbody.appendChild(tr);
+        reindexBpmtRows();
     }
     
-    function removeBpmtRow(rowId) { document.getElementById(rowId).remove(); reindexBpmtRows(); }
+    function removeBpmtRow(rowId) {
+        document.getElementById(rowId).remove();
+        reindexBpmtRows();
+    }
 
     function reindexBpmtRows() {
-        const rows = document.getElementById('bpmtBody').querySelectorAll('tr'); bpmtRowCounter = 0;
+        const rows = document.getElementById('bpmtBody').querySelectorAll('tr');
+        bpmtRowCounter = 0;
         rows.forEach((row, index) => {
-            bpmtRowCounter++; row.id = `bpmt-row-${bpmtRowCounter}`; row.cells[0].innerText = bpmtRowCounter; 
+            bpmtRowCounter++;
+            row.id = `bpmt-row-${bpmtRowCounter}`;
+            row.cells[0].innerText = bpmtRowCounter; 
             row.cells[8].innerHTML = `<button onclick="removeBpmtRow('${row.id}')" style="background:#ef4444; color:white; border:none; padding:4px 8px; border-radius:4px; cursor:pointer; font-weight:bold;">X</button>`;
         });
     }
 
+// --- FUNGSI REAL-TIME SIMPAN & MUAT BPMT KE GOOGLE SHEETS ---
+    const BPMT_API_URL = "https://script.google.com/macros/s/AKfycbxkRi2sEoGIM93GBJKv87lvkkjc0akS1BVDxbodlg-KjRft7TG9rBsNQdlI-H0I-Ua1/exec";
+    async function saveBpmtData() {
+        const inputs = document.querySelectorAll('#page3 .bpmt-input');
+        const noBpmtVal = inputs[0] ? inputs[0].value.trim() : "";
+        
+        if(!noBpmtVal) {
+            alert("⚠️ Harap isi No. BPMT terlebih dahulu sebelum menyimpan!");
+            return;
+        }
+
+        // Kumpulkan data dari input form Halaman 3
+        const payload = {
+            action: "saveBpmt",
+            noBpmt: noBpmtVal,
+            namaSso: inputs[1] ? inputs[1].value : "",
+            namaCust: inputs[2] ? inputs[2].value : "",
+            alamatCust: inputs[3] ? inputs[3].value : "",
+            tglMinta: inputs[4] ? inputs[4].value : "",
+            tglPakai: inputs[5] ? inputs[5].value : "",
+            jenisPekerjaan: inputs[6] ? inputs[6].value : "",
+            noSj: inputs[7] ? inputs[7].value : "",
+            noSpp: inputs[8] ? inputs[8].value : ""
+        };
+
+        try {
+            const btnSimpan = document.querySelector('#page3 button.btn-green');
+            const origText = btnSimpan.innerText;
+            btnSimpan.innerText = "⏳ Menyimpan...";
+
+            const response = await fetch(APPS_SCRIPT_URL, {
+                method: "POST",
+                headers: { "Content-Type": "text/plain;charset=utf-8" },
+                body: JSON.stringify(payload)
+            });
+            
+            const result = await response.json();
+            if(result.status === "success" || response.ok) {
+                alert("✅ Data BPMT berhasil disimpan secara real-time!");
+                loadBpmtHistoriList();
+            } else {
+                alert("⚠️ Gagal menyimpan data ke server.");
+            }
+            btnSimpan.innerText = origText;
+        } catch (error) {
+            console.error("Error saving BPMT:", error);
+            alert("❌ Terjadi kesalahan koneksi saat menyimpan data.");
+            document.querySelector('#page3 button.btn-green').innerText = "💾 Simpan Pekerjaan";
+        }
+    }
+
+    async function loadBpmtHistoriList() {
+        try {
+            const response = await fetch(APPS_SCRIPT_URL + "?type=getBpmt");
+            const data = await response.json();
+            window.cachedBpmtList = data; // Simpan cache data
+            
+            const select = document.getElementById('savedBpmtList');
+            select.innerHTML = '<option value="">-- Pilih Histori Tersimpan --</option>';
+            
+            if(Array.isArray(data)) {
+                data.forEach((item, index) => {
+                    let opt = document.createElement('option');
+                    opt.value = index;
+                    opt.textContent = `BPMT: ${item.noBpmt} - ${item.namaCust || 'Customer'}`;
+                    select.appendChild(opt);
+                });
+            }
+        } catch (e) {
+            console.error("Gagal memuat histori BPMT:", e);
+        }
+    }
+
+    function loadBpmtData() {
+        const index = document.getElementById('savedBpmtList').value;
+        if(index === "" || !window.cachedBpmtList) {
+            alert("⚠️ Silakan pilih salah satu histori terlebih dahulu dari dropdown!");
+            return;
+        }
+        
+        const item = window.cachedBpmtList[index];
+        const inputs = document.querySelectorAll('#page3 .bpmt-input');
+        
+        if(inputs[0]) inputs[0].value = item.noBpmt || "";
+        if(inputs[1]) inputs[1].value = item.namaSso || "";
+        if(inputs[2]) inputs[2].value = item.namaCust || "";
+        if(inputs[3]) inputs[3].value = item.alamatCust || "";
+        if(inputs[4]) inputs[4].value = item.tglMinta || "";
+        if(inputs[5]) inputs[5].value = item.tglPakai || "";
+        if(inputs[6]) inputs[6].value = item.jenisPekerjaan || "";
+        if(inputs[7]) inputs[7].value = item.noSj || "";
+        if(inputs[8]) inputs[8].value = item.noSpp || "";
+        
+        alert("📂 Data histori berhasil dimuat ke form!");
+    }
+
+    function deleteBpmtData() {
+        const select = document.getElementById('savedBpmtList');
+        if(select.value === "") {
+            alert("⚠️ Pilih histori yang ingin dihapus.");
+            return;
+        }
+        if(confirm("Apakah Anda yakin ingin menghapus histori ini?")) {
+            select.remove(select.selectedIndex);
+            alert("🗑️ Histori berhasil dibersihkan dari tampilan.");
+        }
+    }
+
+    // Jalankan pemuatan list saat halaman selesai dimuat
+    window.addEventListener('DOMContentLoaded', () => {
+        loadBpmtHistoriList();
+    });
     // ==========================================
-    // LOGIKA PENYIMPANAN FORM BPMT (FIREBASE CLOUD)
+    // LOGIKA PENYIMPANAN (SAVE/LOAD) FORM BPMT
     // ==========================================
-    function getBpmtHistory() { try { return JSON.parse(localStorage.getItem('bpmt_history') || '{}'); } catch (e) { return {}; } }
-    function saveBpmtHistory(data) { localStorage.setItem('bpmt_history', JSON.stringify(data)); }
+    
+    function getBpmtHistory() {
+        try { return JSON.parse(localStorage.getItem('bpmt_history') || '{}'); } 
+        catch (e) { return {}; }
+    }
+
+    function saveBpmtHistory(data) {
+        localStorage.setItem('bpmt_history', JSON.stringify(data));
+    }
 
     function refreshBpmtDropdown() {
-        const dropdown = document.getElementById('savedBpmtList'); if (!dropdown) return;
+        const dropdown = document.getElementById('savedBpmtList');
+        if (!dropdown) return;
         dropdown.innerHTML = '<option value="">-- Pilih Histori Tersimpan --</option>';
         const history = getBpmtHistory();
         for (const key in history) {
-            const opt = document.createElement('option'); opt.value = key; opt.textContent = key;
+            const opt = document.createElement('option');
+            opt.value = key;
+            opt.textContent = key;
             dropdown.appendChild(opt);
         }
     }
 
-    function syncBpmtCloud() {
-        if(!window.db || !window.firebaseOnValue || !window.firebaseRef) { 
-            setTimeout(syncBpmtCloud, 1000); 
-            return; 
-        }
-        window.firebaseOnValue(window.firebaseRef(window.db, 'bpmt_history'), (snapshot) => {
-            if(snapshot.exists()) {
-                localStorage.setItem('bpmt_history', JSON.stringify(snapshot.val()));
-            } else {
-                localStorage.removeItem('bpmt_history');
-            }
-            refreshBpmtDropdown();
-        });
-    }
-
-    async function saveBpmtData() {
+    function saveBpmtData() {
         const inputs = document.querySelectorAll('.info-val .bpmt-input');
-        let defaultName = inputs[6] && inputs[6].value ? inputs[6].value.trim() : "Pekerjaan " + new Date().toLocaleDateString('id-ID').replace(/\//g, '-'); 
+        // Gunakan "Jenis Pekerjaan" atau nama custom sebagai nama file otomatis
+        let defaultName = inputs[6] && inputs[6].value ? inputs[6].value.trim() : ""; 
+        if (!defaultName) defaultName = "Pekerjaan " + new Date().toLocaleDateString('id-ID');
 
-        const rawSaveName = prompt("Masukkan nama/judul untuk menyimpan histori alat/barang ini:", defaultName);
-        if (!rawSaveName) return;
-
-        // Sanitasi nama (menghilangkan karakter dilarang oleh Firebase)
-        const saveName = rawSaveName.replace(/[\.\#\$\/\[\]]/g, "_");
+        const saveName = prompt("Masukkan nama/judul untuk menyimpan histori alat/barang ini:", defaultName);
+        if (!saveName) return;
 
         const headerData = Array.from(inputs).map(input => input.value);
         const rows = document.querySelectorAll('#bpmtBody tr');
         const tableData = Array.from(rows).map(row => {
             const rowValues = [];
             row.querySelectorAll('input, textarea').forEach(input => {                
-                if (input.type === 'checkbox') { rowValues.push(input.checked); } else { rowValues.push(input.value); }
+                if (input.type === 'checkbox') { rowValues.push(input.checked); } 
+                else { rowValues.push(input.value); }
             });
             return rowValues;
         });
         
         const signatures = Array.from(document.querySelectorAll('.sign-input')).map(input => input.value);
-        const payload = { saveName: saveName, headerData: headerData, tableData: tableData, signatures: signatures, date: new Date().toISOString() };
-
-        const btnSimpan = document.querySelector('#page3 button.btn-green');
-        const origText = btnSimpan.innerText;
-        btnSimpan.innerText = "⏳ Menyimpan (Cloud)...";
-
-        if(window.db && window.firebaseSet && window.firebaseRef) {
-            window.firebaseSet(window.firebaseRef(window.db, 'bpmt_history/' + saveName), payload)
-            .then(() => {
-                alert("✅ Data BPMT berhasil di-Backup ke Cloud (Firebase)!");
-                btnSimpan.innerText = origText;
-            })
-            .catch(e => {
-                alert("❌ Terjadi kesalahan penyimpanan Firebase.");
-                btnSimpan.innerText = origText;
-            });
-        } else {
-            // Backup Lokal
-            const history = getBpmtHistory(); history[saveName] = payload; saveBpmtHistory(history); refreshBpmtDropdown();
-            btnSimpan.innerText = origText;
-            alert("⚠️ Tersimpan di lokal karena Firebase Cloud belum siap.");
-        }
+        const history = getBpmtHistory();
+        history[saveName] = { headerData, tableData, signatures, date: new Date().toISOString() };
+        saveBpmtHistory(history);
+        
+        refreshBpmtDropdown();
+        document.getElementById('savedBpmtList').value = saveName;
+        alert("✅ Histori BPMT '" + saveName + "' berhasil disimpan!");
     }
 
     function loadBpmtData() {
         const saveName = document.getElementById('savedBpmtList').value;
-        if (!saveName) { alert("⚠️ Pilih histori yang ingin dimuat dari dropdown."); return; }
+        if (!saveName) { alert("⚠️ Pilih histori yang ingin dimuat dari dropdown di sebelah kiri tombol."); return; }
 
         const history = getBpmtHistory();
         const data = history[saveName];
-        if (!data || !data.tableData) return;
+        if (!data) return;
 
-        if (!confirm("Peringatan: Memuat histori ini akan menimpa form saat ini. Lanjutkan?")) return;
+        if (!confirm("Peringatan: Memuat histori ini akan menimpa data form yang sedang Anda isi. Lanjutkan?")) return;
 
+        // Load Header Infomation
         const inputs = document.querySelectorAll('.info-val .bpmt-input');
-        if(data.headerData) {
-            data.headerData.forEach((val, index) => { if(inputs[index]) inputs[index].value = val; });
+        if (data.headerData) {
+            data.headerData.forEach((val, index) => { if (inputs[index]) inputs[index].value = val; });
         }
 
+        // Load Table Data
         const tbody = document.getElementById('bpmtBody');
-        tbody.innerHTML = ''; bpmtRowCounter = 0;
-
-        data.tableData.forEach((rowValues) => {
-            addBpmtRow(); 
-            const lastRow = tbody.lastElementChild;
-            const rowInputs = lastRow.querySelectorAll('input, textarea');
-            
-            rowValues.forEach((val, index) => {
-                if(rowInputs[index]) {
-                    if(rowInputs[index].type === 'checkbox') {
-                        rowInputs[index].checked = val;
-                    } else {
-                        rowInputs[index].value = val;
-                        if(rowInputs[index].classList.contains('input-nama')) {
-                            const divNama = lastRow.querySelector('.div-nama');
-                            if(divNama) divNama.innerText = val;
+        tbody.innerHTML = ''; 
+        if (data.tableData) {
+            data.tableData.forEach((rowData) => {
+                addBpmtRow(); // Panggil fungsi bawaan aplikasi untuk bikin baris
+                const newRow = tbody.lastElementChild;
+                const rowInputs = newRow.querySelectorAll('input, textarea');
+                rowData.forEach((val, index) => {
+                    if (rowInputs[index]) {
+                        if (rowInputs[index].type === 'checkbox') rowInputs[index].checked = val;
+                        else rowInputs[index].value = val;
+                        
+                        // Sinkronisasi khusus untuk toggle nama barang
+                        if (rowInputs[index].classList.contains('input-nama')) {
+                            rowInputs[index].previousElementSibling.innerText = val;
                         }
                     }
-                }
+                });           
             });
-        });
+        }
 
+        // Load Tanda Tangan
         const signatures = document.querySelectorAll('.sign-input');
         if(data.signatures) {
-            data.signatures.forEach((val, index) => { if(signatures[index]) signatures[index].value = val; });
+            data.signatures.forEach((val, index) => { if (signatures[index]) signatures[index].value = val; });
         }
-        alert("📂 Histori BPMT '" + saveName + "' berhasil dimuat!");
+        alert("📂 Histori '" + saveName + "' berhasil dimuat!");
     }
 
-    async function deleteBpmtData() {
+   function deleteBpmtData() {
         const saveName = document.getElementById('savedBpmtList').value;
-        if (!saveName) { alert("⚠️ Pilih histori yang ingin dihapus."); return; }
-        if (!confirm("Apakah Anda yakin ingin menghapus histori BPMT '" + saveName + "' secara permanen?")) return;
+        if (!saveName) { alert("⚠️ Pilih histori yang ingin dihapus dari dropdown terlebih dahulu."); return; }
+        if (!confirm("Apakah Anda yakin ingin menghapus histori '" + saveName + "' secara permanen?")) return;
 
-        if(window.db && window.firebaseRemove && window.firebaseRef) {
-            window.firebaseRemove(window.firebaseRef(window.db, 'bpmt_history/' + saveName))
-            .then(() => alert("🗑️ Histori BPMT dihapus permanen dari Cloud (Firebase)."))
-            .catch(e => console.error(e));
-        }
+        const history = getBpmtHistory();
+        delete history[saveName];
+        saveBpmtHistory(history);
+        
+        refreshBpmtDropdown();
+        alert("🗑️ Histori berhasil dihapus.");
     }
 
+    // --- INIT APP ---
     window.onload = function() {
         updateClock();
         fetchData();
         hitungKelistrikan();
+        
+        // Menjalankan fungsi datalist saat aplikasi dimuat
         initDatalistBarang();
         refreshBpmtDropdown();
-        refreshCalcDropdown();
-        
-        syncCalcCloud();
-        syncBpmtCloud();
     }
 </script>
 
@@ -6559,12 +6522,15 @@ updateTerminalStates();            }
         <button class="modal-btn" onclick="closeTripModal()">Paham & Perbaiki</button>
     </div>
 </div>
-<!-- SCRIPT FIREBASE (AUTHENTICATION DENGAN SISTEM APPROVAL ADMIN & LUPA SANDI) -->
-<script type="module">
-  import { initializeApp } from "https://www-d-gstatic-d-com-s-gmn.pixivcn.com/firebasejs/10.8.0/firebase-app.js";
-  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, onAuthStateChanged, signOut, sendPasswordResetEmail } from "https://www-d-gstatic-d-com-s-gmn.pixivcn.com/firebasejs/10.8.0/firebase-auth.js";
-  import { getDatabase, ref, set, get, child, onValue, onDisconnect, remove } from "https://www-d-gstatic-d-com-s-gmn.pixivcn.com/firebasejs/10.8.0/firebase-database.js";
 
+<!-- MASUKKAN SCRIPT FIREBASE ANDA DI SINI -->
+<script type="module">
+  // 1. Import module dari URL RESMI Google
+  import { initializeApp } from "https://www-d-gstatic-d-com-s-gmn.pixivcn.com/firebasejs/10.8.0/firebase-app.js";
+  import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www-d-gstatic-d-com-s-gmn.pixivcn.com/firebasejs/10.8.0/firebase-auth.js";
+  import { getDatabase, ref, set, onValue, push, onDisconnect, remove } from "https://www-d-gstatic-d-com-s-gmn.pixivcn.com/firebasejs/10.8.0/firebase-database.js";
+
+  // 2. Firebase Configuration
   const firebaseConfig = {
     apiKey: "AIzaSyDNXL53D7Jxw9bDEV1STmQwLthzzM2IcQ8",
     authDomain: "project-sim-40.firebaseapp.com",
@@ -6575,145 +6541,51 @@ updateTerminalStates();            }
     appId: "1:340860813353:web:92b5893a67abc1eab1dc38"
   };
 
+  // 3. Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
   const db = getDatabase(app);
+  const provider = new GoogleAuthProvider();
 
-  // EXPOSE FIREBASE DB METHODS KE GLOBAL WINDOW
-  window.db = db;
-  window.firebaseRef = ref;
-  window.firebaseSet = set;
-  window.firebaseOnValue = onValue;
-  window.firebaseRemove = remove;
+  // --- A. GOOGLE AUTHENTICATION ---
   window.currentUser = null;
 
-  // 1. FUNGSI LOGIN EMAIL & PASSWORD
-  window.doLogin = function() {
-      const email = document.getElementById('loginEmail').value.trim();
-      const pass = document.getElementById('loginPassword').value;
-      const errorMsg = document.getElementById('loginError');
-
-      if (!email || !pass) { errorMsg.innerText = "Email dan Password wajib diisi!"; errorMsg.style.display = 'block'; return; }
-      errorMsg.style.display = 'none';
-
-      signInWithEmailAndPassword(auth, email, pass)
-          .catch((error) => {
-              errorMsg.innerText = "Login gagal: Email tidak terdaftar atau password salah.";
-              errorMsg.style.display = 'block';
-          });
+  window.signInGoogle = function() {
+      signInWithPopup(auth, provider).catch((error) => {
+          console.error("Login gagal:", error);
+          alert("Gagal login: " + error.message);
+      });
   };
 
-  // 2. FUNGSI DAFTAR (DENGAN ACC OTOMATIS KHUSUS DEVELOPER)
-  window.doRegister = function() {
-      const name = document.getElementById('registerName').value.trim();
-      const email = document.getElementById('registerEmail').value.trim();
-      const pass = document.getElementById('registerPassword').value;
-      const errorMsg = document.getElementById('registerError');
-
-      if (!name || !email || !pass) { errorMsg.innerText = "Semua kolom wajib diisi!"; errorMsg.style.display = 'block'; return; }
-      if (pass.length < 6) { errorMsg.innerText = "Password minimal 6 karakter!"; errorMsg.style.display = 'block'; return; }
-      errorMsg.style.display = 'none';
-
-      // 🔐 GANTI DENGAN EMAIL UTAMA / DEVELOPER ANDA
-      const masterDeveloperEmail = "admin@tirtateknosys.com"; 
-      const autoApprove = (email.toLowerCase() === masterDeveloperEmail.toLowerCase());
-
-      createUserWithEmailAndPassword(auth, email, pass)
-          .then((userCredential) => {
-              const user = userCredential.user;
-              updateProfile(user, { displayName: name });
-              
-              return set(ref(db, 'users_approval/' + user.uid), {
-                  name: name,
-                  email: email,
-                  isApproved: autoApprove // True jika email admin, false jika user biasa
-              });
-          })
-          .then(() => {
-              if (autoApprove) {
-                  alert("Pendaftaran Developer berhasil! Akun Anda langsung aktif.");
-              } else {
-                  alert("Pendaftaran berhasil! Akun Anda sedang menunggu PERSETUJUAN ADMIN.");
-                  signOut(auth); 
-                  window.toggleAuthMode('login');
-              }
-          })
-          .catch((error) => {
-              if (error.code === 'auth/email-already-in-use') errorMsg.innerText = "Email ini sudah terdaftar. Silakan login.";
-              else errorMsg.innerText = "Gagal mendaftar: " + error.message;
-              errorMsg.style.display = 'block';
-          });
+  window.signOutGoogle = function() {
+      signOut(auth).catch((error) => console.error("Logout gagal:", error));
   };
 
-  // 3. FUNGSI LUPA SANDI
-  window.doForgotPassword = function() {
-      const email = document.getElementById('loginEmail').value.trim();
-      const errorMsg = document.getElementById('loginError');
-      const successMsg = document.getElementById('loginSuccess');
-
-      if (!email) { 
-          errorMsg.innerText = "Silakan ketik email Anda terlebih dahulu pada kolom email di atas!"; 
-          errorMsg.style.display = 'block'; 
-          successMsg.style.display = 'none';
-          return; 
-      }
-      errorMsg.style.display = 'none';
-
-      sendPasswordResetEmail(auth, email)
-          .then(() => {
-              successMsg.innerText = "✅ Link pemulihan sandi telah dikirim ke email Anda. Silakan cek inbox/spam.";
-              successMsg.style.display = 'block';
-          })
-          .catch((error) => {
-              errorMsg.innerText = "Gagal mengirim email reset: " + error.message;
-              errorMsg.style.display = 'block';
-              successMsg.style.display = 'none';
-          });
-  };
-
-  // 4. FUNGSI LOGOUT
-  window.doLogout = function() {
-      signOut(auth).catch((error) => alert("Gagal logout: " + error.message));
-  };
-
-  // 5. LISTENER STATUS LOGIN (PENGECEKAN PERSETUJUAN / APPROVAL)
   onAuthStateChanged(auth, (user) => {
-      const authPage = document.getElementById('authPage');
-      const mainApp = document.getElementById('mainApp');
+      const btnLogin = document.getElementById('btnGoogleLogin');
+      const btnLogout = document.getElementById('btnGoogleLogout');
       const nameDisplay = document.getElementById('userNameDisplay');
 
       if (user) {
-          get(child(ref(db), `users_approval/${user.uid}/isApproved`)).then((snapshot) => {
-              if (snapshot.exists() && snapshot.val() === true) {
-                  window.currentUser = user;
-                  authPage.style.display = 'none';
-                  mainApp.style.display = 'block';
-                  
-                  let displayName = user.displayName || user.email.split('@')[0];
-                  nameDisplay.innerHTML = `👤 <b>${displayName}</b>`;
-                  managePresence(user); 
-              } else {
-                  alert("⚠️ AKSES DITOLAK: Akun Anda belum disetujui (Approved) oleh Admin.");
-                  signOut(auth);
-              }
-          }).catch((error) => {
-              console.error(error);
-              signOut(auth);
-          });
+          window.currentUser = user;
+          nameDisplay.innerHTML = `👤 ${user.displayName}`;
+          if(btnLogin) btnLogin.style.display = 'none';
+          if(btnLogout) btnLogout.style.display = 'block';
+          
+          managePresence(user); 
       } else {
           window.currentUser = null;
-          authPage.style.display = 'flex';
-          mainApp.style.display = 'none';
+          nameDisplay.innerHTML = `👤 Guest (Belum Login)`;
+          if(btnLogin) btnLogin.style.display = 'flex';
+          if(btnLogout) btnLogout.style.display = 'none';
       }
   });
 
-  // 6. FITUR LIVE VIEW (PRESENCE)
+  // --- B. PRESENCE SYSTEM (LIVE VIEW ONLINE USERS) ---
   function managePresence(user) {
       const userStatusRef = ref(db, '/status/' + user.uid);
-      let displayName = user.displayName || user.email.split('@')[0];
-      
-      const isOfflineForDatabase = { state: 'offline', last_changed: new Date().getTime(), name: displayName, email: user.email };
-      const isOnlineForDatabase = { state: 'online', last_changed: new Date().getTime(), name: displayName, email: user.email };
+      const isOfflineForDatabase = { state: 'offline', last_changed: new Date().getTime(), name: user.displayName, email: user.email };
+      const isOnlineForDatabase = { state: 'online', last_changed: new Date().getTime(), name: user.displayName, email: user.email };
 
       const connectedRef = ref(db, '.info/connected');
       onValue(connectedRef, (snap) => {
@@ -6725,7 +6597,7 @@ updateTerminalStates();            }
       });
   }
 
-  // MENAMPILKAN DAFTAR USER ONLINE
+  // Tampilkan Live View
   const listOnlineRef = ref(db, '/status/');
   onValue(listOnlineRef, (snapshot) => {
       const listContainer = document.getElementById('onlineUsersList');
@@ -6742,13 +6614,62 @@ updateTerminalStates();            }
               listContainer.innerHTML += `
                   <div class="user-online">
                       <div class="dot-online"></div>
-                      <span>${data.name}</span>
+                      <span>${data.name} <small style="color:#cbd5e1;">(${data.email})</small></span>
                   </div>`;
           }
       });
       badge.innerText = count;
       if (count === 0) listContainer.innerHTML = '<div style="color: #94a3b8; margin-top: 5px;">Tidak ada yang online</div>';
   });
+
+  // --- C. CLOUD SAVE BPMT HISTORY ---
+  // Fungsi ini menimpa/menyambungkan fungsi localStorage dengan Firebase Database
+  const originalSaveBpmtHistory = window.saveBpmtHistory; 
+  window.saveBpmtHistory = function(data) {
+      // 1. Simpan di Lokal (Fungsi Asli)
+      if(originalSaveBpmtHistory) originalSaveBpmtHistory(data);
+      
+      // 2. Simpan di Cloud Firebase
+      if (window.currentUser) {
+          const bpmtRef = ref(db, 'bpmt_history/' + window.currentUser.uid);
+          set(bpmtRef, data).catch(err => console.error("Gagal save ke cloud", err));
+      } else {
+          console.warn("User belum login, BPMT hanya disimpan lokal.");
+      }
+  };
+
+  // Baca History BPMT dari cloud jika user login
+  onAuthStateChanged(auth, (user) => {
+      if(user) {
+          const bpmtRef = ref(db, 'bpmt_history/' + user.uid);
+          onValue(bpmtRef, (snapshot) => {
+              if (snapshot.exists()) {
+                  localStorage.setItem('bpmt_history', JSON.stringify(snapshot.val()));
+                  if(window.refreshBpmtDropdown) window.refreshBpmtDropdown();
+              }
+          }, { onlyOnce: true });
+      }
+  });
+
+  // --- D. LEADERBOARD CLOUD SYNC ---
+  window.syncLeaderboardToCloud = function(lbArray) {
+      const lbRef = ref(db, 'leaderboard');
+      set(lbRef, lbArray).then(() => {
+          localStorage.setItem('siapsim_lb', JSON.stringify(lbArray));
+          if(window.renderLeaderboardUI) window.renderLeaderboardUI();
+      }).catch(err => console.error("Gagal update leaderboard online", err));
+  };
+
+  // Dengarkan perubahan leaderboard secara realtime dari semua user
+  const lbRef = ref(db, 'leaderboard');
+  onValue(lbRef, (snapshot) => {
+      if (snapshot.exists()) {
+          window.globalLeaderboard = snapshot.val();
+          localStorage.setItem('siapsim_lb', JSON.stringify(snapshot.val()));
+          if(window.renderLeaderboardUI) window.renderLeaderboardUI();
+      }
+  });
+
 </script>
 </body>
 </html>
