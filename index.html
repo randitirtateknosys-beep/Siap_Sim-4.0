@@ -1,25 +1,11 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-   
-	    <meta charset="UTF-8">
-    	<meta name="viewport" content="width=device-width, initial-scale=	1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aplikasi Manajemen & Portal Produksi PT Tirta Teknosys</title>
     <style>
-	<!-- 1. SCRIPT ANTI-KEDIP HARUS DI LUAR TAG STYLE -->
-    <script>
-        // Cek sesi instan dan pasang class di tag <html>
-        if (localStorage.getItem('isLoggedIn') === 'true') {
-            document.documentElement.classList.add('sesi-aktif');
-        } else {
-            document.documentElement.classList.add('sesi-kosong');
-        }
-    </script>    
-<style>
-        /* ATURAN ANTI-KEDIP */
-        #authPage, #mainApp { display: none !important; }
-        html.sesi-kosong #authPage { display: flex !important; }
-        html.sesi-aktif #mainApp { display: block !important; }        :root {
+        :root {
             --bg-dark: #0f172a; --panel-bg: #1e293b; --border-color: #334155;
             --text-main: #f8fafc; --text-muted: #94a3b8; --accent: #3b82f6;
             --tirta-blue: #0284c7; --tirta-dark: #0c4a6e;
@@ -526,7 +512,7 @@
 </div>
 
 <!-- CONTAINER UTAMA APLIKASI (Disembunyikan Jika Belum Login) -->
-<div id="mainApp">
+<div id="mainApp" style="display: none;">
 
 <div class="hero-header">
 <div class="sun-glow"></div>
@@ -3067,7 +3053,6 @@ updateTerminalStates();            }
         if(elArus) elArus.innerText = totalArusRunning.toFixed(2) + " A";
         if(elMcb) elMcb.innerText = totalKwRunning === 0 ? "0 A" : (mcbSelect + " Ampere (3P MCCB / MCB Utama)");
     }
-
 
     // --- FUNGSI SAVE/LOAD/SYNC KALKULATOR TOTAL DAYA (FIREBASE) ---
     function getCalcHistory() { try { return JSON.parse(localStorage.getItem('calc_history') || '{}'); } catch (e) { return {}; } }
@@ -6606,76 +6591,22 @@ updateTerminalStates();            }
   window.firebaseRemove = remove;
   window.currentUser = null;
 
-// ==========================================
-// LOGIKA LOGIN & LOGOUT (ANTI-FLICKER)
-// ==========================================
+  // 1. FUNGSI LOGIN EMAIL & PASSWORD
+  window.doLogin = function() {
+      const email = document.getElementById('loginEmail').value.trim();
+      const pass = document.getElementById('loginPassword').value;
+      const errorMsg = document.getElementById('loginError');
 
-// Menampilkan nama user otomatis jika di-refresh dalam keadaan login
-document.addEventListener("DOMContentLoaded", function() {
-    if (localStorage.getItem('isLoggedIn') === 'true') {
-        const userName = localStorage.getItem('userName') || 'User';
-        document.getElementById('userNameDisplay').innerText = `👤 ${userName}`;
-    }
-});
+      if (!email || !pass) { errorMsg.innerText = "Email dan Password wajib diisi!"; errorMsg.style.display = 'block'; return; }
+      errorMsg.style.display = 'none';
 
-// Fungsi Login
-window.doLogin = function() {
-    const email = document.getElementById('loginEmail').value;
-    const password = document.getElementById('loginPassword').value;
-    const errorMsg = document.getElementById('loginError');
-    
-    if (email.trim() !== "" && password.trim() !== "") {
-        // 1. Simpan sesi
-        localStorage.setItem('isLoggedIn', 'true');
-        localStorage.setItem('userName', email); 
-        
-        // 2. Ganti class pada HTML agar tampilan langsung berubah mulus
-        document.documentElement.classList.remove('sesi-kosong');
-        document.documentElement.classList.add('sesi-aktif');
-        
-        // 3. Update nama
-        document.getElementById('userNameDisplay').innerText = `👤 ${email}`;
-        errorMsg.style.display = 'none';
-    } else {
-        errorMsg.innerText = "Email dan Password wajib diisi!";
-        errorMsg.style.display = 'block';
-    }
-};
+      signInWithEmailAndPassword(auth, email, pass)
+          .catch((error) => {
+              errorMsg.innerText = "Login gagal: Email tidak terdaftar atau password salah.";
+              errorMsg.style.display = 'block';
+          });
+  };
 
-// Fungsi Logout
-window.doLogout = function() {
-    // 1. Hapus memori sesi
-    localStorage.removeItem('isLoggedIn');
-    localStorage.removeItem('userName');
-
-    // 2. Ganti class HTML untuk kembali ke halaman login
-    document.documentElement.classList.remove('sesi-aktif');
-    document.documentElement.classList.add('sesi-kosong');
-    
-    // 3. Bersihkan form
-    document.getElementById('loginEmail').value = '';
-    document.getElementById('loginPassword').value = '';
-    document.getElementById('loginError').style.display = 'none';
-};
-// --- FUNGSI AUTH LAINNYA ---
-window.doRegister = function() {
-    alert("Fitur pendaftaran sedang dalam pengembangan.");
-};
-
-window.doForgotPassword = function() {
-    alert("Silakan hubungi administrator untuk mereset password Anda.");
-};
-
-window.toggleAuthMode = function(mode) {
-    if (mode === 'register') {
-        document.getElementById('loginPanel').style.display = 'none';
-        document.getElementById('registerPanel').style.display = 'block';
-    } else {
-        document.getElementById('registerPanel').style.display = 'none';
-        document.getElementById('loginPanel').style.display = 'block';
-    }
-};
-  
   // 2. FUNGSI DAFTAR (DENGAN ACC OTOMATIS KHUSUS DEVELOPER)
   window.doRegister = function() {
       const name = document.getElementById('registerName').value.trim();
@@ -6745,41 +6676,9 @@ window.toggleAuthMode = function(mode) {
   };
 
   // 4. FUNGSI LOGOUT
- window.doLogout = function() {
-    // 1. Hapus data sesi dari localStorage
-    localStorage.removeItem('isLoggedIn');
-    localStorage.removeItem('userName');
-
-    // 2. Sembunyikan aplikasi utama dan kembali ke halaman login
-    document.getElementById('mainApp').style.display = 'none';
-    document.getElementById('authPage').style.display = 'flex';
-    
-    // 3. Bersihkan kolom inputan di form login
-    document.getElementById('loginEmail').value = '';
-    document.getElementById('loginPassword').value = '';
-    document.getElementById('loginError').style.display = 'none';
-};
-
-// Fungsi Registrasi (Opsional, agar tombol daftar tidak error saat diklik)
-window.doRegister = function() {
-    alert("Fitur pendaftaran sedang dalam pengembangan.");
-};
-
-// Fungsi Lupa Password (Opsional)
-window.doForgotPassword = function() {
-    alert("Silakan hubungi administrator untuk mereset password Anda.");
-};
-
-// Fungsi Pindah Mode Login/Register
-window.toggleAuthMode = function(mode) {
-    if (mode === 'register') {
-        document.getElementById('loginPanel').style.display = 'none';
-        document.getElementById('registerPanel').style.display = 'block';
-    } else {
-        document.getElementById('registerPanel').style.display = 'none';
-        document.getElementById('loginPanel').style.display = 'block';
-    }
-};
+  window.doLogout = function() {
+      signOut(auth).catch((error) => alert("Gagal logout: " + error.message));
+  };
 
   // 5. LISTENER STATUS LOGIN (PENGECEKAN PERSETUJUAN / APPROVAL)
   onAuthStateChanged(auth, (user) => {
