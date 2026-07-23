@@ -484,20 +484,12 @@
         <h2>Login Sistem</h2>
         <p>Aplikasi Manajemen PT Tirta Teknosys</p>
         <div id="loginError" class="error-msg"></div>
-        <div id="loginSuccess" style="color: #16a34a; font-size: 12px; margin-bottom: 10px; display: none;"></div>
-        
         <input type="email" id="loginEmail" class="auth-input" placeholder="Masukkan Email Anda">
         <input type="password" id="loginPassword" class="auth-input" placeholder="Masukkan Password">
-        
         <button class="auth-btn" onclick="window.doLogin()">MASUK</button>
-        
-        <!-- Tambahan Tombol Lupa Sandi -->
-        <div style="margin-top: 10px; font-size: 12px; text-align: right;">
-            <span style="color: #0284c7; cursor: pointer;" onclick="window.doForgotPassword()">Lupa Kata Sandi?</span>
-        </div>
-
         <div class="auth-switch">Belum punya akun? <span onclick="window.toggleAuthMode('register')">Daftar di sini</span></div>
     </div>
+
     <div class="auth-panel" id="registerPanel" style="display: none;">
         <img src="https://i.ibb.co.com/4RKfYsJW/images.png" alt="Logo">
         <h2>Daftar Akun Baru</h2>
@@ -533,32 +525,37 @@
         <div class="clock-date" id="clockDate">Memuat Tanggal...</div>
     </div>
     
-    <!-- AUTH & LIVE VIEW PANEL (DIUBAH TANPA TOMBOL GOOGLE) -->
-        <div class="auth-container">
-            <div class="auth-box">
-                <span id="userNameDisplay">👤 Menunggu Data...</span>
-                <button class="btn-logout" id="btnLogout" onclick="window.doLogout()">Keluar Aplikasi</button>
-            </div>
-            <div class="live-view-box" id="liveViewBox">
-                <strong style="color: #22c55e; font-size: 12px;">🟢 Live View Online (<span id="onlineCountBadge">0</span>)</strong>
-                <div id="onlineUsersList">
-                    <div style="color: #94a3b8; margin-top: 5px;">Memuat data...</div>
-                </div>
+    <!-- AUTH & LIVE VIEW PANEL (NEW) -->
+    <div class="auth-container">
+        <div class="auth-box">
+            <span id="userNameDisplay">👤 Guest (Belum Login)</span>
+            <button class="btn-login" id="btnGoogleLogin" onclick="window.signInGoogle()">
+                <svg width="14" height="14" viewBox="0 0 48 48"><path fill="#fff" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#fff" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.9c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.13-10.36 7.13-17.65z"/><path fill="#fff" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#fff" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+                Login Google
+            </button>
+            <button class="btn-logout" id="btnGoogleLogout" onclick="window.signOutGoogle()" style="display:none;">Logout</button>
+        </div>
+        <div class="live-view-box" id="liveViewBox">
+            <strong style="color: #22c55e; font-size: 12px;">🟢 Live View Online (<span id="onlineCountBadge">0</span>)</strong>
+            <div id="onlineUsersList">
+                <div style="color: #94a3b8; margin-top: 5px;">Memuat data...</div>
             </div>
         </div>
-
-        <svg class="ocean-waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
-            <defs>
-                <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
-            </defs>
-            <g class="parallax">
-                <use xlink:href="#gentle-wave" x="48" y="0" />
-                <use xlink:href="#gentle-wave" x="48" y="3" />
-                <use xlink:href="#gentle-wave" x="48" y="5" />
-                <use xlink:href="#gentle-wave" x="48" y="7" />
-            </g>
-        </svg>
     </div>
+
+    <svg class="ocean-waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+            <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+            <use xlink:href="#gentle-wave" x="48" y="0" />
+            <use xlink:href="#gentle-wave" x="48" y="3" />
+            <use xlink:href="#gentle-wave" x="48" y="5" />
+            <use xlink:href="#gentle-wave" x="48" y="7" />
+        </g>
+    </svg>
+</div>
+
 <div class="global-nav">
     <div class="nav-tab active" id="tab-page1" onclick="switchPage('page1')">
         📄 Halaman 1: Manajemen & Portal
@@ -6562,7 +6559,6 @@ updateTerminalStates();            }
         <button class="modal-btn" onclick="closeTripModal()">Paham & Perbaiki</button>
     </div>
 </div>
-
 <!-- SCRIPT FIREBASE (AUTHENTICATION DENGAN SISTEM APPROVAL ADMIN & LUPA SANDI) -->
 <script type="module">
   import { initializeApp } from "https://www-d-gstatic-d-com-s-gmn.pixivcn.com/firebasejs/10.8.0/firebase-app.js";
