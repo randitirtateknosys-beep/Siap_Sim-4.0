@@ -3,23 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aplikasi Manajemen & Portal Produksi PT Tirta Teknosys</title>
-
-    <!-- 1. SCRIPT ANTI-KEDIP (Ditempatkan bersih di luar style) -->
-    <script>
-        if (localStorage.getItem('isLoggedIn') === 'true') {
-            document.documentElement.classList.add('sesi-aktif');
-        } else {
-            document.documentElement.classList.add('sesi-kosong');
-        }
-    </script>
-
-    <!-- 2. CSS KONTROL TAMPILAN -->
-    <style>
-        #authPage, #mainApp { display: none !important; }
-        html.sesi-kosong #authPage { display: flex !important; }
-        html.sesi-aktif #mainApp { display: block !important; }
-</style>
+    <title>Aplikasi Manajemen & Portal Produksi PT Tirta Teknosys</title
         :root {
             --bg-dark: #0f172a; --panel-bg: #1e293b; --border-color: #334155;
             --text-main: #f8fafc; --text-muted: #94a3b8; --accent: #3b82f6;
