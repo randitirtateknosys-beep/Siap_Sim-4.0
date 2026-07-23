@@ -526,8 +526,8 @@
     </div>
 </div>
 
-<!-- CONTAINER UTAMA APLIKASI (Disembunyikan Jika Belum Login) -->
-<div id="mainApp" style="display: none;">
+<!-- CONTAINER UTAMA APLIKASI -->
+<div id="mainApp">
 
 <div class="hero-header">
 <div class="sun-glow"></div>
@@ -548,7 +548,6 @@
         <div class="clock-date" id="clockDate">Memuat Tanggal...</div>
     </div>
     
-    <!-- AUTH & LIVE VIEW PANEL (DIUBAH TANPA TOMBOL GOOGLE) -->
         <div class="auth-container">
             <div class="auth-box">
                 <span id="userNameDisplay">👤 Menunggu Data...</span>
@@ -2068,7 +2067,7 @@ function startLevel1() {
         }
     }
     
-    function updateSensorSim(slider, type) {
+   function updateSensorSim(slider, type) {
         let compBox = slider.closest('.comp-box');
         let c = components.find(x => x.id === compBox.id);
         if(c) {
@@ -6605,22 +6604,73 @@ updateTerminalStates();            }
   window.firebaseRemove = remove;
   window.currentUser = null;
 
-  // 1. FUNGSI LOGIN EMAIL & PASSWORD
-  window.doLogin = function() {
-      const email = document.getElementById('loginEmail').value.trim();
-      const pass = document.getElementById('loginPassword').value;
-      const errorMsg = document.getElementById('loginError');
+  // ==========================================
+    // LOGIKA LOGIN & LOGOUT UTAMA
+    // ==========================================
+    
+    document.addEventListener("DOMContentLoaded", function() {
+        if (localStorage.getItem('isLoggedIn') === 'true') {
+            const userName = localStorage.getItem('userName') || 'User';
+            const userDisplay = document.getElementById('userNameDisplay');
+            if (userDisplay) userDisplay.innerText = `👤 ${userName}`;
+        }
+    });
 
-      if (!email || !pass) { errorMsg.innerText = "Email dan Password wajib diisi!"; errorMsg.style.display = 'block'; return; }
-      errorMsg.style.display = 'none';
+    window.doLogin = function() {
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
+        const errorMsg = document.getElementById('loginError');
 
-      signInWithEmailAndPassword(auth, email, pass)
-          .catch((error) => {
-              errorMsg.innerText = "Login gagal: Email tidak terdaftar atau password salah.";
-              errorMsg.style.display = 'block';
-          });
-  };
+        if (email.trim() !== "" && password.trim() !== "") {
+            // 1. Simpan Status Login
+            localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('userName', email);
 
+            // 2. Ganti Tampilan Tanpa Kedip
+            document.documentElement.classList.remove('sesi-kosong');
+            document.documentElement.classList.add('sesi-aktif');
+
+            // 3. Update Nama User
+            const userDisplay = document.getElementById('userNameDisplay');
+            if (userDisplay) userDisplay.innerText = `👤 ${email}`;
+            if (errorMsg) errorMsg.style.display = 'none';
+        } else {
+            if (errorMsg) {
+                errorMsg.innerText = "Email dan Password wajib diisi!";
+                errorMsg.style.display = 'block';
+            }
+        }
+    };
+
+    window.doLogout = function() {
+        localStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('userName');
+
+        document.documentElement.classList.remove('sesi-aktif');
+        document.documentElement.classList.add('sesi-kosong');
+
+        document.getElementById('loginEmail').value = '';
+        document.getElementById('loginPassword').value = '';
+    };
+
+    window.doRegister = function() {
+        alert("Fitur pendaftaran sedang dalam pengembangan.");
+    };
+
+    window.doForgotPassword = function() {
+        alert("Silakan hubungi administrator untuk mereset password Anda.");
+    };
+
+    // INI FUNGSI YANG BIKIN ERROR DI GITHUB KEMARIN (JANGAN SAMPAI HILANG)
+    window.toggleAuthMode = function(mode) {
+        if (mode === 'register') {
+            document.getElementById('loginPanel').style.display = 'none';
+            document.getElementById('registerPanel').style.display = 'block';
+        } else {
+            document.getElementById('registerPanel').style.display = 'none';
+            document.getElementById('loginPanel').style.display = 'block';
+        }
+    };
   // 2. FUNGSI DAFTAR (DENGAN ACC OTOMATIS KHUSUS DEVELOPER)
   window.doRegister = function() {
       const name = document.getElementById('registerName').value.trim();
@@ -6687,11 +6737,6 @@ updateTerminalStates();            }
               errorMsg.style.display = 'block';
               successMsg.style.display = 'none';
           });
-  };
-
-  // 4. FUNGSI LOGOUT
-  window.doLogout = function() {
-      signOut(auth).catch((error) => alert("Gagal logout: " + error.message));
   };
 
   // 5. LISTENER STATUS LOGIN (PENGECEKAN PERSETUJUAN / APPROVAL)
