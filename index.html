@@ -2735,10 +2735,9 @@ updateTerminalStates();            }
 </div>
 
 <!-- =========================================================
-     1. SCRIPT UI DASAR & ANTI-STUCK (TIDAK BERGANTUNG FIREBASE)
+     1. SCRIPT UI DASAR (MENGATUR TAMPILAN)
      ========================================================= -->
 <script>
-    // Fungsi ini dipastikan selalu jalan untuk pindah panel Login <-> Daftar
     window.toggleAuthMode = function(mode) {
         if (mode === 'register') {
             document.getElementById('loginPanel').style.display = 'none';
@@ -2749,38 +2748,34 @@ updateTerminalStates();            }
         }
     };
 
-    // Fungsi sementara JIKA Firebase diblokir/gagal dimuat
-    window.doLogin = function() {
-        const errorMsg = document.getElementById('loginError');
-        errorMsg.innerText = "Gagal terhubung ke server Firebase. Pastikan koneksi internet Anda stabil atau tidak memblokir layanan Google.";
-        errorMsg.style.display = 'block';
-    };
-
-    window.doRegister = function() {
-        alert("Sistem Pendaftaran belum siap karena Firebase gagal terhubung. Cek koneksi Anda.");
-    };
-
-    window.doForgotPassword = function() {
-        alert("Sistem Reset Sandi belum siap karena Firebase gagal terhubung. Cek koneksi Anda.");
-    };
-
     window.doLogout = function() {
-        localStorage.removeItem('isLoggedIn');
-        localStorage.removeItem('userName');
-        location.reload(); 
+        if(window.firebaseAuth) {
+            window.firebaseAuth.signOut().then(() => {
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('userName');
+                location.reload(); 
+            });
+        } else {
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('userName');
+            location.reload();
+        }
     };
 </script>
 
 <!-- =========================================================
-     2. SCRIPT FIREBASE UTAMA
+     2. LOAD FIREBASE DARI CDN RESMI (VERSI COMPAT ANTI-GAGAL)
      ========================================================= -->
-<script type="module">
-  // IMPORT WAJIB DI LUAR TRY-CATCH AGAR TIDAK BLANK (SYNTAX ERROR)
-  import { initializeApp } from "https://www-d-gstatic-d-com-s-gmn.pixivcn.com/firebasejs/10.8.0/firebase-app.js";
-  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, onAuthStateChanged, signOut, sendPasswordResetEmail } from "https://www-d-gstatic-d-com-s-gmn.pixivcn.com/firebasejs/10.8.0/firebase-auth.js";
-  import { getDatabase, ref, set, get, child, onValue, onDisconnect, remove } from "https://www-d-gstatic-d-com-s-gmn.pixivcn.com/firebasejs/10.8.0/firebase-database.js";
+<script src="https://www-d-gstatic-d-com-s-gmn.pixivcn.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+<script src="https://www-d-gstatic-d-com-s-gmn.pixivcn.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+<script src="https://www-d-gstatic-d-com-s-gmn.pixivcn.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
 
+<!-- =========================================================
+     3. LOGIKA FIREBASE UTAMA
+     ========================================================= -->
+<script>
   try {
+      // 1. Inisialisasi Firebase
       const firebaseConfig = {
         apiKey: "AIzaSyDNXL53D7Jxw9bDEV1STmQwLthzzM2IcQ8",
         authDomain: "project-sim-40.firebaseapp.com",
@@ -2791,18 +2786,21 @@ updateTerminalStates();            }
         appId: "1:340860813353:web:92b5893a67abc1eab1dc38"
       };
 
-      const app = initializeApp(firebaseConfig);
-      const auth = getAuth(app);
-      const db = getDatabase(app);
-
+      firebase.initializeApp(firebaseConfig);
+      
+      const auth = firebase.auth();
+      const db = firebase.database();
+      
+      // Export untuk dipakai di fungsi UI jika perlu
+      window.firebaseAuth = auth;
       window.db = db;
-      window.firebaseRef = ref;
-      window.firebaseSet = set;
-      window.firebaseOnValue = onValue;
-      window.firebaseRemove = remove;
+      window.firebaseRef = function(d, path) { return d.ref(path); };
+      window.firebaseSet = function(r, data) { return r.set(data); };
+      window.firebaseOnValue = function(r, cb) { return r.on('value', cb); };
+      window.firebaseRemove = function(r) { return r.remove(); };
       window.currentUser = null;
 
-      // JIKA FIREBASE SUKSES, TIMPA FUNGSI LOGIN DENGAN VERSI ASLI
+      // --- FUNGSI LOGIN ---
       window.doLogin = function() {
           const email = document.getElementById('loginEmail').value.trim();
           const password = document.getElementById('loginPassword').value;
@@ -2818,21 +2816,21 @@ updateTerminalStates();            }
           errorMsg.style.display = 'none';
           loginBtn.innerText = "MENGOTENTIKASI..."; 
 
-          signInWithEmailAndPassword(auth, email, password)
+          auth.signInWithEmailAndPassword(email, password)
               .then((userCredential) => {
                   localStorage.setItem('isLoggedIn', 'true');
                   localStorage.setItem('userName', email);
                   loginBtn.innerText = "MASUK";
-                  // Reload untuk langsung memicu anti-kedip di atas
-                  location.reload();
+                  location.reload(); // Reload agar UI berubah
               })
               .catch((error) => {
-                  errorMsg.innerText = "Gagal login: Periksa email & sandi (" + error.message + ")";
+                  errorMsg.innerText = "Gagal login: " + error.message;
                   errorMsg.style.display = 'block';
                   loginBtn.innerText = "MASUK";
               });
       };
 
+      // --- FUNGSI REGISTER ---
       window.doRegister = function() {
           const name = document.getElementById('registerName').value.trim();
           const email = document.getElementById('registerEmail').value.trim();
@@ -2849,11 +2847,12 @@ updateTerminalStates();            }
           const masterDeveloperEmail = "admin@tirtateknosys.com"; 
           const autoApprove = (email.toLowerCase() === masterDeveloperEmail.toLowerCase());
 
-          createUserWithEmailAndPassword(auth, email, pass)
+          auth.createUserWithEmailAndPassword(email, pass)
               .then((userCredential) => {
                   const user = userCredential.user;
-                  updateProfile(user, { displayName: name });
-                  return set(ref(db, 'users_approval/' + user.uid), {
+                  user.updateProfile({ displayName: name });
+                  
+                  return db.ref('users_approval/' + user.uid).set({
                       name: name, email: email, isApproved: autoApprove 
                   });
               })
@@ -2863,7 +2862,7 @@ updateTerminalStates();            }
                       alert("Pendaftaran Developer berhasil! Akun Anda langsung aktif.");
                   } else {
                       alert("Pendaftaran berhasil! Akun Anda sedang menunggu PERSETUJUAN ADMIN.");
-                      signOut(auth); 
+                      auth.signOut(); 
                       window.toggleAuthMode('login');
                   }
               })
@@ -2875,6 +2874,7 @@ updateTerminalStates();            }
               });
       };
 
+      // --- FUNGSI LUPA SANDI ---
       window.doForgotPassword = function() {
           const email = document.getElementById('loginEmail').value.trim();
           const errorMsg = document.getElementById('loginError');
@@ -2888,7 +2888,7 @@ updateTerminalStates();            }
           }
           errorMsg.style.display = 'none';
 
-          sendPasswordResetEmail(auth, email)
+          auth.sendPasswordResetEmail(email)
               .then(() => {
                   successMsg.innerText = "✅ Link pemulihan sandi dikirim ke email Anda.";
                   successMsg.style.display = 'block';
@@ -2900,11 +2900,13 @@ updateTerminalStates();            }
               });
       };
 
-      onAuthStateChanged(auth, (user) => {
+      // --- LISTENER STATUS LOGIN & APPROVAL ---
+      auth.onAuthStateChanged((user) => {
           const nameDisplay = document.getElementById('userNameDisplay');
 
           if (user) {
-              get(child(ref(db), `users_approval/${user.uid}/isApproved`)).then((snapshot) => {
+              db.ref(`users_approval/${user.uid}/isApproved`).once('value')
+                .then((snapshot) => {
                   if (!snapshot.exists() || snapshot.val() === true) {
                       window.currentUser = user;
                       document.documentElement.classList.remove('sesi-kosong');
@@ -2915,7 +2917,7 @@ updateTerminalStates();            }
                       managePresence(user); 
                   } else {
                       alert("⚠️ AKSES DITOLAK: Akun Anda belum disetujui (Approved) oleh Admin.");
-                      signOut(auth);
+                      auth.signOut();
                   }
               }).catch((error) => {
                   console.error("Firebase Rules terkunci, Bypass Testing: ", error);
@@ -2932,25 +2934,50 @@ updateTerminalStates();            }
           }
       });
 
+      // --- PRESENCE (ONLINE/OFFLINE) ---
       function managePresence(user) {
-          const userStatusRef = ref(db, '/status/' + user.uid);
+          const userStatusRef = db.ref('/status/' + user.uid);
           let displayName = user.displayName || user.email.split('@')[0];
           
-          const isOfflineForDatabase = { state: 'offline', last_changed: new Date().getTime(), name: displayName, email: user.email };
-          const isOnlineForDatabase = { state: 'online', last_changed: new Date().getTime(), name: displayName, email: user.email };
+          const isOfflineForDatabase = { state: 'offline', last_changed: firebase.database.ServerValue.TIMESTAMP, name: displayName, email: user.email };
+          const isOnlineForDatabase = { state: 'online', last_changed: firebase.database.ServerValue.TIMESTAMP, name: displayName, email: user.email };
 
-          const connectedRef = ref(db, '.info/connected');
-          onValue(connectedRef, (snap) => {
+          db.ref('.info/connected').on('value', (snap) => {
               if (snap.val() === true) {
-                  onDisconnect(userStatusRef).set(isOfflineForDatabase).then(() => {
-                      set(userStatusRef, isOnlineForDatabase);
+                  userStatusRef.onDisconnect().set(isOfflineForDatabase).then(() => {
+                      userStatusRef.set(isOnlineForDatabase);
                   });
               }
           });
       }
 
+      // --- MENAMPILKAN USER ONLINE ---
+      db.ref('/status/').on('value', (snapshot) => {
+          const listContainer = document.getElementById('onlineUsersList');
+          const badge = document.getElementById('onlineCountBadge');
+          if(!listContainer || !badge) return;
+
+          listContainer.innerHTML = '';
+          let count = 0;
+
+          snapshot.forEach((childSnap) => {
+              const data = childSnap.val();
+              if (data.state === 'online') {
+                  count++;
+                  listContainer.innerHTML += `
+                      <div class="user-online">
+                          <div class="dot-online"></div>
+                          <span>${data.name}</span>
+                      </div>`;
+              }
+          });
+          badge.innerText = count;
+          if (count === 0) listContainer.innerHTML = '<div style="color: #94a3b8; margin-top: 5px;">Tidak ada yang online</div>';
+      });
+
   } catch (error) {
-      console.error("Gagal mengeksekusi logika Firebase:", error);
+      console.error("Gagal mengeksekusi Firebase:", error);
+      alert("Terjadi kesalahan memuat Firebase. Buka Inspect Element -> Console untuk melihat detail.");
   }
 </script>
 </body>
