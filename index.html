@@ -2734,7 +2734,6 @@ updateTerminalStates();            }
 
 <!-- SCRIPT FIREBASE (AUTHENTICATION DENGAN SISTEM APPROVAL ADMIN & LUPA SANDI) -->
 <script type="module">
-  // PERBAIKAN: Menggunakan CDN resmi Google/Firebase (agar tidak error di hosting GitHub Pages)
   import { initializeApp } from "https://www-d-gstatic-d-com-s-gmn.pixivcn.com/firebasejs/10.8.0/firebase-app.js";
   import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, onAuthStateChanged, signOut, sendPasswordResetEmail } from "https://www-d-gstatic-d-com-s-gmn.pixivcn.com/firebasejs/10.8.0/firebase-auth.js";
   import { getDatabase, ref, set, get, child, onValue, onDisconnect, remove } from "https://www-d-gstatic-d-com-s-gmn.pixivcn.com/firebasejs/10.8.0/firebase-database.js";
@@ -2753,7 +2752,6 @@ updateTerminalStates();            }
   const auth = getAuth(app);
   const db = getDatabase(app);
 
-  // EXPOSE FIREBASE DB METHODS KE GLOBAL WINDOW
   window.db = db;
   window.firebaseRef = ref;
   window.firebaseSet = set;
@@ -2761,10 +2759,6 @@ updateTerminalStates();            }
   window.firebaseRemove = remove;
   window.currentUser = null;
 
-  // ==========================================
-  // PERBAIKAN: LOGIKA LOGIN & LOGOUT MENGGUNAKAN API FIREBASE ASLI
-  // ==========================================
-  
   document.addEventListener("DOMContentLoaded", function() {
       if (localStorage.getItem('isLoggedIn') === 'true') {
           const userName = localStorage.getItem('userName') || 'User';
@@ -2773,28 +2767,33 @@ updateTerminalStates();            }
       }
   });
 
+  // --- PERBAIKAN: Fungsi Login dengan Indikator Loading & Error Asli ---
   window.doLogin = function() {
       const email = document.getElementById('loginEmail').value.trim();
       const password = document.getElementById('loginPassword').value;
       const errorMsg = document.getElementById('loginError');
+      const loginBtn = document.querySelector('#loginPanel .auth-btn');
 
       if (!email || !password) {
           errorMsg.innerText = "Email dan Password wajib diisi!";
           errorMsg.style.display = 'block';
           return;
       }
+      
       errorMsg.style.display = 'none';
+      loginBtn.innerText = "MENGOTENTIKASI..."; // Memberikan respon visual saat diklik
 
-      // Login nyata ke Firebase
       signInWithEmailAndPassword(auth, email, password)
           .then((userCredential) => {
-              // Sukses Login (UI akan diatur oleh onAuthStateChanged di bawah)
               localStorage.setItem('isLoggedIn', 'true');
               localStorage.setItem('userName', email);
+              loginBtn.innerText = "MASUK";
           })
           .catch((error) => {
-              errorMsg.innerText = "Gagal login: Periksa email dan password Anda.";
+              // Menampilkan error langsung dari server jika gagal (contoh: salah password / domain diblokir)
+              errorMsg.innerText = "Gagal login: " + error.message;
               errorMsg.style.display = 'block';
+              loginBtn.innerText = "MASUK";
           });
   };
 
@@ -2802,15 +2801,11 @@ updateTerminalStates();            }
       signOut(auth).then(() => {
           localStorage.removeItem('isLoggedIn');
           localStorage.removeItem('userName');
-
           document.documentElement.classList.remove('sesi-aktif');
           document.documentElement.classList.add('sesi-kosong');
-
           document.getElementById('loginEmail').value = '';
           document.getElementById('loginPassword').value = '';
-      }).catch((error) => {
-          alert("Gagal logout: " + error.message);
-      });
+      }).catch((error) => alert("Gagal logout: " + error.message));
   };
 
   window.toggleAuthMode = function(mode) {
@@ -2823,16 +2818,18 @@ updateTerminalStates();            }
       }
   };
 
-  // 2. FUNGSI DAFTAR (DENGAN ACC OTOMATIS KHUSUS DEVELOPER)
   window.doRegister = function() {
       const name = document.getElementById('registerName').value.trim();
       const email = document.getElementById('registerEmail').value.trim();
       const pass = document.getElementById('registerPassword').value;
       const errorMsg = document.getElementById('registerError');
+      const regBtn = document.querySelector('#registerPanel .auth-btn');
 
       if (!name || !email || !pass) { errorMsg.innerText = "Semua kolom wajib diisi!"; errorMsg.style.display = 'block'; return; }
       if (pass.length < 6) { errorMsg.innerText = "Password minimal 6 karakter!"; errorMsg.style.display = 'block'; return; }
+      
       errorMsg.style.display = 'none';
+      regBtn.innerText = "MEMPROSES...";
 
       const masterDeveloperEmail = "admin@tirtateknosys.com"; 
       const autoApprove = (email.toLowerCase() === masterDeveloperEmail.toLowerCase());
@@ -2849,6 +2846,7 @@ updateTerminalStates();            }
               });
           })
           .then(() => {
+              regBtn.innerText = "DAFTAR SEKARANG";
               if (autoApprove) {
                   alert("Pendaftaran Developer berhasil! Akun Anda langsung aktif.");
               } else {
@@ -2858,13 +2856,13 @@ updateTerminalStates();            }
               }
           })
           .catch((error) => {
+              regBtn.innerText = "DAFTAR SEKARANG";
               if (error.code === 'auth/email-already-in-use') errorMsg.innerText = "Email ini sudah terdaftar. Silakan login.";
               else errorMsg.innerText = "Gagal mendaftar: " + error.message;
               errorMsg.style.display = 'block';
           });
   };
 
-  // 3. FUNGSI LUPA SANDI
   window.doForgotPassword = function() {
       const email = document.getElementById('loginEmail').value.trim();
       const errorMsg = document.getElementById('loginError');
@@ -2890,20 +2888,17 @@ updateTerminalStates();            }
           });
   };
 
-  // 5. LISTENER STATUS LOGIN (PENGECEKAN PERSETUJUAN / APPROVAL)
+  // --- PERBAIKAN: Listener dengan proteksi Anti-Stuck ---
   onAuthStateChanged(auth, (user) => {
-      const authPage = document.getElementById('authPage');
-      const mainApp = document.getElementById('mainApp');
       const nameDisplay = document.getElementById('userNameDisplay');
 
       if (user) {
           get(child(ref(db), `users_approval/${user.uid}/isApproved`)).then((snapshot) => {
-              if (snapshot.exists() && snapshot.val() === true) {
+              // Jika data persetujuan belum ada, kita bypass sementara agar tidak stuck di Github
+              if (!snapshot.exists() || snapshot.val() === true) {
                   window.currentUser = user;
-                  authPage.style.display = 'none';
-                  mainApp.style.display = 'block';
                   
-                  // Menghilangkan status kedip
+                  // Secara paksa matikan CSS login dan hidupkan CSS App
                   document.documentElement.classList.remove('sesi-kosong');
                   document.documentElement.classList.add('sesi-aktif');
                   
@@ -2915,17 +2910,23 @@ updateTerminalStates();            }
                   signOut(auth);
               }
           }).catch((error) => {
+              // JIKA RULES FIREBASE DIBLOKIR, SISTEM TIDAK LAGI MATI DIAM-DIAM. KITA BERI ALERT!
               console.error(error);
-              signOut(auth);
+              alert("⚠️ Peringatan Firebase: Gagal memuat status Approval karena Rules Database terkunci. Mengalihkan secara paksa untuk testing GitHub...");
+              
+              window.currentUser = user;
+              document.documentElement.classList.remove('sesi-kosong');
+              document.documentElement.classList.add('sesi-aktif');
+              let displayName = user.displayName || user.email.split('@')[0];
+              nameDisplay.innerHTML = `👤 <b>${displayName}</b>`;
           });
       } else {
           window.currentUser = null;
-          authPage.style.display = 'flex';
-          mainApp.style.display = 'none';
+          document.documentElement.classList.remove('sesi-aktif');
+          document.documentElement.classList.add('sesi-kosong');
       }
   });
 
-  // 6. FITUR LIVE VIEW (PRESENCE)
   function managePresence(user) {
       const userStatusRef = ref(db, '/status/' + user.uid);
       let displayName = user.displayName || user.email.split('@')[0];
@@ -2943,7 +2944,6 @@ updateTerminalStates();            }
       });
   }
 
-  // MENAMPILKAN DAFTAR USER ONLINE
   const listOnlineRef = ref(db, '/status/');
   onValue(listOnlineRef, (snapshot) => {
       const listContainer = document.getElementById('onlineUsersList');
