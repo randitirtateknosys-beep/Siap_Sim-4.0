@@ -631,342 +631,11 @@ html.sesi-aktif #mainApp { display: block !important; }
                 </div>
                 <div class="search-input-group">
                     <input type="text" id="pumpSearchInput" placeholder="Ketik model pompa... (misal: chlf 2-50, CR 5-5, CDMF 10-6)" oninput="searchPumpDatabase()">
-                    <select id="pumpSelectDropdown" onchange="selectPumpFromDropdown()">
-                        <option value="">-- Atau Pilih Model dari Katalog --</option>
-                        <optgroup label="CNP CHLF Series (Light Horizontal)">
-                            <option value="CHLF 2-50 (1-Phase)">CNP CHLF 2-50 | 0.55 kW | 1-Phase (220V)</option>
-                            <option value="CHLF 2-50 (3-Phase)">CNP CHLF 2-50 | 0.55 kW | 3-Phase (380V)</option>
-                            <option value="CHLF 2-60 (3-Phase)">CNP CHLF 2-60 | 0.75 kW | 3-Phase (380V)</option>
-                            <option value="CHLF 4-30 (1-Phase)">CNP CHLF 4-30 | 0.55 kW | 1-Phase (220V)</option>
-                            <option value="CHLF 4-40 (3-Phase)">CNP CHLF 4-40 | 0.75 kW | 3-Phase (380V)</option>
-                            <option value="CHLF 4-50 (3-Phase)">CNP CHLF 4-50 | 1.1 kW | 3-Phase (380V)</option>
-                        </optgroup>
 
-                   <optgroup label="CNP CDL / CDLF Series (Vertical Multistage)">
-                            <option value="CDLF 1-50 (3-Phase)">CNP CDLF 1-50 | 0.37 kW | 3-Phase (380V)</option>
-                            <option value="CDLF 2-50 (3-Phase)">CNP CDLF 2-50 | 0.55 kW | 3-Phase (380V)</option>
-                            <option value="CDLF 4-60 (3-Phase)">CNP CDLF 4-60 | 1.1 kW | 3-Phase (380V)</option>
-                            <option value="CDLF 4-120 (3-Phase)">CNP CDLF 4-120 | 2.2 kW | 3-Phase (380V)</option>
-                            <option value="CDLF 4-160 (3-Phase)">CNP CDLF 4-160 | 3.0 kW | 3-Phase (380V)</option>
-                            <option value="CDLF 8-50 (3-Phase)">CNP CDLF 8-50 | 2.2 kW | 3-Phase (380V)</option>
-                            <option value="CDLF 12-50 (3-Phase)">CNP CDLF 12-50 | 4.0 kW | 3-Phase (380V)</option>
-                            <option value="CDLF 16-40 (3-Phase)">CNP CDLF 16-40 | 4.0 kW | 3-Phase (380V)</option>
-                            <option value="CDLF 32-40 (3-Phase)">CNP CDLF 32-40 | 7.5 kW | 3-Phase (380V)</option>
-                            <option value="CDLF 42-30 (3-Phase)">CNP CDLF 42-30 | 11.0 kW | 3-Phase (380V)</option>
-                            <option value="CDLF 65-30 (3-Phase)">CNP CDLF 65-30 | 18.5 kW | 3-Phase (380V)</option>
-                        </optgroup>
-
-                        <optgroup label="CNP CDM / CDMF Series (Next Gen Vertical)">
-                            <option value="CDMF 1-5 (3-Phase)">CNP CDMF 1-5 | 0.37 kW | 3-Phase (380V)</option>
-                            <option value="CDMF 3-5 (3-Phase)">CNP CDMF 3-5 | 0.55 kW | 3-Phase (380V)</option>
-                            <option value="CDMF 5-5 (3-Phase)">CNP CDMF 5-5 | 1.1 kW | 3-Phase (380V)</option>
-                            <option value="CDMF 10-6 (3-Phase)">CNP CDMF 10-6 | 2.2 kW | 3-Phase (380V)</option>
-                            <option value="CDMF 15-4 (3-Phase)">CNP CDMF 15-4 | 4.0 kW | 3-Phase (380V)</option>
-                            <option value="CDMF 20-5 (3-Phase)">CNP CDMF 20-5 | 5.5 kW | 3-Phase (380V)</option>
-                            <option value="CDMF 32-3 (3-Phase)">CNP CDMF 32-3 | 5.5 kW | 3-Phase (380V)</option>
-                            <option value="CDMF 42-3 (3-Phase)">CNP CDMF 42-3 | 11.0 kW | 3-Phase (380V)</option>
-                            <option value="CDMF 65-2 (3-Phase)">CNP CDMF 65-2 | 11.0 kW | 3-Phase (380V)</option>
-                        </optgroup>
-
-                        <optgroup label="Grundfos CM / CMBE / Scala Series">
-                            <option value="CM1-5">Grundfos CM 1-5 | 0.37 kW | 3-Phase/1-Phase</option>
-                            <option value="CM1-6">Grundfos CM 1-6 | 0.37 kW | 3-Phase/1-Phase</option>
-                            <option value="CM3-3">Grundfos CM 3-3 | 0.37 kW | 3-Phase/1-Phase</option>
-                            <option value="CM3-4">Grundfos CM 3-4 | 0.55 kW | 3-Phase/1-Phase</option>
-                            <option value="CM3-5">Grundfos CM 3-5 | 0.55 kW | 3-Phase/1-Phase</option>
-                            <option value="CM3-6">Grundfos CM 3-6 | 0.75 kW | 3-Phase/1-Phase</option>
-                            <option value="CM3-8">Grundfos CM 3-8 | 1.1 kW | 3-Phase/1-Phase</option>
-                            <option value="CM3-10">Grundfos CM 3-10 | 1.1 kW | 3-Phase/1-Phase</option>
-                            <option value="CM5-3">Grundfos CM 5-3 | 0.55 kW | 3-Phase/1-Phase</option>
-                            <option value="CM5-4">Grundfos CM 5-4 | 0.75 kW | 3-Phase/1-Phase</option>
-                            <option value="CM5-5">Grundfos CM 5-5 | 1.1 kW | 3-Phase/1-Phase</option>
-                            <option value="CM5-6">Grundfos CM 5-6 | 1.1 kW | 3-Phase/1-Phase</option>
-                            <option value="CM5-8">Grundfos CM 5-8 | 1.5 kW | 3-Phase/1-Phase</option>
-                            <option value="CM10-2">Grundfos CM 10-2 | 1.5 kW | 3-Phase</option>
-                            <option value="CM10-3">Grundfos CM 10-3 | 2.2 kW | 3-Phase</option>
-                            <option value="CM10-4">Grundfos CM 10-4 | 3.0 kW | 3-Phase</option>
-                            <option value="CM10-5">Grundfos CM 10-5 | 4.0 kW | 3-Phase</option>
-                            <option value="CM15-1">Grundfos CM 15-1 | 1.5 kW | 3-Phase</option>
-                            <option value="CM15-2">Grundfos CM 15-2 | 3.0 kW | 3-Phase</option>
-                            <option value="CMBE 3-62">Grundfos CMBE 3-62 | 1.1 kW | 1-Phase (220V)</option>
-                            <option value="Scala 2 3-45">Grundfos Scala 2 3-45 | 0.55 kW | 1-Phase (220V)</option>
-                        </optgroup>
-
-                        <optgroup label="Grundfos CR / CRE / CRN / SP Series">
-                            <option value="CR 1-5 (3-Phase)">Grundfos CR 1-5 | 0.37 kW | 3-Phase (380V)</option>
-                            <option value="CR 3-5 (3-Phase)">Grundfos CR 3-5 | 0.37 kW | 3-Phase (380V)</option>
-                            <option value="CR 5-5 (3-Phase)">Grundfos CR 5-5 | 0.75 kW | 3-Phase (380V)</option>
-                            <option value="CR 10-4 (3-Phase)">Grundfos CR 10-4 | 1.5 kW | 3-Phase (380V)</option>
-                            <option value="CR 15-3 (3-Phase)">Grundfos CR 15-3 | 3.0 kW | 3-Phase (380V)</option>
-                            <option value="CR 20-3 (3-Phase)">Grundfos CR 20-3 | 4.0 kW | 3-Phase (380V)</option>
-                            <option value="CR 32-4-2 (3-Phase)">Grundfos CR 32-4-2 | 7.5 kW | 3-Phase (380V)</option>
-                            <option value="CR 45-3-1 (3-Phase)">Grundfos CR 45-3-1 | 11.0 kW | 3-Phase (380V)</option>
-                            <option value="CR 64-4-1 (3-Phase)">Grundfos CR 64-4-1 | 18.5 kW | 3-Phase (380V)</option>
-                            <option value="CH4-60">Grundfos CH 4-60 | 1.1 kW | 3-Phase (380V)</option>
-                            <option value="CR3-25">Grundfos CR 3-25 | 2.2 kW | 3-Phase (380V)</option>
-                            <option value="CR3-27">Grundfos CR 3-27 | 2.2 kW | 3-Phase (380V)</option>
-                            <option value="CR90-2">Grundfos CR 90-2 | 7.5 kW | 3-Phase (380V)</option>
-                            <option value="CRN10-20">Grundfos CRN 10-20 | 7.5 kW | 3-Phase (380V)</option>
-                            <option value="CRE 5-9">Grundfos CRE 5-9 | 1.5 kW | 3-Phase (380V)</option>
-                            <option value="CRE 5-10">Grundfos CRE 5-10 | 1.5 kW | 3-Phase (380V)</option>
-                            <option value="SP14-13">Grundfos SP 14-13 | 5.5 kW | 3-Phase (380V)</option>
-                        </optgroup>
-                        
-                        <optgroup label="CNP CDLF / CDMF Series (Tambahan)">
-                            <option value="CDLF 2-22 (1-Phase)">CNP CDLF 2-22 | 2.2 kW | 1-Phase (220V)</option>
-                            <option value="CDLF 4-10 (1-Phase)">CNP CDLF 4-10 | 1.5 kW | 1-Phase (220V)</option>
-                            <option value="CDLF 4-16 (3-Phase)">CNP CDLF 4-16 | 3.0 kW | 3-Phase (380V)</option>
-                            <option value="CDLF 4-22 (3-Phase)">CNP CDLF 4-22 | 4.0 kW | 3-Phase (380V)</option>
-                            <option value="CDLF 5-12 (3-Phase)">CNP CDLF 5-12 | 2.2 kW | 3-Phase (380V)</option>
-                            <option value="CDMF 3-8 (1-Phase)">CNP CDMF 3-8 | 0.75 kW | 1-Phase (220V)</option>
-                            <option value="CDMF 5-12 (3-Phase)">CNP CDMF 5-12 | 2.2 kW | 3-Phase (380V)</option>
-                            <option value="CDMF 5-13 (3-Phase)">CNP CDMF 5-13 | 2.2 kW | 3-Phase (380V)</option>
-                            <option value="CDMF 5-25 (3-Phase)">CNP CDMF 5-25 | 4.0 kW | 3-Phase (380V)</option>
-                        </optgroup>
-
-                        <optgroup label="CNP CHLF / CHLF(T) Series (Tambahan)">
-                            <option value="CHLF 2-3 (1-Phase)">CNP CHLF 2-3 | 0.37 kW | 1-Phase (220V)</option>
-                            <option value="CHLF 2-15 (1-Phase)">CNP CHLF 2-15 | 0.37 kW | 1-Phase (220V)</option>
-                            <option value="CHLF 2-20 (1-Phase)">CNP CHLF 2-20 | 0.37 kW | 1-Phase (220V)</option>
-                            <option value="CHLF 2-30 (1-Phase)">CNP CHLF 2-30 | 0.37 kW | 1-Phase (220V)</option>
-                            <option value="CHLF 2-60 (1-Phase)">CNP CHLF 2-60 | 0.75 kW | 1-Phase (220V)</option>
-                            <option value="CHLF 4-50 (1-Phase)">CNP CHLF 4-50 | 1.1 kW | 1-Phase (220V)</option>
-                            <option value="CHLF 4-60 (1-Phase)">CNP CHLF 4-60 | 1.1 kW | 1-Phase (220V)</option>
-                            <option value="CHLF 8-40 (3-Phase)">CNP CHLF 8-40 | 1.5 kW | 3-Phase (380V)</option>
-                            <option value="CHLF 12-20 (1-Phase)">CNP CHLF 12-20 | 1.5 kW | 1-Phase (220V)</option>
-                            <option value="CHLF(T) 2-40">CNP CHLF(T) 2-40 | 0.55 kW | 3-Phase (380V)</option>
-                            <option value="CHLF(T) 2-60">CNP CHLF(T) 2-60 | 0.75 kW | 3-Phase (380V)</option>
-                            <option value="CHLF(T) 4-60">CNP CHLF(T) 4-60 | 1.1 kW | 3-Phase (380V)</option>
-                        </optgroup>
-
-<optgroup label="Floteq XM / XMI / XMN Series 1 & 3">
-                            <option value="XM 1-2">Floteq XM/XMI 1-2 | 0.37 kW</option>
-                            <option value="XM 1-3">Floteq XM/XMI 1-3 | 0.37 kW</option>
-                            <option value="XM 1-4">Floteq XM/XMI 1-4 | 0.37 kW</option>
-                            <option value="XM 1-5">Floteq XM/XMI 1-5 | 0.37 kW</option>
-                            <option value="XM 1-6">Floteq XM/XMI 1-6 | 0.37 kW</option>
-                            <option value="XM 1-7">Floteq XM/XMI 1-7 | 0.37 kW</option>
-                            <option value="XM 1-8">Floteq XM/XMI 1-8 | 0.55 kW</option>
-                            <option value="XM 1-9">Floteq XM/XMI 1-9 | 0.55 kW</option>
-                            <option value="XM 1-10">Floteq XM/XMI 1-10 | 0.55 kW</option>
-                            <option value="XM 1-11">Floteq XM/XMI 1-11 | 0.55 kW</option>
-                            <option value="XM 1-12">Floteq XM/XMI 1-12 | 0.75 kW</option>
-                            <option value="XM 1-13">Floteq XM/XMI 1-13 | 0.75 kW</option>
-                            <option value="XM 1-15">Floteq XM/XMI 1-15 | 0.75 kW</option>
-                            <option value="XM 1-17">Floteq XM/XMI 1-17 | 1.1 kW</option>
-                            <option value="XM 1-19">Floteq XM/XMI 1-19 | 1.1 kW</option>
-                            <option value="XM 1-21">Floteq XM/XMI 1-21 | 1.1 kW</option>
-                            <option value="XM 1-23">Floteq XM/XMI 1-23 | 1.1 kW</option>
-                            <option value="XM 1-25">Floteq XM/XMI 1-25 | 1.5 kW</option>
-                            <option value="XM 1-27">Floteq XM/XMI 1-27 | 1.5 kW</option>
-                            <option value="XM 1-30">Floteq XM/XMI 1-30 | 1.5 kW</option>
-                            <option value="XM 1-33">Floteq XM/XMI 1-33 | 2.2 kW</option>
-                            <option value="XM 1-36">Floteq XM/XMI 1-36 | 2.2 kW</option>
-                            <option value="XM 3-2">Floteq XM/XMI 3-2 | 0.37 kW</option>
-                            <option value="XM 3-3">Floteq XM/XMI 3-3 | 0.37 kW</option>
-                            <option value="XM 3-4">Floteq XM/XMI 3-4 | 0.37 kW</option>
-                            <option value="XM 3-5">Floteq XM/XMI 3-5 | 0.37 kW</option>
-                            <option value="XM 3-6">Floteq XM/XMI 3-6 | 0.55 kW</option>
-                            <option value="XM 3-7">Floteq XM/XMI 3-7 | 0.55 kW</option>
-                            <option value="XM 3-8">Floteq XM/XMI 3-8 | 0.75 kW</option>
-                            <option value="XM 3-9">Floteq XM/XMI 3-9 | 0.75 kW</option>
-                            <option value="XM 3-10">Floteq XM/XMI 3-10 | 0.75 kW</option>
-                            <option value="XM 3-11">Floteq XM/XMI 3-11 | 1.1 kW</option>
-                            <option value="XM 3-12">Floteq XM/XMI 3-12 | 1.1 kW</option>
-                            <option value="XM 3-13">Floteq XM/XMI 3-13 | 1.1 kW</option>
-                            <option value="XM 3-15">Floteq XM/XMI 3-15 | 1.1 kW</option>
-                            <option value="XM 3-17">Floteq XM/XMI 3-17 | 1.5 kW</option>
-                            <option value="XM 3-19">Floteq XM/XMI 3-19 | 1.5 kW</option>
-                            <option value="XM 3-21">Floteq XM/XMI 3-21 | 2.2 kW</option>
-                            <option value="XM 3-23">Floteq XM/XMI 3-23 | 2.2 kW</option>
-                            <option value="XM 3-25">Floteq XM/XMI 3-25 | 2.2 kW</option>
-                            <option value="XM 3-27">Floteq XM/XMI 3-27 | 2.2 kW</option>
-                            <option value="XM 3-29">Floteq XM/XMI 3-29 | 2.2 kW</option>
-                            <option value="XM 3-31">Floteq XM/XMI 3-31 | 3.0 kW</option>
-                            <option value="XM 3-33">Floteq XM/XMI 3-33 | 3.0 kW</option>
-                            <option value="XM 3-36">Floteq XM/XMI 3-36 | 3.0 kW</option> </optgroup>
-                        
- <optgroup label="Floteq XM / XMI / XMN Series 5, 10 & 15">
-                            <option value="XM 5-2">Floteq XM/XMI 5-2 | 0.37 kW</option>
-                            <option value="XM 5-3">Floteq XM/XMI 5-3 | 0.55 kW</option>
-                            <option value="XM 5-4">Floteq XM/XMI 5-4 | 0.55 kW</option>
-                            <option value="XM 5-5">Floteq XM/XMI 5-5 | 0.75 kW</option>
-                            <option value="XM 5-6">Floteq XM/XMI 5-6 | 1.1 kW</option>
-                            <option value="XM 5-7">Floteq XM/XMI 5-7 | 1.1 kW</option>
-                            <option value="XM 5-8">Floteq XM/XMI 5-8 | 1.1 kW</option>
-                            <option value="XM 5-9">Floteq XM/XMI 5-9 | 1.5 kW</option>
-                            <option value="XM 5-10">Floteq XM/XMI 5-10 | 1.5 kW</option>
-                            <option value="XM 5-11">Floteq XM/XMI 5-11 | 2.2 kW</option>
-                            <option value="XM 5-12">Floteq XM/XMI 5-12 | 2.2 kW</option>
-                            <option value="XM 5-13">Floteq XM/XMI 5-13 | 2.2 kW</option>
-                            <option value="XM 5-14">Floteq XM/XMI 5-14 | 2.2 kW</option>
-                            <option value="XM 5-15">Floteq XM/XMI 5-15 | 2.2 kW</option>
-                            <option value="XM 5-16">Floteq XM/XMI 5-16 | 2.2 kW</option>
-                            <option value="XM 5-18">Floteq XM/XMI 5-18 | 3.0 kW</option>
-                            <option value="XM 5-20">Floteq XM/XMI 5-20 | 3.0 kW</option>
-                            <option value="XM 5-22">Floteq XM/XMI 5-22 | 4.0 kW</option>
-                            <option value="XM 5-24">Floteq XM/XMI 5-24 | 4.0 kW</option>
-                            <option value="XM 5-26">Floteq XM/XMI 5-26 | 4.0 kW</option>
-                            <option value="XM 5-29">Floteq XM/XMI 5-29 | 4.0 kW</option>
-                            <option value="XM 10-2">Floteq XM/XMI 10-2 | 0.75 kW</option>
-                            <option value="XM 10-3">Floteq XM/XMI 10-3 | 1.1 kW</option>
-                            <option value="XM 10-4">Floteq XM/XMI 10-4 | 1.5 kW</option>
-                            <option value="XM 10-5">Floteq XM/XMI 10-5 | 2.2 kW</option>
-                            <option value="XM 10-6">Floteq XM/XMI 10-6 | 2.2 kW</option>
-                            <option value="XM 10-7">Floteq XM/XMI 10-7 | 3.0 kW</option>
-                            <option value="XM 10-8">Floteq XM/XMI 10-8 | 3.0 kW</option>
-                            <option value="XM 10-9">Floteq XM/XMI 10-9 | 3.0 kW</option>
-                            <option value="XM 10-10">Floteq XM/XMI 10-10 | 4.0 kW</option>
-                            <option value="XM 10-12">Floteq XM/XMI 10-12 | 4.0 kW</option>
-                            <option value="XM 10-14">Floteq XM/XMI 10-14 | 5.5 kW</option>
-                            <option value="XM 10-16">Floteq XM/XMI 10-16 | 5.5 kW</option>
-                            <option value="XM 10-18">Floteq XM/XMI 10-18 | 7.5 kW</option>
-                            <option value="XM 10-20">Floteq XM/XMI 10-20 | 7.5 kW</option>
-                            <option value="XM 10-22">Floteq XM/XMI 10-22 | 7.5 kW</option>
-                            <option value="XM 15-1">Floteq XM/XMI 15-1 | 1.1 kW</option>
-                            <option value="XM 15-2">Floteq XM/XMI 15-2 | 2.2 kW</option>
-                            <option value="XM 15-3">Floteq XM/XMI 15-3 | 3.0 kW</option>
-                            <option value="XM 15-4">Floteq XM/XMI 15-4 | 4.0 kW</option>
-                            <option value="XM 15-5">Floteq XM/XMI 15-5 | 4.0 kW</option>
-                            <option value="XM 15-6">Floteq XM/XMI 15-6 | 5.5 kW</option>
-                            <option value="XM 15-7">Floteq XM/XMI 15-7 | 5.5 kW</option>
-                            <option value="XM 15-8">Floteq XM/XMI 15-8 | 7.5 kW</option>
-                            <option value="XM 15-9">Floteq XM/XMI 15-9 | 7.5 kW</option>
-                            <option value="XM 15-10">Floteq XM/XMI 15-10 | 11 kW</option>
-                            <option value="XM 15-12">Floteq XM/XMI 15-12 | 11 kW</option>
-                            <option value="XM 15-14">Floteq XM/XMI 15-14 | 11 kW</option>
-                            <option value="XM 15-17">Floteq XM/XMI 15-17 | 15 kW</option></optgroup>
-
-<optgroup label="Floteq XM / XMI / XMN Series 20 & 32">
-                            <option value="XM 20-1">Floteq XM/XMI 20-1 | 1.1 kW</option>
-                            <option value="XM 20-2">Floteq XM/XMI 20-2 | 2.2 kW</option>
-                            <option value="XM 20-3">Floteq XM/XMI 20-3 | 4.0 kW</option>
-                            <option value="XM 20-4">Floteq XM/XMI 20-4 | 5.5 kW</option>
-                            <option value="XM 20-5">Floteq XM/XMI 20-5 | 5.5 kW</option>
-                            <option value="XM 20-6">Floteq XM/XMI 20-6 | 7.5 kW</option>
-                            <option value="XM 20-7">Floteq XM/XMI 20-7 | 7.5 kW</option>
-                            <option value="XM 20-8">Floteq XM/XMI 20-8 | 11 kW</option>
-                            <option value="XM 20-10">Floteq XM/XMI 20-10 | 11 kW</option>
-                            <option value="XM 20-12">Floteq XM/XMI 20-12 | 15 kW</option>
-                            <option value="XM 20-14">Floteq XM/XMI 20-14 | 15 kW</option>
-                            <option value="XM 20-17">Floteq XM/XMI 20-17 | 18.5 kW</option>
-                            <option value="XM 32-1-1">Floteq XM/XMI 32-1-1 | 1.5 kW</option>
-                            <option value="XM 32-1">Floteq XM/XMI 32-1 | 2.2 kW</option>
-                            <option value="XM 32-2-2">Floteq XM/XMI 32-2-2 | 3.0 kW</option>
-                            <option value="XM 32-2">Floteq XM/XMI 32-2 | 4.0 kW</option>
-                            <option value="XM 32-3-2">Floteq XM/XMI 32-3-2 | 5.5 kW</option>
-                            <option value="XM 32-3">Floteq XM/XMI 32-3 | 5.5 kW</option>
-                            <option value="XM 32-4-2">Floteq XM/XMI 32-4-2 | 7.5 kW</option>
-                            <option value="XM 32-4">Floteq XM/XMI 32-4 | 7.5 kW</option>
-                            <option value="XM 32-5-2">Floteq XM/XMI 32-5-2 | 11 kW</option>
-                            <option value="XM 32-5">Floteq XM/XMI 32-5 | 11 kW</option>
-                            <option value="XM 32-6-2">Floteq XM/XMI 32-6-2 | 11 kW</option>
-                            <option value="XM 32-6">Floteq XM/XMI 32-6 | 11 kW</option>
-                            <option value="XM 32-7-2">Floteq XM/XMI 32-7-2 | 15 kW</option>
-                            <option value="XM 32-7">Floteq XM/XMI 32-7 | 15 kW</option>
-                            <option value="XM 32-8-2">Floteq XM/XMI 32-8-2 | 15 kW</option>
-                            <option value="XM 32-8">Floteq XM/XMI 32-8 | 15 kW</option>
-                            <option value="XM 32-9-2">Floteq XM/XMI 32-9-2 | 18.5 kW</option>
-                            <option value="XM 32-9">Floteq XM/XMI 32-9 | 18.5 kW</option>
-                            <option value="XM 32-10-2">Floteq XM/XMI 32-10-2 | 18.5 kW</option>
-                            <option value="XM 32-10">Floteq XM/XMI 32-10 | 18.5 kW</option>
-                            <option value="XM 32-11-2">Floteq XM/XMI 32-11-2 | 22 kW</option>
-                            <option value="XM 32-11">Floteq XM/XMI 32-11 | 22 kW</option>
-                            <option value="XM 32-12-2">Floteq XM/XMI 32-12-2 | 22 kW</option>
-                            <option value="XM 32-12">Floteq XM/XMI 32-12 | 22 kW</option>
-                            <option value="XM 32-13-2">Floteq XM/XMI 32-13-2 | 30 kW</option>
-                            <option value="XM 32-13">Floteq XM/XMI 32-13 | 30 kW</option>
-                            <option value="XM 32-14-2">Floteq XM/XMI 32-14-2 | 30 kW</option>
-                            <option value="XM 32-14">Floteq XM/XMI 32-14 | 30 kW</option></optgroup>
-
- <optgroup label="Floteq XM / XMI / XMN Series 45, 64, 90, 120 & 150">
-                            <option value="XM 45-1-1">Floteq XM/XMI 45-1-1 | 3.0 kW</option>
-                            <option value="XM 45-1">Floteq XM/XMI 45-1 | 4.0 kW</option>
-                            <option value="XM 45-2-2">Floteq XM/XMI 45-2-2 | 5.5 kW</option>
-                            <option value="XM 45-2">Floteq XM/XMI 45-2 | 7.5 kW</option>
-                            <option value="XM 45-3-2">Floteq XM/XMI 45-3-2 | 11 kW</option>
-                            <option value="XM 45-3">Floteq XM/XMI 45-3 | 11 kW</option>
-                            <option value="XM 45-4-2">Floteq XM/XMI 45-4-2 | 15 kW</option>
-                            <option value="XM 45-4">Floteq XM/XMI 45-4 | 15 kW</option>
-                            <option value="XM 45-5-2">Floteq XM/XMI 45-5-2 | 18.5 kW</option>
-                            <option value="XM 45-5">Floteq XM/XMI 45-5 | 18.5 kW</option>
-                            <option value="XM 45-6-2">Floteq XM/XMI 45-6-2 | 22 kW</option>
-                            <option value="XM 45-6">Floteq XM/XMI 45-6 | 22 kW</option>
-                            <option value="XM 45-7-2">Floteq XM/XMI 45-7-2 | 30 kW</option>
-                            <option value="XM 45-7">Floteq XM/XMI 45-7 | 30 kW</option>
-                            <option value="XM 45-8-2">Floteq XM/XMI 45-8-2 | 30 kW</option>
-                            <option value="XM 45-8">Floteq XM/XMI 45-8 | 30 kW</option>
-                            <option value="XM 45-9-2">Floteq XM/XMI 45-9-2 | 30 kW</option>
-                            <option value="XM 45-9">Floteq XM/XMI 45-9 | 37 kW</option>
-                            <option value="XM 45-10-2">Floteq XM/XMI 45-10-2 | 37 kW</option>
-                            <option value="XM 45-10">Floteq XM/XMI 45-10 | 37 kW</option>
-                            <option value="XM 45-11-2">Floteq XM/XMI 45-11-2 | 45 kW</option>
-                            <option value="XM 45-11">Floteq XM/XMI 45-11 | 45 kW</option>
-                            <option value="XM 45-12-2">Floteq XM/XMI 45-12-2 | 45 kW</option>
-                            <option value="XM 45-12">Floteq XM/XMI 45-12 | 45 kW</option>
-                            <option value="XM 45-13-2">Floteq XM/XMI 45-13-2 | 45 kW</option>
-                            <option value="XM 64-1-1">Floteq XM/XMI 64-1-1 | 4.0 kW</option>
-                            <option value="XM 64-1">Floteq XM/XMI 64-1 | 5.5 kW</option>
-                            <option value="XM 64-2-2">Floteq XM/XMI 64-2-2 | 7.5 kW</option>
-                            <option value="XM 64-2-1">Floteq XM/XMI 64-2-1 | 11 kW</option>
-                            <option value="XM 64-2">Floteq XM/XMI 64-2 | 11 kW</option>
-                            <option value="XM 64-3-2">Floteq XM/XMI 64-3-2 | 15 kW</option>
-                            <option value="XM 64-3-1">Floteq XM/XMI 64-3-1 | 15 kW</option>
-                            <option value="XM 64-3">Floteq XM/XMI 64-3 | 18.5 kW</option>
-                            <option value="XM 64-4-2">Floteq XM/XMI 64-4-2 | 18.5 kW</option>
-                            <option value="XM 64-4-1">Floteq XM/XMI 64-4-1 | 22 kW</option>
-                            <option value="XM 64-4">Floteq XM/XMI 64-4 | 22 kW</option>
-                            <option value="XM 64-5-2">Floteq XM/XMI 64-5-2 | 30 kW</option>
-                            <option value="XM 64-5-1">Floteq XM/XMI 64-5-1 | 30 kW</option>
-                            <option value="XM 64-5">Floteq XM/XMI 64-5 | 30 kW</option>
-                            <option value="XM 64-6-2">Floteq XM/XMI 64-6-2 | 30 kW</option>
-                            <option value="XM 64-6-1">Floteq XM/XMI 64-6-1 | 37 kW</option>
-                            <option value="XM 64-6">Floteq XM/XMI 64-6 | 37 kW</option>
-                            <option value="XM 64-7-2">Floteq XM/XMI 64-7-2 | 37 kW</option>
-                            <option value="XM 64-7-1">Floteq XM/XMI 64-7-1 | 37 kW</option>
-                            <option value="XM 64-7">Floteq XM/XMI 64-7 | 45 kW</option>
-                            <option value="XM 64-8-2">Floteq XM/XMI 64-8-2 | 45 kW</option>
-                            <option value="XM 64-8-1">Floteq XM/XMI 64-8-1 | 45 kW</option>
-                            <option value="XM 90-1-1">Floteq XM/XMI 90-1-1 | 5.5 kW</option>
-                            <option value="XM 90-1">Floteq XM/XMI 90-1 | 7.5 kW</option>
-                            <option value="XM 90-2-2">Floteq XM/XMI 90-2-2 | 11 kW</option>
-                            <option value="XM 90-2">Floteq XM/XMI 90-2 | 15 kW</option>
-                            <option value="XM 90-3-2">Floteq XM/XMI 90-3-2 | 18.5 kW</option>
-                            <option value="XM 90-3">Floteq XM/XMI 90-3 | 22 kW</option>
-                            <option value="XM 90-4-2">Floteq XM/XMI 90-4-2 | 30 kW</option>
-                            <option value="XM 90-4">Floteq XM/XMI 90-4 | 30 kW</option>
-                            <option value="XM 90-5-2">Floteq XM/XMI 90-5-2 | 37 kW</option>
-                            <option value="XM 90-5">Floteq XM/XMI 90-5 | 37 kW</option>
-                            <option value="XM 90-6-2">Floteq XM/XMI 90-6-2 | 45 kW</option>
-                            <option value="XM 90-6">Floteq XM/XMI 90-6 | 45 kW</option>
-                            <option value="XM 120-1">Floteq XM/XMI 120-1 | 11 kW</option>
-                            <option value="XM 120-2-1">Floteq XM/XMI 120-2-1 | 18.5 kW</option>
-                            <option value="XM 120-2">Floteq XM/XMI 120-2 | 22 kW</option>
-                            <option value="XM 120-3">Floteq XM/XMI 120-3 | 30 kW</option>
-                            <option value="XM 120-4-1">Floteq XM/XMI 120-4-1 | 37 kW</option>
-                            <option value="XM 120-5-1">Floteq XM/XMI 120-5-1 | 45 kW</option>
-                            <option value="XM 120-6-1">Floteq XM/XMI 120-6-1 | 55 kW</option>
-                            <option value="XM 120-7">Floteq XM/XMI 120-7 | 75 kW</option>
-                            <option value="XM 150-1-1">Floteq XM/XMI 150-1-1 | 11 kW</option>
-                            <option value="XM 150-1">Floteq XM/XMI 150-1 | 15 kW</option>
-                            <option value="XM 150-2-1">Floteq XM/XMI 150-2-1 | 22 kW</option>
-                            <option value="XM 150-3-2">Floteq XM/XMI 150-3-2 | 30 kW</option>
-                            <option value="XM 150-3">Floteq XM/XMI 150-3 | 37 kW</option>
-                            <option value="XM 150-4-1">Floteq XM/XMI 150-4-1 | 45 kW</option>
-                            <option value="XM 150-5-2">Floteq XM/XMI 150-5-2 | 55 kW</option>
-                            <option value="XM 150-6">Floteq XM/XMI 150-6 | 75 kW</option></optgroup>
-
-
- <optgroup label="Nocchi / Pentair / Nasional Mcpump">
-                            <option value="JT 100">Pentair Pump JT 100 | 0.75 kW | 1-Phase (220V)</option>
-                            <option value="JT 250">Nocchi Pump JT 250 | 1.5 kW | 1/3-Phase</option>
-                            <option value="MCX 195">Nocchi MCX 195 | 1.1 kW | 1/3-Phase</option>
-                            <option value="MCX 375">Nocchi Pump MCX 375 | 2.2 kW | 3-Phase (380V)</option>
-                            <option value="4NMCPM">Nasional Mcpump 4NMCPM (Satelit) | 0.75 kW | 1-Phase (220V)</option>
-                        </optgroup>
-                    </select>
-                </div>
-
+<select id="pumpSelectDropdown" onchange="selectPumpFromDropdown()">
+    <option value="">-- Atau Pilih Model dari Katalog --</option>
+</select>
+</div>
                 <div class="pump-result-card" id="pumpResultCard">
                     <div class="pump-result-title">
                         <span id="specTitle">CNP CHLF 2-50</span>
@@ -1440,345 +1109,644 @@ html.sesi-aktif #mainApp { display: block !important; }
     let globalData = []; 
 
     const pumpDatabase = {
-        "CHLF 2-50 (1-Phase)": { model: "CNP CHLF 2-50", kw: 0.55, hp: 0.75, phase: 1, volt: "220V", cos: 0.9, head: "2 m³/h @ 36 meter" },
-        "CHLF 2-50 (3-Phase)": { model: "CNP CHLF 2-50", kw: 0.55, hp: 0.75, phase: 3, volt: "380V", cos: 0.85, head: "2 m³/h @ 36 meter" },
-        "CHLF 2-60 (3-Phase)": { model: "CNP CHLF 2-60", kw: 0.75, hp: 1.0, phase: 3, volt: "380V", cos: 0.85, head: "2 m³/h @ 45 meter" },
-        "CHLF 4-30 (1-Phase)": { model: "CNP CHLF 4-30", kw: 0.55, hp: 0.75, phase: 1, volt: "220V", cos: 0.9, head: "4 m³/h @ 24 meter" },
-        "CHLF 4-40 (3-Phase)": { model: "CNP CHLF 4-40", kw: 0.75, hp: 1.0, phase: 3, volt: "380V", cos: 0.85, head: "4 m³/h @ 32 meter" },
-        "CHLF 4-50 (3-Phase)": { model: "CNP CHLF 4-50", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.85, head: "4 m³/h @ 40 meter" },
-        "JT 100": { model: "Pentair Pump JT 100", kw: 0.75, hp: 1.0, phase: 1, volt: "220V", cos: 0.9, head: "Sesuai Spesifikasi Model" },
-        "JT 250": { model: "Nocchi Pump JT 250", kw: 1.5, hp: 2.0, phase: 3, volt: "380V/220V", cos: 0.85, head: "Sesuai Spesifikasi Model" },
-        "MCX 195": { model: "Nocchi MCX 195", kw: 1.1, hp: 1.5, phase: 3, volt: "380V/220V", cos: 0.85, head: "Sesuai Spesifikasi Model" },
-        "MCX 375": { model: "Nocchi Pump MCX 375", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "Sesuai Spesifikasi Model" },
-        "4NMCPM": { model: "Nasional Mcpump 4NMCPM (Satelit)", kw: 0.75, hp: 1.0, phase: 1, volt: "220V", cos: 0.9, head: "Sesuai Spesifikasi Model" },
- // ==========================================
-        // 2. CNP CDL / CDLF Series (Vertical Multistage)
+"CR 1s": { model: "Grundfos CR/CRI/CRN 1s", kw: 0.37, hp: 0.5, phase: 3, volt: "380V", cos: 0.81, head: "Maks 25 bar / 1 m³/h" }, /*[cite: 2] */
+        "CR 1": { model: "Grundfos CR/CRI/CRN 1", kw: 0.37, hp: 0.5, phase: 3, volt: "380V", cos: 0.81, head: "Maks 25 bar / 1 m³/h" }, /*[cite: 2] */
+        "CR 3": { model: "Grundfos CR/CRI/CRN 3", kw: 0.37, hp: 0.5, phase: 3, volt: "380V", cos: 0.81, head: "Maks 25 bar / 3 m³/h" }, /*[cite: 2] */
+        "CR 5": { model: "Grundfos CR/CRI/CRN 5", kw: 0.37, hp: 0.5, phase: 3, volt: "380V", cos: 0.81, head: "Maks 25 bar / 5 m³/h" }, /*[cite: 2] */
+        "CR 10": { model: "Grundfos CR/CRI/CRN 10", kw: 0.37, hp: 0.5, phase: 3, volt: "380V", cos: 0.81, head: "Maks 25 bar / 10 m³/h" }, /*[cite: 2] */
+        "CR 15": { model: "Grundfos CR/CRI/CRN 15", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.83, head: "Maks 25 bar / 15 m³/h" }, /*[cite: 2] */
+        "CR 20": { model: "Grundfos CR/CRI/CRN 20", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.83, head: "Maks 25 bar / 20 m³/h" }, /*[cite: 2] */
+        "CR 32": { model: "Grundfos CR/CRN 32", kw: 1.5, hp: 2.0, phase: 3, volt: "380V", cos: 0.84, head: "Maks 30 bar / 32 m³/h" }, /*[cite: 2] */
+        "CR 45": { model: "Grundfos CR/CRN 45", kw: 3.0, hp: 4.0, phase: 3, volt: "380V", cos: 0.87, head: "Maks 33 bar / 45 m³/h" }, /*[cite: 2] */
+        "CR 64": { model: "Grundfos CR/CRN 64", kw: 4.0, hp: 5.5, phase: 3, volt: "380V", cos: 0.88, head: "Maks 30 bar / 64 m³/h" }, /*[cite: 2] */
+        "CR 90": { model: "Grundfos CR/CRN 90", kw: 5.5, hp: 7.5, phase: 3, volt: "380V", cos: 0.88, head: "Maks 30 bar / 90 m³/h" }, /*[cite: 2] */
+        "CR 120": { model: "Grundfos CR/CRN 120", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.89, head: "Maks 30 bar / 120 m³/h" }, /*[cite: 2] */
+        "CR 150": { model: "Grundfos CR/CRN 150", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.89, head: "Maks 30 bar / 150 m³/h" }, /*[cite: 2] */
+
+
+        /* =================================================================================
+           2. CNP CDL & CDLF SERIES[cite: 3]
+           Faktor Daya (Cos Phi) disesuaikan dengan standar motor CNP: 
+           <=0.37kW:0.81 | 0.55-0.75kW:0.82 | 1.1kW:0.83 | 1.5kW:0.84 | 2.2kW:0.85 
+           3.0kW:0.87 | 4.0-7.5kW:0.88 | >=11.0kW:0.89[cite: 4]
+           ================================================================================= */
+        
+        // CDL/CDLF 1 Series (Nominal Q = 1 m³/h)[cite: 3]
+        "CDL1-2": { model: "CNP CDL/CDLF 1-2", kw: 0.37, hp: 0.5, phase: 3, volt: "380V", cos: 0.81, head: "1 m³/h @ 11.5m" },
+        "CDL1-3": { model: "CNP CDL/CDLF 1-3", kw: 0.37, hp: 0.5, phase: 3, volt: "380V", cos: 0.81, head: "1 m³/h @ 17m" },
+        "CDL1-4": { model: "CNP CDL/CDLF 1-4", kw: 0.37, hp: 0.5, phase: 3, volt: "380V", cos: 0.81, head: "1 m³/h @ 22.5m" },
+        "CDL1-5": { model: "CNP CDL/CDLF 1-5", kw: 0.37, hp: 0.5, phase: 3, volt: "380V", cos: 0.81, head: "1 m³/h @ 28m" },
+        "CDL1-6": { model: "CNP CDL/CDLF 1-6", kw: 0.37, hp: 0.5, phase: 3, volt: "380V", cos: 0.81, head: "1 m³/h @ 33m" },
+        "CDL1-7": { model: "CNP CDL/CDLF 1-7", kw: 0.37, hp: 0.5, phase: 3, volt: "380V", cos: 0.81, head: "1 m³/h @ 39m" },
+        "CDL1-8": { model: "CNP CDL/CDLF 1-8", kw: 0.55, hp: 0.75, phase: 3, volt: "380V", cos: 0.82, head: "1 m³/h @ 45m" },
+        "CDL1-9": { model: "CNP CDL/CDLF 1-9", kw: 0.55, hp: 0.75, phase: 3, volt: "380V", cos: 0.82, head: "1 m³/h @ 51m" },
+        "CDL1-10": { model: "CNP CDL/CDLF 1-10", kw: 0.55, hp: 0.75, phase: 3, volt: "380V", cos: 0.82, head: "1 m³/h @ 57m" },
+        "CDL1-11": { model: "CNP CDL/CDLF 1-11", kw: 0.55, hp: 0.75, phase: 3, volt: "380V", cos: 0.82, head: "1 m³/h @ 61m" },
+        "CDL1-12": { model: "CNP CDL/CDLF 1-12", kw: 0.75, hp: 1.0, phase: 3, volt: "380V", cos: 0.82, head: "1 m³/h @ 67m" },
+        "CDL1-13": { model: "CNP CDL/CDLF 1-13", kw: 0.75, hp: 1.0, phase: 3, volt: "380V", cos: 0.82, head: "1 m³/h @ 73m" },
+        "CDL1-15": { model: "CNP CDL/CDLF 1-15", kw: 0.75, hp: 1.0, phase: 3, volt: "380V", cos: 0.82, head: "1 m³/h @ 84m" },
+        "CDL1-17": { model: "CNP CDL/CDLF 1-17", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.83, head: "1 m³/h @ 95m" },
+        "CDL1-19": { model: "CNP CDL/CDLF 1-19", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.83, head: "1 m³/h @ 106m" },
+        "CDL1-21": { model: "CNP CDL/CDLF 1-21", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.83, head: "1 m³/h @ 117m" },
+        "CDL1-23": { model: "CNP CDL/CDLF 1-23", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.83, head: "1 m³/h @ 128m" },
+        "CDL1-25": { model: "CNP CDL/CDLF 1-25", kw: 1.5, hp: 2.0, phase: 3, volt: "380V", cos: 0.84, head: "1 m³/h @ 139m" },
+        "CDL1-27": { model: "CNP CDL/CDLF 1-27", kw: 1.5, hp: 2.0, phase: 3, volt: "380V", cos: 0.84, head: "1 m³/h @ 150m" },
+        "CDL1-30": { model: "CNP CDL/CDLF 1-30", kw: 1.5, hp: 2.0, phase: 3, volt: "380V", cos: 0.84, head: "1 m³/h @ 166m" },
+        "CDL1-33": { model: "CNP CDL/CDLF 1-33", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "1 m³/h @ 183m" },
+        "CDL1-36": { model: "CNP CDL/CDLF 1-36", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "1 m³/h @ 200m" },
+
+        // CDL/CDLF 2 Series (Nominal Q = 2 m³/h)[cite: 3]
+        "CDL2-2": { model: "CNP CDL/CDLF 2-2", kw: 0.37, hp: 0.5, phase: 3, volt: "380V", cos: 0.81, head: "2 m³/h @ 15m" },
+        "CDL2-3": { model: "CNP CDL/CDLF 2-3", kw: 0.37, hp: 0.5, phase: 3, volt: "380V", cos: 0.81, head: "2 m³/h @ 22m" },
+        "CDL2-4": { model: "CNP CDL/CDLF 2-4", kw: 0.55, hp: 0.75, phase: 3, volt: "380V", cos: 0.82, head: "2 m³/h @ 30m" },
+        "CDL2-5": { model: "CNP CDL/CDLF 2-5", kw: 0.55, hp: 0.75, phase: 3, volt: "380V", cos: 0.82, head: "2 m³/h @ 37m" },
+        "CDL2-6": { model: "CNP CDL/CDLF 2-6", kw: 0.75, hp: 1.0, phase: 3, volt: "380V", cos: 0.82, head: "2 m³/h @ 45m" },
+        "CDL2-7": { model: "CNP CDL/CDLF 2-7", kw: 0.75, hp: 1.0, phase: 3, volt: "380V", cos: 0.82, head: "2 m³/h @ 52m" },
+        "CDL2-9": { model: "CNP CDL/CDLF 2-9", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.83, head: "2 m³/h @ 67m" },
+        "CDL2-11": { model: "CNP CDL/CDLF 2-11", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.83, head: "2 m³/h @ 82m" },
+        "CDL2-13": { model: "CNP CDL/CDLF 2-13", kw: 1.5, hp: 2.0, phase: 3, volt: "380V", cos: 0.84, head: "2 m³/h @ 98m" },
+        "CDL2-15": { model: "CNP CDL/CDLF 2-15", kw: 1.5, hp: 2.0, phase: 3, volt: "380V", cos: 0.84, head: "2 m³/h @ 112m" },
+        "CDL2-18": { model: "CNP CDL/CDLF 2-18", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "2 m³/h @ 136m" },
+        "CDL2-22": { model: "CNP CDL/CDLF 2-22", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "2 m³/h @ 165m" },
+        "CDL2-26": { model: "CNP CDL/CDLF 2-26", kw: 3.0, hp: 4.0, phase: 3, volt: "380V", cos: 0.87, head: "2 m³/h @ 198m" },
+
+        // CDL/CDLF 3 Series (Nominal Q = 3 m³/h)[cite: 3]
+        "CDL3-2": { model: "CNP CDL/CDLF 3-2", kw: 0.37, hp: 0.5, phase: 3, volt: "380V", cos: 0.81, head: "3 m³/h @ 11.5m" },
+        "CDL3-3": { model: "CNP CDL/CDLF 3-3", kw: 0.37, hp: 0.5, phase: 3, volt: "380V", cos: 0.81, head: "3 m³/h @ 17.5m" },
+        "CDL3-4": { model: "CNP CDL/CDLF 3-4", kw: 0.37, hp: 0.5, phase: 3, volt: "380V", cos: 0.81, head: "3 m³/h @ 23m" },
+        "CDL3-5": { model: "CNP CDL/CDLF 3-5", kw: 0.37, hp: 0.5, phase: 3, volt: "380V", cos: 0.81, head: "3 m³/h @ 29m" },
+        "CDL3-6": { model: "CNP CDL/CDLF 3-6", kw: 0.55, hp: 0.75, phase: 3, volt: "380V", cos: 0.82, head: "3 m³/h @ 34m" },
+        "CDL3-7": { model: "CNP CDL/CDLF 3-7", kw: 0.55, hp: 0.75, phase: 3, volt: "380V", cos: 0.82, head: "3 m³/h @ 39m" },
+        "CDL3-8": { model: "CNP CDL/CDLF 3-8", kw: 0.75, hp: 1.0, phase: 3, volt: "380V", cos: 0.82, head: "3 m³/h @ 45m" },
+        "CDL3-9": { model: "CNP CDL/CDLF 3-9", kw: 0.75, hp: 1.0, phase: 3, volt: "380V", cos: 0.82, head: "3 m³/h @ 51m" },
+        "CDL3-10": { model: "CNP CDL/CDLF 3-10", kw: 0.75, hp: 1.0, phase: 3, volt: "380V", cos: 0.82, head: "3 m³/h @ 57m" },
+        "CDL3-11": { model: "CNP CDL/CDLF 3-11", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.83, head: "3 m³/h @ 61m" },
+        "CDL3-12": { model: "CNP CDL/CDLF 3-12", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.83, head: "3 m³/h @ 67m" },
+        "CDL3-13": { model: "CNP CDL/CDLF 3-13", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.83, head: "3 m³/h @ 73m" },
+        "CDL3-15": { model: "CNP CDL/CDLF 3-15", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.83, head: "3 m³/h @ 84m" },
+        "CDL3-17": { model: "CNP CDL/CDLF 3-17", kw: 1.5, hp: 2.0, phase: 3, volt: "380V", cos: 0.84, head: "3 m³/h @ 96m" },
+        "CDL3-19": { model: "CNP CDL/CDLF 3-19", kw: 1.5, hp: 2.0, phase: 3, volt: "380V", cos: 0.84, head: "3 m³/h @ 107m" },
+        "CDL3-21": { model: "CNP CDL/CDLF 3-21", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "3 m³/h @ 119m" },
+        "CDL3-23": { model: "CNP CDL/CDLF 3-23", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "3 m³/h @ 130m" },
+        "CDL3-25": { model: "CNP CDL/CDLF 3-25", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "3 m³/h @ 141m" },
+        "CDL3-27": { model: "CNP CDL/CDLF 3-27", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "3 m³/h @ 152m" },
+        "CDL3-29": { model: "CNP CDL/CDLF 3-29", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "3 m³/h @ 163m" },
+        "CDL3-31": { model: "CNP CDL/CDLF 3-31", kw: 3.0, hp: 4.0, phase: 3, volt: "380V", cos: 0.87, head: "3 m³/h @ 175m" },
+        "CDL3-33": { model: "CNP CDL/CDLF 3-33", kw: 3.0, hp: 4.0, phase: 3, volt: "380V", cos: 0.87, head: "3 m³/h @ 187m" },
+        "CDL3-36": { model: "CNP CDL/CDLF 3-36", kw: 3.0, hp: 4.0, phase: 3, volt: "380V", cos: 0.87, head: "3 m³/h @ 204m" },
+
+        // CDL/CDLF 4 Series (Nominal Q = 4 m³/h)[cite: 3]
+        "CDL4-2": { model: "CNP CDL/CDLF 4-2", kw: 0.37, hp: 0.5, phase: 3, volt: "380V", cos: 0.81, head: "4 m³/h @ 15m" },
+        "CDL4-3": { model: "CNP CDL/CDLF 4-3", kw: 0.55, hp: 0.75, phase: 3, volt: "380V", cos: 0.82, head: "4 m³/h @ 24m" },
+        "CDL4-4": { model: "CNP CDL/CDLF 4-4", kw: 0.75, hp: 1.0, phase: 3, volt: "380V", cos: 0.82, head: "4 m³/h @ 32m" },
+        "CDL4-5": { model: "CNP CDL/CDLF 4-5", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.83, head: "4 m³/h @ 40m" },
+        "CDL4-6": { model: "CNP CDL/CDLF 4-6", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.83, head: "4 m³/h @ 48m" },
+        "CDL4-7": { model: "CNP CDL/CDLF 4-7", kw: 1.5, hp: 2.0, phase: 3, volt: "380V", cos: 0.84, head: "4 m³/h @ 56m" },
+        "CDL4-8": { model: "CNP CDL/CDLF 4-8", kw: 1.5, hp: 2.0, phase: 3, volt: "380V", cos: 0.84, head: "4 m³/h @ 64m" },
+        "CDL4-10": { model: "CNP CDL/CDLF 4-10", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "4 m³/h @ 81m" },
+        "CDL4-12": { model: "CNP CDL/CDLF 4-12", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "4 m³/h @ 93m" },
+        "CDL4-14": { model: "CNP CDL/CDLF 4-14", kw: 3.0, hp: 4.0, phase: 3, volt: "380V", cos: 0.87, head: "4 m³/h @ 112m" },
+        "CDL4-16": { model: "CNP CDL/CDLF 4-16", kw: 3.0, hp: 4.0, phase: 3, volt: "380V", cos: 0.87, head: "4 m³/h @ 129m" },
+        "CDL4-19": { model: "CNP CDL/CDLF 4-19", kw: 4.0, hp: 5.5, phase: 3, volt: "380V", cos: 0.88, head: "4 m³/h @ 153m" },
+        "CDL4-22": { model: "CNP CDL/CDLF 4-22", kw: 4.0, hp: 5.5, phase: 3, volt: "380V", cos: 0.88, head: "4 m³/h @ 178m" },
+
+        // CDL/CDLF 8 Series (Nominal Q = 8 m³/h)[cite: 3]
+        "CDL8-2/1": { model: "CNP CDL/CDLF 8-2/1", kw: 0.75, hp: 1.0, phase: 3, volt: "380V", cos: 0.82, head: "8 m³/h @ 8.5m" },
+        "CDL8-2": { model: "CNP CDL/CDLF 8-2", kw: 0.75, hp: 1.0, phase: 3, volt: "380V", cos: 0.82, head: "8 m³/h @ 18m" },
+        "CDL8-3": { model: "CNP CDL/CDLF 8-3", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.83, head: "8 m³/h @ 27m" },
+        "CDL8-4": { model: "CNP CDL/CDLF 8-4", kw: 1.5, hp: 2.0, phase: 3, volt: "380V", cos: 0.84, head: "8 m³/h @ 36m" },
+        "CDL8-5": { model: "CNP CDL/CDLF 8-5", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "8 m³/h @ 45m" },
+        "CDL8-6": { model: "CNP CDL/CDLF 8-6", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "8 m³/h @ 54m" },
+        "CDL8-8": { model: "CNP CDL/CDLF 8-8", kw: 3.0, hp: 4.0, phase: 3, volt: "380V", cos: 0.87, head: "8 m³/h @ 73m" },
+        "CDL8-10": { model: "CNP CDL/CDLF 8-10", kw: 4.0, hp: 5.5, phase: 3, volt: "380V", cos: 0.88, head: "8 m³/h @ 92m" },
+        "CDL8-12": { model: "CNP CDL/CDLF 8-12", kw: 4.0, hp: 5.5, phase: 3, volt: "380V", cos: 0.88, head: "8 m³/h @ 111m" },
+        "CDL8-14": { model: "CNP CDL/CDLF 8-14", kw: 5.5, hp: 7.5, phase: 3, volt: "380V", cos: 0.88, head: "8 m³/h @ 130m" },
+        "CDL8-16": { model: "CNP CDL/CDLF 8-16", kw: 5.5, hp: 7.5, phase: 3, volt: "380V", cos: 0.88, head: "8 m³/h @ 148m" },
+        "CDL8-18": { model: "CNP CDL/CDLF 8-18", kw: 7.5, hp: 10.0, phase: 3, volt: "380V", cos: 0.88, head: "8 m³/h @ 167m" },
+        "CDL8-20": { model: "CNP CDL/CDLF 8-20", kw: 7.5, hp: 10.0, phase: 3, volt: "380V", cos: 0.88, head: "8 m³/h @ 186m" },
+
+        // CDL/CDLF 10 Series (Nominal Q = 10 m³/h)[cite: 3]
+        "CDL10-1": { model: "CNP CDL/CDLF 10-1", kw: 0.75, hp: 1.0, phase: 3, volt: "380V", cos: 0.82, head: "10 m³/h @ 7.7m" },
+        "CDL10-2": { model: "CNP CDL/CDLF 10-2", kw: 0.75, hp: 1.0, phase: 3, volt: "380V", cos: 0.82, head: "10 m³/h @ 16m" },
+        "CDL10-3": { model: "CNP CDL/CDLF 10-3", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.83, head: "10 m³/h @ 25m" },
+        "CDL10-4": { model: "CNP CDL/CDLF 10-4", kw: 1.5, hp: 2.0, phase: 3, volt: "380V", cos: 0.84, head: "10 m³/h @ 34m" },
+        "CDL10-5": { model: "CNP CDL/CDLF 10-5", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "10 m³/h @ 42m" },
+        "CDL10-6": { model: "CNP CDL/CDLF 10-6", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "10 m³/h @ 51m" },
+        "CDL10-7": { model: "CNP CDL/CDLF 10-7", kw: 3.0, hp: 4.0, phase: 3, volt: "380V", cos: 0.87, head: "10 m³/h @ 60m" },
+        "CDL10-8": { model: "CNP CDL/CDLF 10-8", kw: 3.0, hp: 4.0, phase: 3, volt: "380V", cos: 0.87, head: "10 m³/h @ 69m" },
+        "CDL10-9": { model: "CNP CDL/CDLF 10-9", kw: 3.0, hp: 4.0, phase: 3, volt: "380V", cos: 0.87, head: "10 m³/h @ 77m" },
+        "CDL10-10": { model: "CNP CDL/CDLF 10-10", kw: 4.0, hp: 5.5, phase: 3, volt: "380V", cos: 0.88, head: "10 m³/h @ 85m" },
+        "CDL10-12": { model: "CNP CDL/CDLF 10-12", kw: 4.0, hp: 5.5, phase: 3, volt: "380V", cos: 0.88, head: "10 m³/h @ 104m" },
+        "CDL10-14": { model: "CNP CDL/CDLF 10-14", kw: 5.5, hp: 7.5, phase: 3, volt: "380V", cos: 0.88, head: "10 m³/h @ 122m" },
+        "CDL10-16": { model: "CNP CDL/CDLF 10-16", kw: 5.5, hp: 7.5, phase: 3, volt: "380V", cos: 0.88, head: "10 m³/h @ 140m" },
+        "CDL10-18": { model: "CNP CDL/CDLF 10-18", kw: 7.5, hp: 10.0, phase: 3, volt: "380V", cos: 0.88, head: "10 m³/h @ 156m" },
+        "CDL10-20": { model: "CNP CDL/CDLF 10-20", kw: 7.5, hp: 10.0, phase: 3, volt: "380V", cos: 0.88, head: "10 m³/h @ 173m" },
+        "CDL10-22": { model: "CNP CDL/CDLF 10-22", kw: 7.5, hp: 10.0, phase: 3, volt: "380V", cos: 0.88, head: "10 m³/h @ 190m" },
+
+        // CDL/CDLF 12 Series (Nominal Q = 12 m³/h)[cite: 3]
+        "CDL12-2": { model: "CNP CDL/CDLF 12-2", kw: 1.5, hp: 2.0, phase: 3, volt: "380V", cos: 0.84, head: "12 m³/h @ 20m" },
+        "CDL12-3": { model: "CNP CDL/CDLF 12-3", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "12 m³/h @ 31.5m" },
+        "CDL12-4": { model: "CNP CDL/CDLF 12-4", kw: 3.0, hp: 4.0, phase: 3, volt: "380V", cos: 0.87, head: "12 m³/h @ 42m" },
+        "CDL12-5": { model: "CNP CDL/CDLF 12-5", kw: 3.0, hp: 4.0, phase: 3, volt: "380V", cos: 0.87, head: "12 m³/h @ 52.5m" },
+        "CDL12-6": { model: "CNP CDL/CDLF 12-6", kw: 4.0, hp: 5.5, phase: 3, volt: "380V", cos: 0.88, head: "12 m³/h @ 63m" },
+        "CDL12-7": { model: "CNP CDL/CDLF 12-7", kw: 5.5, hp: 7.5, phase: 3, volt: "380V", cos: 0.88, head: "12 m³/h @ 73.5m" },
+        "CDL12-8": { model: "CNP CDL/CDLF 12-8", kw: 5.5, hp: 7.5, phase: 3, volt: "380V", cos: 0.88, head: "12 m³/h @ 84m" },
+        "CDL12-9": { model: "CNP CDL/CDLF 12-9", kw: 5.5, hp: 7.5, phase: 3, volt: "380V", cos: 0.88, head: "12 m³/h @ 95.5m" },
+        "CDL12-10": { model: "CNP CDL/CDLF 12-10", kw: 7.5, hp: 10.0, phase: 3, volt: "380V", cos: 0.88, head: "12 m³/h @ 106m" },
+        "CDL12-12": { model: "CNP CDL/CDLF 12-12", kw: 7.5, hp: 10.0, phase: 3, volt: "380V", cos: 0.88, head: "12 m³/h @ 127m" },
+        "CDL12-14": { model: "CNP CDL/CDLF 12-14", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.89, head: "12 m³/h @ 148m" },
+        "CDL12-16": { model: "CNP CDL/CDLF 12-16", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.89, head: "12 m³/h @ 170m" },
+        "CDL12-18": { model: "CNP CDL/CDLF 12-18", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.89, head: "12 m³/h @ 192.5m" },
+
+        // CDL/CDLF 15 Series (Nominal Q = 15 m³/h)[cite: 3]
+        "CDL15-1": { model: "CNP CDL/CDLF 15-1", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.83, head: "15 m³/h @ 9.5m" },
+        "CDL15-2": { model: "CNP CDL/CDLF 15-2", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "15 m³/h @ 21.5m" },
+        "CDL15-3": { model: "CNP CDL/CDLF 15-3", kw: 3.0, hp: 4.0, phase: 3, volt: "380V", cos: 0.87, head: "15 m³/h @ 33m" },
+        "CDL15-4": { model: "CNP CDL/CDLF 15-4", kw: 4.0, hp: 5.5, phase: 3, volt: "380V", cos: 0.88, head: "15 m³/h @ 44m" },
+        "CDL15-5": { model: "CNP CDL/CDLF 15-5", kw: 4.0, hp: 5.5, phase: 3, volt: "380V", cos: 0.88, head: "15 m³/h @ 57m" },
+        "CDL15-6": { model: "CNP CDL/CDLF 15-6", kw: 5.5, hp: 7.5, phase: 3, volt: "380V", cos: 0.88, head: "15 m³/h @ 67m" },
+        "CDL15-7": { model: "CNP CDL/CDLF 15-7", kw: 5.5, hp: 7.5, phase: 3, volt: "380V", cos: 0.88, head: "15 m³/h @ 79m" },
+        "CDL15-8": { model: "CNP CDL/CDLF 15-8", kw: 7.5, hp: 10.0, phase: 3, volt: "380V", cos: 0.88, head: "15 m³/h @ 90m" },
+        "CDL15-9": { model: "CNP CDL/CDLF 15-9", kw: 7.5, hp: 10.0, phase: 3, volt: "380V", cos: 0.88, head: "15 m³/h @ 103m" },
+        "CDL15-10": { model: "CNP CDL/CDLF 15-10", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.89, head: "15 m³/h @ 114m" },
+        "CDL15-12": { model: "CNP CDL/CDLF 15-12", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.89, head: "15 m³/h @ 138m" },
+        "CDL15-14": { model: "CNP CDL/CDLF 15-14", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.89, head: "15 m³/h @ 160m" },
+        "CDL15-17": { model: "CNP CDL/CDLF 15-17", kw: 15.0, hp: 20.0, phase: 3, volt: "380V", cos: 0.89, head: "15 m³/h @ 195m" },
+
+        // CDL/CDLF 20 Series (Nominal Q = 20 m³/h)[cite: 3]
+        "CDL20-1": { model: "CNP CDL/CDLF 20-1", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.83, head: "20 m³/h @ 10m" },
+        "CDL20-2": { model: "CNP CDL/CDLF 20-2", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "20 m³/h @ 22m" },
+        "CDL20-3": { model: "CNP CDL/CDLF 20-3", kw: 4.0, hp: 5.5, phase: 3, volt: "380V", cos: 0.88, head: "20 m³/h @ 35m" },
+        "CDL20-4": { model: "CNP CDL/CDLF 20-4", kw: 5.5, hp: 7.5, phase: 3, volt: "380V", cos: 0.88, head: "20 m³/h @ 47m" },
+        "CDL20-5": { model: "CNP CDL/CDLF 20-5", kw: 5.5, hp: 7.5, phase: 3, volt: "380V", cos: 0.88, head: "20 m³/h @ 58m" },
+        "CDL20-6": { model: "CNP CDL/CDLF 20-6", kw: 7.5, hp: 10.0, phase: 3, volt: "380V", cos: 0.88, head: "20 m³/h @ 70m" },
+        "CDL20-7": { model: "CNP CDL/CDLF 20-7", kw: 7.5, hp: 10.0, phase: 3, volt: "380V", cos: 0.88, head: "20 m³/h @ 82m" },
+        "CDL20-8": { model: "CNP CDL/CDLF 20-8", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.89, head: "20 m³/h @ 95m" },
+        "CDL20-10": { model: "CNP CDL/CDLF 20-10", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.89, head: "20 m³/h @ 118m" },
+        "CDL20-12": { model: "CNP CDL/CDLF 20-12", kw: 15.0, hp: 20.0, phase: 3, volt: "380V", cos: 0.89, head: "20 m³/h @ 143m" },
+        "CDL20-14": { model: "CNP CDL/CDLF 20-14", kw: 15.0, hp: 20.0, phase: 3, volt: "380V", cos: 0.89, head: "20 m³/h @ 166m" },
+        "CDL20-17": { model: "CNP CDL/CDLF 20-17", kw: 18.5, hp: 25.0, phase: 3, volt: "380V", cos: 0.89, head: "20 m³/h @ 205m" },
+
+        // CDL/CDLF 32 Series (Nominal Q = 32 m³/h)[cite: 3]
+        "CDL32-10-1": { model: "CNP CDL/CDLF 32-10-1", kw: 1.5, hp: 2.0, phase: 3, volt: "380V", cos: 0.84, head: "32 m³/h @ 9m" },
+        "CDL32-10": { model: "CNP CDL/CDLF 32-10", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "32 m³/h @ 13m" },
+        "CDL32-20-2": { model: "CNP CDL/CDLF 32-20-2", kw: 3.0, hp: 4.0, phase: 3, volt: "380V", cos: 0.87, head: "32 m³/h @ 20m" },
+        "CDL32-20": { model: "CNP CDL/CDLF 32-20", kw: 4.0, hp: 5.5, phase: 3, volt: "380V", cos: 0.88, head: "32 m³/h @ 27m" },
+        "CDL32-30-2": { model: "CNP CDL/CDLF 32-30-2", kw: 5.5, hp: 7.5, phase: 3, volt: "380V", cos: 0.88, head: "32 m³/h @ 33m" },
+        "CDL32-30": { model: "CNP CDL/CDLF 32-30", kw: 5.5, hp: 7.5, phase: 3, volt: "380V", cos: 0.88, head: "32 m³/h @ 40m" },
+        "CDL32-40-2": { model: "CNP CDL/CDLF 32-40-2", kw: 7.5, hp: 10.0, phase: 3, volt: "380V", cos: 0.88, head: "32 m³/h @ 46m" },
+        "CDL32-40": { model: "CNP CDL/CDLF 32-40", kw: 7.5, hp: 10.0, phase: 3, volt: "380V", cos: 0.88, head: "32 m³/h @ 53m" },
+        "CDL32-50-2": { model: "CNP CDL/CDLF 32-50-2", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.89, head: "32 m³/h @ 60m" },
+        "CDL32-50": { model: "CNP CDL/CDLF 32-50", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.89, head: "32 m³/h @ 67m" },
+        "CDL32-60-2": { model: "CNP CDL/CDLF 32-60-2", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.89, head: "32 m³/h @ 74m" },
+        "CDL32-60": { model: "CNP CDL/CDLF 32-60", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.89, head: "32 m³/h @ 81m" },
+        "CDL32-70-2": { model: "CNP CDL/CDLF 32-70-2", kw: 15.0, hp: 20.0, phase: 3, volt: "380V", cos: 0.89, head: "32 m³/h @ 88m" },
+        "CDL32-70": { model: "CNP CDL/CDLF 32-70", kw: 15.0, hp: 20.0, phase: 3, volt: "380V", cos: 0.89, head: "32 m³/h @ 95m" },
+        "CDL32-80-2": { model: "CNP CDL/CDLF 32-80-2", kw: 15.0, hp: 20.0, phase: 3, volt: "380V", cos: 0.89, head: "32 m³/h @ 102m" },
+        "CDL32-80": { model: "CNP CDL/CDLF 32-80", kw: 15.0, hp: 20.0, phase: 3, volt: "380V", cos: 0.89, head: "32 m³/h @ 109m" },
+        "CDL32-90-2": { model: "CNP CDL/CDLF 32-90-2", kw: 18.5, hp: 25.0, phase: 3, volt: "380V", cos: 0.89, head: "32 m³/h @ 117m" },
+        "CDL32-90": { model: "CNP CDL/CDLF 32-90", kw: 18.5, hp: 25.0, phase: 3, volt: "380V", cos: 0.89, head: "32 m³/h @ 124m" },
+        "CDL32-100-2": { model: "CNP CDL/CDLF 32-100-2", kw: 18.5, hp: 25.0, phase: 3, volt: "380V", cos: 0.89, head: "32 m³/h @ 131m" },
+        "CDL32-100": { model: "CNP CDL/CDLF 32-100", kw: 18.5, hp: 25.0, phase: 3, volt: "380V", cos: 0.89, head: "32 m³/h @ 138m" },
+        "CDL32-110-2": { model: "CNP CDL/CDLF 32-110-2", kw: 22.0, hp: 30.0, phase: 3, volt: "380V", cos: 0.89, head: "32 m³/h @ 146m" },
+        "CDL32-110": { model: "CNP CDL/CDLF 32-110", kw: 22.0, hp: 30.0, phase: 3, volt: "380V", cos: 0.89, head: "32 m³/h @ 153m" },
+        "CDL32-120-2": { model: "CNP CDL/CDLF 32-120-2", kw: 22.0, hp: 30.0, phase: 3, volt: "380V", cos: 0.89, head: "32 m³/h @ 160m" },
+        "CDL32-120": { model: "CNP CDL/CDLF 32-120", kw: 22.0, hp: 30.0, phase: 3, volt: "380V", cos: 0.89, head: "32 m³/h @ 167m" },
+        "CDL32-130-2": { model: "CNP CDL/CDLF 32-130-2", kw: 30.0, hp: 40.0, phase: 3, volt: "380V", cos: 0.89, head: "32 m³/h @ 174m" },
+        "CDL32-130": { model: "CNP CDL/CDLF 32-130", kw: 30.0, hp: 40.0, phase: 3, volt: "380V", cos: 0.89, head: "32 m³/h @ 181m" },
+        "CDL32-140-2": { model: "CNP CDL/CDLF 32-140-2", kw: 30.0, hp: 40.0, phase: 3, volt: "380V", cos: 0.89, head: "32 m³/h @ 189m" },
+        "CDL32-140": { model: "CNP CDL/CDLF 32-140", kw: 30.0, hp: 40.0, phase: 3, volt: "380V", cos: 0.89, head: "32 m³/h @ 196m" },
+        "CDL32-150-2": { model: "CNP CDL/CDLF 32-150-2", kw: 30.0, hp: 40.0, phase: 3, volt: "380V", cos: 0.89, head: "32 m³/h @ 203m" },
+        "CDL32-150": { model: "CNP CDL/CDLF 32-150", kw: 30.0, hp: 40.0, phase: 3, volt: "380V", cos: 0.89, head: "32 m³/h @ 210m" },
+        "CDL32-160-2": { model: "CNP CDL/CDLF 32-160-2", kw: 30.0, hp: 40.0, phase: 3, volt: "380V", cos: 0.89, head: "32 m³/h @ 218m" },
+        "CDL32-160": { model: "CNP CDL/CDLF 32-160", kw: 30.0, hp: 40.0, phase: 3, volt: "380V", cos: 0.89, head: "32 m³/h @ 225m" },
+
+        // CDL/CDLF 42 Series (Nominal Q = 42 m³/h)[cite: 3]
+        "CDL42-10-1": { model: "CNP CDL/CDLF 42-10-1", kw: 3.0, hp: 4.0, phase: 3, volt: "380V", cos: 0.87, head: "42 m³/h @ 16m" },
+        "CDL42-10": { model: "CNP CDL/CDLF 42-10", kw: 4.0, hp: 5.5, phase: 3, volt: "380V", cos: 0.88, head: "42 m³/h @ 20m" },
+        "CDL42-20-2": { model: "CNP CDL/CDLF 42-20-2", kw: 5.5, hp: 7.5, phase: 3, volt: "380V", cos: 0.88, head: "42 m³/h @ 32m" },
+        "CDL42-20": { model: "CNP CDL/CDLF 42-20", kw: 7.5, hp: 10.0, phase: 3, volt: "380V", cos: 0.88, head: "42 m³/h @ 40m" },
+        "CDL42-30-2": { model: "CNP CDL/CDLF 42-30-2", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.89, head: "42 m³/h @ 50m" },
+        "CDL42-30": { model: "CNP CDL/CDLF 42-30", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.89, head: "42 m³/h @ 61m" },
+        "CDL42-40-2": { model: "CNP CDL/CDLF 42-40-2", kw: 15.0, hp: 20.0, phase: 3, volt: "380V", cos: 0.89, head: "42 m³/h @ 70m" },
+        "CDL42-40": { model: "CNP CDL/CDLF 42-40", kw: 15.0, hp: 20.0, phase: 3, volt: "380V", cos: 0.89, head: "42 m³/h @ 81m" },
+        "CDL42-50-2": { model: "CNP CDL/CDLF 42-50-2", kw: 18.5, hp: 25.0, phase: 3, volt: "380V", cos: 0.89, head: "42 m³/h @ 93m" },
+        "CDL42-50": { model: "CNP CDL/CDLF 42-50", kw: 18.5, hp: 25.0, phase: 3, volt: "380V", cos: 0.89, head: "42 m³/h @ 101m" },
+        "CDL42-60-2": { model: "CNP CDL/CDLF 42-60-2", kw: 22.0, hp: 30.0, phase: 3, volt: "380V", cos: 0.89, head: "42 m³/h @ 113m" },
+        "CDL42-60": { model: "CNP CDL/CDLF 42-60", kw: 22.0, hp: 30.0, phase: 3, volt: "380V", cos: 0.89, head: "42 m³/h @ 122m" },
+        "CDL42-70-2": { model: "CNP CDL/CDLF 42-70-2", kw: 30.0, hp: 40.0, phase: 3, volt: "380V", cos: 0.89, head: "42 m³/h @ 134m" },
+        "CDL42-70": { model: "CNP CDL/CDLF 42-70", kw: 30.0, hp: 40.0, phase: 3, volt: "380V", cos: 0.89, head: "42 m³/h @ 142m" },
+        "CDL42-80-2": { model: "CNP CDL/CDLF 42-80-2", kw: 30.0, hp: 40.0, phase: 3, volt: "380V", cos: 0.89, head: "42 m³/h @ 154m" },
+        "CDL42-80": { model: "CNP CDL/CDLF 42-80", kw: 30.0, hp: 40.0, phase: 3, volt: "380V", cos: 0.89, head: "42 m³/h @ 162m" },
+        "CDL42-90-2": { model: "CNP CDL/CDLF 42-90-2", kw: 30.0, hp: 40.0, phase: 3, volt: "380V", cos: 0.89, head: "42 m³/h @ 174m" },
+        "CDL42-90": { model: "CNP CDL/CDLF 42-90", kw: 37.0, hp: 50.0, phase: 3, volt: "380V", cos: 0.89, head: "42 m³/h @ 183m" },
+        "CDL42-100-2": { model: "CNP CDL/CDLF 42-100-2", kw: 37.0, hp: 50.0, phase: 3, volt: "380V", cos: 0.89, head: "42 m³/h @ 194m" },
+        "CDL42-100": { model: "CNP CDL/CDLF 42-100", kw: 37.0, hp: 50.0, phase: 3, volt: "380V", cos: 0.89, head: "42 m³/h @ 203m" },
+        "CDL42-110-2": { model: "CNP CDL/CDLF 42-110-2", kw: 45.0, hp: 60.0, phase: 3, volt: "380V", cos: 0.89, head: "42 m³/h @ 217m" },
+        "CDL42-110": { model: "CNP CDL/CDLF 42-110", kw: 45.0, hp: 60.0, phase: 3, volt: "380V", cos: 0.89, head: "42 m³/h @ 225m" },
+        "CDL42-120-2": { model: "CNP CDL/CDLF 42-120-2", kw: 45.0, hp: 60.0, phase: 3, volt: "380V", cos: 0.89, head: "42 m³/h @ 238m" },
+        "CDL42-120": { model: "CNP CDL/CDLF 42-120", kw: 45.0, hp: 60.0, phase: 3, volt: "380V", cos: 0.89, head: "42 m³/h @ 247m" },
+        "CDL42-130-2": { model: "CNP CDL/CDLF 42-130-2", kw: 45.0, hp: 60.0, phase: 3, volt: "380V", cos: 0.89, head: "42 m³/h @ 259m" },
+
+        // CDL/CDLF 65 Series (Nominal Q = 65 m³/h)[cite: 3]
+        "CDL65-10-1": { model: "CNP CDL/CDLF 65-10-1", kw: 4.0, hp: 5.5, phase: 3, volt: "380V", cos: 0.88, head: "65 m³/h @ 13m" },
+        "CDL65-10": { model: "CNP CDL/CDLF 65-10", kw: 5.5, hp: 7.5, phase: 3, volt: "380V", cos: 0.88, head: "65 m³/h @ 18m" },
+        "CDL65-20-2": { model: "CNP CDL/CDLF 65-20-2", kw: 7.5, hp: 10.0, phase: 3, volt: "380V", cos: 0.88, head: "65 m³/h @ 26m" },
+        "CDL65-20-1": { model: "CNP CDL/CDLF 65-20-1", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.89, head: "65 m³/h @ 33m" },
+        "CDL65-20": { model: "CNP CDL/CDLF 65-20", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.89, head: "65 m³/h @ 40m" },
+        "CDL65-30-2": { model: "CNP CDL/CDLF 65-30-2", kw: 15.0, hp: 20.0, phase: 3, volt: "380V", cos: 0.89, head: "65 m³/h @ 46m" },
+        "CDL65-30-1": { model: "CNP CDL/CDLF 65-30-1", kw: 15.0, hp: 20.0, phase: 3, volt: "380V", cos: 0.89, head: "65 m³/h @ 53m" },
+        "CDL65-30": { model: "CNP CDL/CDLF 65-30", kw: 18.5, hp: 25.0, phase: 3, volt: "380V", cos: 0.89, head: "65 m³/h @ 60m" },
+        "CDL65-40-2": { model: "CNP CDL/CDLF 65-40-2", kw: 22.0, hp: 30.0, phase: 3, volt: "380V", cos: 0.89, head: "65 m³/h @ 66m" },
+        "CDL65-40-1": { model: "CNP CDL/CDLF 65-40-1", kw: 22.0, hp: 30.0, phase: 3, volt: "380V", cos: 0.89, head: "65 m³/h @ 73m" },
+        "CDL65-40": { model: "CNP CDL/CDLF 65-40", kw: 30.0, hp: 40.0, phase: 3, volt: "380V", cos: 0.89, head: "65 m³/h @ 80m" },
+        "CDL65-50-2": { model: "CNP CDL/CDLF 65-50-2", kw: 30.0, hp: 40.0, phase: 3, volt: "380V", cos: 0.89, head: "65 m³/h @ 88m" },
+        "CDL65-50-1": { model: "CNP CDL/CDLF 65-50-1", kw: 30.0, hp: 40.0, phase: 3, volt: "380V", cos: 0.89, head: "65 m³/h @ 95m" },
+        "CDL65-50": { model: "CNP CDL/CDLF 65-50", kw: 37.0, hp: 50.0, phase: 3, volt: "380V", cos: 0.89, head: "65 m³/h @ 102m" },
+        "CDL65-60-2": { model: "CNP CDL/CDLF 65-60-2", kw: 37.0, hp: 50.0, phase: 3, volt: "380V", cos: 0.89, head: "65 m³/h @ 110m" },
+        "CDL65-60-1": { model: "CNP CDL/CDLF 65-60-1", kw: 37.0, hp: 50.0, phase: 3, volt: "380V", cos: 0.89, head: "65 m³/h @ 117m" },
+        "CDL65-60": { model: "CNP CDL/CDLF 65-60", kw: 45.0, hp: 60.0, phase: 3, volt: "380V", cos: 0.89, head: "65 m³/h @ 124m" },
+        "CDL65-70-2": { model: "CNP CDL/CDLF 65-70-2", kw: 45.0, hp: 60.0, phase: 3, volt: "380V", cos: 0.89, head: "65 m³/h @ 132m" },
+        "CDL65-70-1": { model: "CNP CDL/CDLF 65-70-1", kw: 45.0, hp: 60.0, phase: 3, volt: "380V", cos: 0.89, head: "65 m³/h @ 139m" },
+        "CDL65-70": { model: "CNP CDL/CDLF 65-70", kw: 45.0, hp: 60.0, phase: 3, volt: "380V", cos: 0.89, head: "65 m³/h @ 146m" },
+        "CDL65-80-2": { model: "CNP CDL/CDLF 65-80-2", kw: 45.0, hp: 60.0, phase: 3, volt: "380V", cos: 0.89, head: "65 m³/h @ 154m" },
+        "CDL65-80-1": { model: "CNP CDL/CDLF 65-80-1", kw: 45.0, hp: 60.0, phase: 3, volt: "380V", cos: 0.89, head: "65 m³/h @ 161m" },
+
+        // CDL/CDLF 85 Series (Nominal Q = 85 m³/h)[cite: 3]
+        "CDL85-10-1": { model: "CNP CDL/CDLF 85-10-1", kw: 5.5, hp: 7.5, phase: 3, volt: "380V", cos: 0.88, head: "85 m³/h @ 14m" },
+        "CDL85-10": { model: "CNP CDL/CDLF 85-10", kw: 7.5, hp: 10.0, phase: 3, volt: "380V", cos: 0.88, head: "85 m³/h @ 20m" },
+        "CDL85-20-2": { model: "CNP CDL/CDLF 85-20-2", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.89, head: "85 m³/h @ 30m" },
+        "CDL85-20": { model: "CNP CDL/CDLF 85-20", kw: 15.0, hp: 20.0, phase: 3, volt: "380V", cos: 0.89, head: "85 m³/h @ 41m" },
+        "CDL85-30-2": { model: "CNP CDL/CDLF 85-30-2", kw: 18.5, hp: 25.0, phase: 3, volt: "380V", cos: 0.89, head: "85 m³/h @ 52m" },
+        "CDL85-30": { model: "CNP CDL/CDLF 85-30", kw: 22.0, hp: 30.0, phase: 3, volt: "380V", cos: 0.89, head: "85 m³/h @ 62m" },
+        "CDL85-40-2": { model: "CNP CDL/CDLF 85-40-2", kw: 30.0, hp: 40.0, phase: 3, volt: "380V", cos: 0.89, head: "85 m³/h @ 75m" },
+        "CDL85-40": { model: "CNP CDL/CDLF 85-40", kw: 30.0, hp: 40.0, phase: 3, volt: "380V", cos: 0.89, head: "85 m³/h @ 86m" },
+        "CDL85-50-2": { model: "CNP CDL/CDLF 85-50-2", kw: 37.0, hp: 50.0, phase: 3, volt: "380V", cos: 0.89, head: "85 m³/h @ 98m" },
+        "CDL85-50": { model: "CNP CDL/CDLF 85-50", kw: 37.0, hp: 50.0, phase: 3, volt: "380V", cos: 0.89, head: "85 m³/h @ 110m" },
+        "CDL85-60-2": { model: "CNP CDL/CDLF 85-60-2", kw: 45.0, hp: 60.0, phase: 3, volt: "380V", cos: 0.89, head: "85 m³/h @ 122m" },
+        "CDL85-60": { model: "CNP CDL/CDLF 85-60", kw: 45.0, hp: 60.0, phase: 3, volt: "380V", cos: 0.89, head: "85 m³/h @ 134m" },
+
+        // CDL/CDLF 120 Series (Nominal Q = 120 m³/h)[cite: 3]
+        "CDL120-10": { model: "CNP CDL/CDLF 120-10", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.89, head: "120 m³/h @ 18.5m" },
+        "CDL120-20-2": { model: "CNP CDL/CDLF 120-20-2", kw: 15.0, hp: 20.0, phase: 3, volt: "380V", cos: 0.89, head: "120 m³/h @ 28.5m" },
+        "CDL120-20-1": { model: "CNP CDL/CDLF 120-20-1", kw: 18.5, hp: 25.0, phase: 3, volt: "380V", cos: 0.89, head: "120 m³/h @ 34.5m" },
+        "CDL120-20": { model: "CNP CDL/CDLF 120-20", kw: 22.0, hp: 30.0, phase: 3, volt: "380V", cos: 0.89, head: "120 m³/h @ 40m" },
+        "CDL120-30-2": { model: "CNP CDL/CDLF 120-30-2", kw: 30.0, hp: 40.0, phase: 3, volt: "380V", cos: 0.89, head: "120 m³/h @ 49m" },
+        "CDL120-30-1": { model: "CNP CDL/CDLF 120-30-1", kw: 30.0, hp: 40.0, phase: 3, volt: "380V", cos: 0.89, head: "120 m³/h @ 55.5m" },
+        "CDL120-30": { model: "CNP CDL/CDLF 120-30", kw: 30.0, hp: 40.0, phase: 3, volt: "380V", cos: 0.89, head: "120 m³/h @ 61m" },
+        "CDL120-40-2": { model: "CNP CDL/CDLF 120-40-2", kw: 37.0, hp: 50.0, phase: 3, volt: "380V", cos: 0.89, head: "120 m³/h @ 69m" },
+        "CDL120-40-1": { model: "CNP CDL/CDLF 120-40-1", kw: 37.0, hp: 50.0, phase: 3, volt: "380V", cos: 0.89, head: "120 m³/h @ 76m" },
+        "CDL120-40": { model: "CNP CDL/CDLF 120-40", kw: 45.0, hp: 60.0, phase: 3, volt: "380V", cos: 0.89, head: "120 m³/h @ 81m" },
+        "CDL120-50-2": { model: "CNP CDL/CDLF 120-50-2", kw: 45.0, hp: 60.0, phase: 3, volt: "380V", cos: 0.89, head: "120 m³/h @ 90m" },
+        "CDL120-50-1": { model: "CNP CDL/CDLF 120-50-1", kw: 45.0, hp: 60.0, phase: 3, volt: "380V", cos: 0.89, head: "120 m³/h @ 97m" },
+        "CDL120-50": { model: "CNP CDL/CDLF 120-50", kw: 55.0, hp: 75.0, phase: 3, volt: "380V", cos: 0.89, head: "120 m³/h @ 101.5m" },
+        "CDL120-60-2": { model: "CNP CDL/CDLF 120-60-2", kw: 55.0, hp: 75.0, phase: 3, volt: "380V", cos: 0.89, head: "120 m³/h @ 110m" },
+        "CDL120-60-1": { model: "CNP CDL/CDLF 120-60-1", kw: 55.0, hp: 75.0, phase: 3, volt: "380V", cos: 0.89, head: "120 m³/h @ 118m" },
+        "CDL120-60": { model: "CNP CDL/CDLF 120-60", kw: 75.0, hp: 100.0, phase: 3, volt: "380V", cos: 0.89, head: "120 m³/h @ 123m" },
+        "CDL120-70-2": { model: "CNP CDL/CDLF 120-70-2", kw: 75.0, hp: 100.0, phase: 3, volt: "380V", cos: 0.89, head: "120 m³/h @ 130m" },
+        "CDL120-70-1": { model: "CNP CDL/CDLF 120-70-1", kw: 75.0, hp: 100.0, phase: 3, volt: "380V", cos: 0.89, head: "120 m³/h @ 137.5m" },
+        "CDL120-70": { model: "CNP CDL/CDLF 120-70", kw: 75.0, hp: 100.0, phase: 3, volt: "380V", cos: 0.89, head: "120 m³/h @ 145m" },
+
+        // CDL/CDLF 150 Series (Nominal Q = 150 m³/h)[cite: 3]
+        "CDL150-10-1": { model: "CNP CDL/CDLF 150-10-1", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.89, head: "150 m³/h @ 12.5m" },
+        "CDL150-10": { model: "CNP CDL/CDLF 150-10", kw: 15.0, hp: 20.0, phase: 3, volt: "380V", cos: 0.89, head: "150 m³/h @ 18.5m" },
+        "CDL150-20-2": { model: "CNP CDL/CDLF 150-20-2", kw: 18.5, hp: 25.0, phase: 3, volt: "380V", cos: 0.89, head: "150 m³/h @ 29m" },
+        "CDL150-20-1": { model: "CNP CDL/CDLF 150-20-1", kw: 22.0, hp: 30.0, phase: 3, volt: "380V", cos: 0.89, head: "150 m³/h @ 35m" },
+        "CDL150-20": { model: "CNP CDL/CDLF 150-20", kw: 30.0, hp: 40.0, phase: 3, volt: "380V", cos: 0.89, head: "150 m³/h @ 40m" },
+        "CDL150-30-2": { model: "CNP CDL/CDLF 150-30-2", kw: 30.0, hp: 40.0, phase: 3, volt: "380V", cos: 0.89, head: "150 m³/h @ 49m" },
+        "CDL150-30-1": { model: "CNP CDL/CDLF 150-30-1", kw: 37.0, hp: 50.0, phase: 3, volt: "380V", cos: 0.89, head: "150 m³/h @ 56m" },
+        "CDL150-30": { model: "CNP CDL/CDLF 150-30", kw: 37.0, hp: 50.0, phase: 3, volt: "380V", cos: 0.89, head: "150 m³/h @ 63m" },
+        "CDL150-40-2": { model: "CNP CDL/CDLF 150-40-2", kw: 45.0, hp: 60.0, phase: 3, volt: "380V", cos: 0.89, head: "150 m³/h @ 70.5m" },
+        "CDL150-40-1": { model: "CNP CDL/CDLF 150-40-1", kw: 45.0, hp: 60.0, phase: 3, volt: "380V", cos: 0.89, head: "150 m³/h @ 77m" },
+        "CDL150-40": { model: "CNP CDL/CDLF 150-40", kw: 55.0, hp: 75.0, phase: 3, volt: "380V", cos: 0.89, head: "150 m³/h @ 84m" },
+        "CDL150-50-2": { model: "CNP CDL/CDLF 150-50-2", kw: 55.0, hp: 75.0, phase: 3, volt: "380V", cos: 0.89, head: "150 m³/h @ 92m" },
+        "CDL150-50-1": { model: "CNP CDL/CDLF 150-50-1", kw: 75.0, hp: 100.0, phase: 3, volt: "380V", cos: 0.89, head: "150 m³/h @ 99m" },
+        "CDL150-50": { model: "CNP CDL/CDLF 150-50", kw: 75.0, hp: 100.0, phase: 3, volt: "380V", cos: 0.89, head: "150 m³/h @ 106.5m" },
+        "CDL150-60-2": { model: "CNP CDL/CDLF 150-60-2", kw: 75.0, hp: 100.0, phase: 3, volt: "380V", cos: 0.89, head: "150 m³/h @ 112m" },
+        "CDL150-60-1": { model: "CNP CDL/CDLF 150-60-1", kw: 75.0, hp: 100.0, phase: 3, volt: "380V", cos: 0.89, head: "150 m³/h @ 120.5m" },
+        "CDL150-60": { model: "CNP CDL/CDLF 150-60", kw: 75.0, hp: 100.0, phase: 3, volt: "380V", cos: 0.89, head: "150 m³/h @ 130m" },
+
+        // CDL/CDLF 200 Series (Nominal Q = 200 m³/h)[cite: 3]
+        "CDL200-10-B": { model: "CNP CDL/CDLF 200-10-B", kw: 18.5, hp: 25.0, phase: 3, volt: "380V", cos: 0.89, head: "200 m³/h @ 18m" },
+        "CDL200-10-A": { model: "CNP CDL/CDLF 200-10-A", kw: 22.0, hp: 30.0, phase: 3, volt: "380V", cos: 0.89, head: "200 m³/h @ 24m" },
+        "CDL200-10": { model: "CNP CDL/CDLF 200-10", kw: 30.0, hp: 40.0, phase: 3, volt: "380V", cos: 0.89, head: "200 m³/h @ 32.5m" },
+        "CDL200-20-2B": { model: "CNP CDL/CDLF 200-20-2B", kw: 37.0, hp: 50.0, phase: 3, volt: "380V", cos: 0.89, head: "200 m³/h @ 41m" },
+        "CDL200-20-2A": { model: "CNP CDL/CDLF 200-20-2A", kw: 45.0, hp: 60.0, phase: 3, volt: "380V", cos: 0.89, head: "200 m³/h @ 49m" },
+        "CDL200-20-A": { model: "CNP CDL/CDLF 200-20-A", kw: 55.0, hp: 75.0, phase: 3, volt: "380V", cos: 0.89, head: "200 m³/h @ 59m" },
+        "CDL200-20": { model: "CNP CDL/CDLF 200-20", kw: 75.0, hp: 100.0, phase: 3, volt: "380V", cos: 0.89, head: "200 m³/h @ 69m" },
+        "CDL200-30-2B": { model: "CNP CDL/CDLF 200-30-2B", kw: 75.0, hp: 100.0, phase: 3, volt: "380V", cos: 0.89, head: "200 m³/h @ 75m" },
+        "CDL200-30-A-B": { model: "CNP CDL/CDLF 200-30-A-B", kw: 75.0, hp: 100.0, phase: 3, volt: "380V", cos: 0.89, head: "200 m³/h @ 79m" },
+        "CDL200-30-2A": { model: "CNP CDL/CDLF 200-30-2A", kw: 75.0, hp: 100.0, phase: 3, volt: "380V", cos: 0.89, head: "200 m³/h @ 84m" },
+        "CDL200-30-B": { model: "CNP CDL/CDLF 200-30-B", kw: 75.0, hp: 100.0, phase: 3, volt: "380V", cos: 0.89, head: "200 m³/h @ 90m" },
+        "CDL200-30-A": { model: "CNP CDL/CDLF 200-30-A", kw: 75.0, hp: 100.0, phase: 3, volt: "380V", cos: 0.89, head: "200 m³/h @ 93m" },
+        "CDL200-30": { model: "CNP CDL/CDLF 200-30", kw: 90.0, hp: 120.0, phase: 3, volt: "380V", cos: 0.89, head: "200 m³/h @ 103m" },
+        "CDL200-40-2B": { model: "CNP CDL/CDLF 200-40-2B", kw: 90.0, hp: 120.0, phase: 3, volt: "380V", cos: 0.89, head: "200 m³/h @ 110m" },
+        "CDL200-40-2A": { model: "CNP CDL/CDLF 200-40-2A", kw: 110.0, hp: 150.0, phase: 3, volt: "380V", cos: 0.89, head: "200 m³/h @ 118m" },
+        "CDL200-40-A": { model: "CNP CDL/CDLF 200-40-A", kw: 110.0, hp: 150.0, phase: 3, volt: "380V", cos: 0.89, head: "200 m³/h @ 128m" },
+        "CDL200-40": { model: "CNP CDL/CDLF 200-40", kw: 110.0, hp: 150.0, phase: 3, volt: "380V", cos: 0.89, head: "200 m³/h @ 138m" },
+
+        /* =================================================================================
+           3. CNP CDM & CDMF SERIES[cite: 4]
+           (Performa identik dengan seri CDL pada tipe kecil, dengan penambahan opsi terbaru)
+           ================================================================================= */
+        
+        // CDM/CDMF 1 Series[cite: 4]
+        "CDM1-2": { model: "CNP CDM/CDMF 1-2", kw: 0.37, hp: 0.5, phase: 3, volt: "380V", cos: 0.81, head: "1 m³/h @ 10.5m" },
+        "CDM1-3": { model: "CNP CDM/CDMF 1-3", kw: 0.37, hp: 0.5, phase: 3, volt: "380V", cos: 0.81, head: "1 m³/h @ 16m" },
+        "CDM1-4": { model: "CNP CDM/CDMF 1-4", kw: 0.37, hp: 0.5, phase: 3, volt: "380V", cos: 0.81, head: "1 m³/h @ 21.5m" },
+        "CDM1-5": { model: "CNP CDM/CDMF 1-5", kw: 0.37, hp: 0.5, phase: 3, volt: "380V", cos: 0.81, head: "1 m³/h @ 27m" },
+        "CDM1-6": { model: "CNP CDM/CDMF 1-6", kw: 0.37, hp: 0.5, phase: 3, volt: "380V", cos: 0.81, head: "1 m³/h @ 32.5m" },
+        "CDM1-7": { model: "CNP CDM/CDMF 1-7", kw: 0.55, hp: 0.75, phase: 3, volt: "380V", cos: 0.82, head: "1 m³/h @ 39m" },
+        "CDM1-8": { model: "CNP CDM/CDMF 1-8", kw: 0.55, hp: 0.75, phase: 3, volt: "380V", cos: 0.82, head: "1 m³/h @ 43.5m" },
+        "CDM1-9": { model: "CNP CDM/CDMF 1-9", kw: 0.55, hp: 0.75, phase: 3, volt: "380V", cos: 0.82, head: "1 m³/h @ 49m" },
+        "CDM1-10": { model: "CNP CDM/CDMF 1-10", kw: 0.55, hp: 0.75, phase: 3, volt: "380V", cos: 0.82, head: "1 m³/h @ 55m" },
+        "CDM1-11": { model: "CNP CDM/CDMF 1-11", kw: 0.75, hp: 1.0, phase: 3, volt: "380V", cos: 0.82, head: "1 m³/h @ 61m" },
+        "CDM1-12": { model: "CNP CDM/CDMF 1-12", kw: 0.75, hp: 1.0, phase: 3, volt: "380V", cos: 0.82, head: "1 m³/h @ 67m" },
+        "CDM1-13": { model: "CNP CDM/CDMF 1-13", kw: 0.75, hp: 1.0, phase: 3, volt: "380V", cos: 0.82, head: "1 m³/h @ 73m" },
+        "CDM1-15": { model: "CNP CDM/CDMF 1-15", kw: 0.75, hp: 1.0, phase: 3, volt: "380V", cos: 0.82, head: "1 m³/h @ 84m" },
+        "CDM1-17": { model: "CNP CDM/CDMF 1-17", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.83, head: "1 m³/h @ 95m" },
+        "CDM1-19": { model: "CNP CDM/CDMF 1-19", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.83, head: "1 m³/h @ 106m" },
+        "CDM1-21": { model: "CNP CDM/CDMF 1-21", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.83, head: "1 m³/h @ 117m" },
+        "CDM1-22": { model: "CNP CDM/CDMF 1-22", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.83, head: "1 m³/h @ 122m" },
+        "CDM1-23": { model: "CNP CDM/CDMF 1-23", kw: 1.5, hp: 2.0, phase: 3, volt: "380V", cos: 0.84, head: "1 m³/h @ 128m" },
+        "CDM1-25": { model: "CNP CDM/CDMF 1-25", kw: 1.5, hp: 2.0, phase: 3, volt: "380V", cos: 0.84, head: "1 m³/h @ 139m" },
+        "CDM1-27": { model: "CNP CDM/CDMF 1-27", kw: 1.5, hp: 2.0, phase: 3, volt: "380V", cos: 0.84, head: "1 m³/h @ 150m" },
+        "CDM1-30": { model: "CNP CDM/CDMF 1-30", kw: 1.5, hp: 2.0, phase: 3, volt: "380V", cos: 0.84, head: "1 m³/h @ 167m" },
+        "CDM1-32": { model: "CNP CDM/CDMF 1-32", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "1 m³/h @ 180m" },
+        "CDM1-33": { model: "CNP CDM/CDMF 1-33", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "1 m³/h @ 186m" },
+        "CDM1-34": { model: "CNP CDM/CDMF 1-34", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "1 m³/h @ 192m" },
+        "CDM1-36": { model: "CNP CDM/CDMF 1-36", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "1 m³/h @ 203m" },
+        "CDM1-38": { model: "CNP CDM/CDMF 1-38", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "1 m³/h @ 215m" },
+
+        // CDM/CDMF 3 Series[cite: 4]
+        "CDM3-2": { model: "CNP CDM/CDMF 3-2", kw: 0.37, hp: 0.5, phase: 3, volt: "380V", cos: 0.81, head: "3 m³/h @ 11.5m" },
+        "CDM3-3": { model: "CNP CDM/CDMF 3-3", kw: 0.37, hp: 0.5, phase: 3, volt: "380V", cos: 0.81, head: "3 m³/h @ 18m" },
+        "CDM3-4": { model: "CNP CDM/CDMF 3-4", kw: 0.37, hp: 0.5, phase: 3, volt: "380V", cos: 0.81, head: "3 m³/h @ 24m" },
+        "CDM3-5": { model: "CNP CDM/CDMF 3-5", kw: 0.55, hp: 0.75, phase: 3, volt: "380V", cos: 0.82, head: "3 m³/h @ 30m" },
+        "CDM3-6": { model: "CNP CDM/CDMF 3-6", kw: 0.55, hp: 0.75, phase: 3, volt: "380V", cos: 0.82, head: "3 m³/h @ 36.5m" },
+        "CDM3-7": { model: "CNP CDM/CDMF 3-7", kw: 0.75, hp: 1.0, phase: 3, volt: "380V", cos: 0.82, head: "3 m³/h @ 43m" },
+        "CDM3-8": { model: "CNP CDM/CDMF 3-8", kw: 0.75, hp: 1.0, phase: 3, volt: "380V", cos: 0.82, head: "3 m³/h @ 49m" },
+        "CDM3-9": { model: "CNP CDM/CDMF 3-9", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.83, head: "3 m³/h @ 56m" },
+        "CDM3-10": { model: "CNP CDM/CDMF 3-10", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.83, head: "3 m³/h @ 61m" },
+        "CDM3-11": { model: "CNP CDM/CDMF 3-11", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.83, head: "3 m³/h @ 68m" },
+        "CDM3-12": { model: "CNP CDM/CDMF 3-12", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.83, head: "3 m³/h @ 74m" },
+        "CDM3-13": { model: "CNP CDM/CDMF 3-13", kw: 1.5, hp: 2.0, phase: 3, volt: "380V", cos: 0.84, head: "3 m³/h @ 80m" },
+        "CDM3-14": { model: "CNP CDM/CDMF 3-14", kw: 1.5, hp: 2.0, phase: 3, volt: "380V", cos: 0.84, head: "3 m³/h @ 86m" },
+        "CDM3-15": { model: "CNP CDM/CDMF 3-15", kw: 1.5, hp: 2.0, phase: 3, volt: "380V", cos: 0.84, head: "3 m³/h @ 94m" },
+        "CDM3-16": { model: "CNP CDM/CDMF 3-16", kw: 1.5, hp: 2.0, phase: 3, volt: "380V", cos: 0.84, head: "3 m³/h @ 100m" },
+        "CDM3-18": { model: "CNP CDM/CDMF 3-18", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "3 m³/h @ 113m" },
+        "CDM3-19": { model: "CNP CDM/CDMF 3-19", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "3 m³/h @ 119m" },
+        "CDM3-20": { model: "CNP CDM/CDMF 3-20", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "3 m³/h @ 125m" },
+        "CDM3-21": { model: "CNP CDM/CDLF 3-21", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "3 m³/h @ 131m" },
+        "CDM3-22": { model: "CNP CDM/CDMF 3-22", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "3 m³/h @ 137m" },
+        "CDM3-23": { model: "CNP CDM/CDMF 3-23", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "3 m³/h @ 144m" },
+        "CDM3-24": { model: "CNP CDM/CDMF 3-24", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "3 m³/h @ 150m" },
+        "CDM3-25": { model: "CNP CDM/CDMF 3-25", kw: 3.0, hp: 4.0, phase: 3, volt: "380V", cos: 0.87, head: "3 m³/h @ 156m" },
+        "CDM3-27": { model: "CNP CDM/CDMF 3-27", kw: 3.0, hp: 4.0, phase: 3, volt: "380V", cos: 0.87, head: "3 m³/h @ 169m" },
+        "CDM3-28": { model: "CNP CDM/CDMF 3-28", kw: 3.0, hp: 4.0, phase: 3, volt: "380V", cos: 0.87, head: "3 m³/h @ 175m" },
+        "CDM3-29": { model: "CNP CDM/CDMF 3-29", kw: 3.0, hp: 4.0, phase: 3, volt: "380V", cos: 0.87, head: "3 m³/h @ 182m" },
+        "CDM3-31": { model: "CNP CDM/CDMF 3-31", kw: 3.0, hp: 4.0, phase: 3, volt: "380V", cos: 0.87, head: "3 m³/h @ 194m" },
+
+        // CDM/CDMF 5 Series[cite: 4]
+        "CDM5-2": { model: "CNP CDM/CDMF 5-2", kw: 0.37, hp: 0.5, phase: 3, volt: "380V", cos: 0.81, head: "5 m³/h @ 11.5m" },
+        "CDM5-3": { model: "CNP CDM/CDMF 5-3", kw: 0.55, hp: 0.75, phase: 3, volt: "380V", cos: 0.82, head: "5 m³/h @ 17.5m" },
+        "CDM5-4": { model: "CNP CDM/CDMF 5-4", kw: 0.55, hp: 0.75, phase: 3, volt: "380V", cos: 0.82, head: "5 m³/h @ 24m" },
+        "CDM5-5": { model: "CNP CDM/CDMF 5-5", kw: 0.75, hp: 1.0, phase: 3, volt: "380V", cos: 0.82, head: "5 m³/h @ 30m" },
+        "CDM5-6": { model: "CNP CDM/CDMF 5-6", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.83, head: "5 m³/h @ 37m" },
+        "CDM5-7": { model: "CNP CDM/CDMF 5-7", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.83, head: "5 m³/h @ 42.5m" },
+        "CDM5-8": { model: "CNP CDM/CDMF 5-8", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.83, head: "5 m³/h @ 49m" },
+        "CDM5-9": { model: "CNP CDM/CDMF 5-9", kw: 1.5, hp: 2.0, phase: 3, volt: "380V", cos: 0.84, head: "5 m³/h @ 55m" },
+        "CDM5-10": { model: "CNP CDM/CDMF 5-10", kw: 1.5, hp: 2.0, phase: 3, volt: "380V", cos: 0.84, head: "5 m³/h @ 62m" },
+        "CDM5-11": { model: "CNP CDM/CDMF 5-11", kw: 1.5, hp: 2.0, phase: 3, volt: "380V", cos: 0.84, head: "5 m³/h @ 68m" },
+        "CDM5-12": { model: "CNP CDM/CDMF 5-12", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "5 m³/h @ 74.5m" },
+        "CDM5-13": { model: "CNP CDM/CDMF 5-13", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "5 m³/h @ 80m" },
+        "CDM5-14": { model: "CNP CDM/CDMF 5-14", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "5 m³/h @ 87m" },
+        "CDM5-15": { model: "CNP CDM/CDMF 5-15", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "5 m³/h @ 93m" },
+        "CDM5-16": { model: "CNP CDM/CDMF 5-16", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "5 m³/h @ 99m" },
+        "CDM5-17": { model: "CNP CDM/CDMF 5-17", kw: 3.0, hp: 4.0, phase: 3, volt: "380V", cos: 0.87, head: "5 m³/h @ 105m" },
+        "CDM5-18": { model: "CNP CDM/CDMF 5-18", kw: 3.0, hp: 4.0, phase: 3, volt: "380V", cos: 0.87, head: "5 m³/h @ 111m" },
+        "CDM5-20": { model: "CNP CDM/CDMF 5-20", kw: 3.0, hp: 4.0, phase: 3, volt: "380V", cos: 0.87, head: "5 m³/h @ 124m" },
+        "CDM5-21": { model: "CNP CDM/CDMF 5-21", kw: 3.0, hp: 4.0, phase: 3, volt: "380V", cos: 0.87, head: "5 m³/h @ 130m" },
+        "CDM5-22": { model: "CNP CDM/CDMF 5-22", kw: 4.0, hp: 5.5, phase: 3, volt: "380V", cos: 0.88, head: "5 m³/h @ 136m" },
+        "CDM5-23": { model: "CNP CDM/CDMF 5-23", kw: 4.0, hp: 5.5, phase: 3, volt: "380V", cos: 0.88, head: "5 m³/h @ 142m" },
+        "CDM5-24": { model: "CNP CDM/CDMF 5-24", kw: 4.0, hp: 5.5, phase: 3, volt: "380V", cos: 0.88, head: "5 m³/h @ 149m" },
+        "CDM5-25": { model: "CNP CDM/CDMF 5-25", kw: 4.0, hp: 5.5, phase: 3, volt: "380V", cos: 0.88, head: "5 m³/h @ 155m" },
+        "CDM5-27": { model: "CNP CDM/CDMF 5-27", kw: 4.0, hp: 5.5, phase: 3, volt: "380V", cos: 0.88, head: "5 m³/h @ 168m" },
+        "CDM5-28": { model: "CNP CDM/CDMF 5-28", kw: 4.0, hp: 5.5, phase: 3, volt: "380V", cos: 0.88, head: "5 m³/h @ 174m" },
+        "CDM5-29": { model: "CNP CDM/CDMF 5-29", kw: 5.5, hp: 7.5, phase: 3, volt: "380V", cos: 0.88, head: "5 m³/h @ 180m" },
+        "CDM5-30": { model: "CNP CDM/CDMF 5-30", kw: 5.5, hp: 7.5, phase: 3, volt: "380V", cos: 0.88, head: "5 m³/h @ 186m" },
+        "CDM5-33": { model: "CNP CDM/CDMF 5-33", kw: 5.5, hp: 7.5, phase: 3, volt: "380V", cos: 0.88, head: "5 m³/h @ 206m" },
+
+        // CDM/CDMF 10 Series[cite: 4]
+        "CDM10-1": { model: "CNP CDM/CDMF 10-1", kw: 0.75, hp: 1.0, phase: 3, volt: "380V", cos: 0.82, head: "10 m³/h @ 8m" },
+        "CDM10-2": { model: "CNP CDM/CDMF 10-2", kw: 0.75, hp: 1.0, phase: 3, volt: "380V", cos: 0.82, head: "10 m³/h @ 16.5m" },
+        "CDM10-3": { model: "CNP CDM/CDMF 10-3", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.83, head: "10 m³/h @ 25.5m" },
+        "CDM10-4": { model: "CNP CDM/CDMF 10-4", kw: 1.5, hp: 2.0, phase: 3, volt: "380V", cos: 0.84, head: "10 m³/h @ 34m" },
+        "CDM10-5": { model: "CNP CDM/CDMF 10-5", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "10 m³/h @ 43m" },
+        "CDM10-6": { model: "CNP CDM/CDMF 10-6", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "10 m³/h @ 52m" },
+        "CDM10-7": { model: "CNP CDM/CDMF 10-7", kw: 3.0, hp: 4.0, phase: 3, volt: "380V", cos: 0.87, head: "10 m³/h @ 62m" },
+        "CDM10-8": { model: "CNP CDM/CDMF 10-8", kw: 3.0, hp: 4.0, phase: 3, volt: "380V", cos: 0.87, head: "10 m³/h @ 71m" },
+        "CDM10-9": { model: "CNP CDM/CDMF 10-9", kw: 4.0, hp: 5.5, phase: 3, volt: "380V", cos: 0.88, head: "10 m³/h @ 80m" },
+        "CDM10-10": { model: "CNP CDM/CDMF 10-10", kw: 4.0, hp: 5.5, phase: 3, volt: "380V", cos: 0.88, head: "10 m³/h @ 89m" },
+        "CDM10-11": { model: "CNP CDM/CDMF 10-11", kw: 4.0, hp: 5.5, phase: 3, volt: "380V", cos: 0.88, head: "10 m³/h @ 98m" },
+        "CDM10-12": { model: "CNP CDM/CDMF 10-12", kw: 4.0, hp: 5.5, phase: 3, volt: "380V", cos: 0.88, head: "10 m³/h @ 107m" },
+        "CDM10-13": { model: "CNP CDM/CDMF 10-13", kw: 5.5, hp: 7.5, phase: 3, volt: "380V", cos: 0.88, head: "10 m³/h @ 116m" },
+        "CDM10-14": { model: "CNP CDM/CDMF 10-14", kw: 5.5, hp: 7.5, phase: 3, volt: "380V", cos: 0.88, head: "10 m³/h @ 125m" },
+        "CDM10-15": { model: "CNP CDM/CDMF 10-15", kw: 5.5, hp: 7.5, phase: 3, volt: "380V", cos: 0.88, head: "10 m³/h @ 134m" },
+        "CDM10-16": { model: "CNP CDM/CDMF 10-16", kw: 7.5, hp: 10.0, phase: 3, volt: "380V", cos: 0.88, head: "10 m³/h @ 144m" },
+        "CDM10-17": { model: "CNP CDM/CDMF 10-17", kw: 7.5, hp: 10.0, phase: 3, volt: "380V", cos: 0.88, head: "10 m³/h @ 153m" },
+        "CDM10-18": { model: "CNP CDM/CDMF 10-18", kw: 7.5, hp: 10.0, phase: 3, volt: "380V", cos: 0.88, head: "10 m³/h @ 163m" },
+        "CDM10-19": { model: "CNP CDM/CDMF 10-19", kw: 7.5, hp: 10.0, phase: 3, volt: "380V", cos: 0.88, head: "10 m³/h @ 172m" },
+        "CDM10-20": { model: "CNP CDM/CDMF 10-20", kw: 7.5, hp: 10.0, phase: 3, volt: "380V", cos: 0.88, head: "10 m³/h @ 181m" },
+        "CDM10-21": { model: "CNP CDM/CDMF 10-21", kw: 7.5, hp: 10.0, phase: 3, volt: "380V", cos: 0.88, head: "10 m³/h @ 191m" },
+        "CDM10-22": { model: "CNP CDM/CDMF 10-22", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.89, head: "10 m³/h @ 201m" },
+
+        // CDM/CDMF 15 Series[cite: 4]
+        "CDM15-1": { model: "CNP CDM/CDMF 15-1", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.83, head: "15 m³/h @ 11.5m" },
+        "CDM15-2": { model: "CNP CDM/CDMF 15-2", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "15 m³/h @ 23m" },
+        "CDM15-3": { model: "CNP CDM/CDMF 15-3", kw: 3.0, hp: 4.0, phase: 3, volt: "380V", cos: 0.87, head: "15 m³/h @ 35.5m" },
+        "CDM15-4": { model: "CNP CDM/CDMF 15-4", kw: 4.0, hp: 5.5, phase: 3, volt: "380V", cos: 0.88, head: "15 m³/h @ 47.5m" },
+        "CDM15-5": { model: "CNP CDM/CDMF 15-5", kw: 4.0, hp: 5.5, phase: 3, volt: "380V", cos: 0.88, head: "15 m³/h @ 59m" },
+        "CDM15-6": { model: "CNP CDM/CDMF 15-6", kw: 5.5, hp: 7.5, phase: 3, volt: "380V", cos: 0.88, head: "15 m³/h @ 71m" },
+        "CDM15-7": { model: "CNP CDM/CDMF 15-7", kw: 5.5, hp: 7.5, phase: 3, volt: "380V", cos: 0.88, head: "15 m³/h @ 83m" },
+        "CDM15-8": { model: "CNP CDM/CDMF 15-8", kw: 7.5, hp: 10.0, phase: 3, volt: "380V", cos: 0.88, head: "15 m³/h @ 95m" },
+        "CDM15-9": { model: "CNP CDM/CDMF 15-9", kw: 7.5, hp: 10.0, phase: 3, volt: "380V", cos: 0.88, head: "15 m³/h @ 108m" },
+        "CDM15-10": { model: "CNP CDM/CDMF 15-10", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.89, head: "15 m³/h @ 121m" },
+        "CDM15-11": { model: "CNP CDM/CDMF 15-11", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.89, head: "15 m³/h @ 133m" },
+        "CDM15-12": { model: "CNP CDM/CDMF 15-12", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.89, head: "15 m³/h @ 145m" },
+        "CDM15-13": { model: "CNP CDM/CDMF 15-13", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.89, head: "15 m³/h @ 155m" },
+        "CDM15-14": { model: "CNP CDM/CDMF 15-14", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.89, head: "15 m³/h @ 168m" },
+        "CDM15-15": { model: "CNP CDM/CDMF 15-15", kw: 15.0, hp: 20.0, phase: 3, volt: "380V", cos: 0.89, head: "15 m³/h @ 182m" },
+        "CDM15-16": { model: "CNP CDM/CDMF 15-16", kw: 15.0, hp: 20.0, phase: 3, volt: "380V", cos: 0.89, head: "15 m³/h @ 194m" },
+        "CDM15-17": { model: "CNP CDM/CDMF 15-17", kw: 15.0, hp: 20.0, phase: 3, volt: "380V", cos: 0.89, head: "15 m³/h @ 206m" },
+        "CDM15-18": { model: "CNP CDM/CDMF 15-18", kw: 15.0, hp: 20.0, phase: 3, volt: "380V", cos: 0.89, head: "15 m³/h @ 218m" },
+
+        // CDM/CDMF 20 Series[cite: 4]
+        "CDM20-1": { model: "CNP CDM/CDMF 20-1", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.83, head: "20 m³/h @ 10.5m" },
+        "CDM20-2": { model: "CNP CDM/CDMF 20-2", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "20 m³/h @ 23m" },
+        "CDM20-3": { model: "CNP CDM/CDMF 20-3", kw: 4.0, hp: 5.5, phase: 3, volt: "380V", cos: 0.88, head: "20 m³/h @ 35m" },
+        "CDM20-4": { model: "CNP CDM/CDMF 20-4", kw: 5.5, hp: 7.5, phase: 3, volt: "380V", cos: 0.88, head: "20 m³/h @ 47m" },
+        "CDM20-5": { model: "CNP CDM/CDMF 20-5", kw: 5.5, hp: 7.5, phase: 3, volt: "380V", cos: 0.88, head: "20 m³/h @ 58m" },
+        "CDM20-6": { model: "CNP CDM/CDMF 20-6", kw: 7.5, hp: 10.0, phase: 3, volt: "380V", cos: 0.88, head: "20 m³/h @ 70m" },
+        "CDM20-7": { model: "CNP CDM/CDMF 20-7", kw: 7.5, hp: 10.0, phase: 3, volt: "380V", cos: 0.88, head: "20 m³/h @ 82m" },
+        "CDM20-8": { model: "CNP CDM/CDMF 20-8", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.89, head: "20 m³/h @ 95m" },
+        "CDM20-10": { model: "CNP CDM/CDMF 20-10", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.89, head: "20 m³/h @ 119m" },
+        "CDM20-12": { model: "CNP CDM/CDMF 20-12", kw: 15.0, hp: 20.0, phase: 3, volt: "380V", cos: 0.89, head: "20 m³/h @ 143m" },
+        "CDM20-14": { model: "CNP CDM/CDMF 20-14", kw: 15.0, hp: 20.0, phase: 3, volt: "380V", cos: 0.89, head: "20 m³/h @ 168m" },
+        "CDM20-17": { model: "CNP CDM/CDMF 20-17", kw: 18.5, hp: 25.0, phase: 3, volt: "380V", cos: 0.89, head: "20 m³/h @ 205m" },     
+        
+// ==========================================
+        // 4. FLOTEQ XM / XMI / XMN SERIES
         // ==========================================
-        "CDLF 1-50 (3-Phase)": { model: "CNP CDLF 1-50", kw: 0.37, hp: 0.5, phase: 3, volt: "380V", cos: 0.83, head: "1 m³/h @ 30 meter" },
-        "CDLF 2-50 (3-Phase)": { model: "CNP CDLF 2-50", kw: 0.55, hp: 0.75, phase: 3, volt: "380V", cos: 0.85, head: "2 m³/h @ 38 meter" },
-        "CDLF 4-60 (3-Phase)": { model: "CNP CDLF 4-60", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.85, head: "4 m³/h @ 48 meter" },
-        "CDLF 4-120 (3-Phase)": { model: "CNP CDLF 4-120", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "4 m³/h @ 96 meter" },
-        "CDLF 4-160 (3-Phase)": { model: "CNP CDLF 4-160", kw: 3.0, hp: 4.0, phase: 3, volt: "380V", cos: 0.85, head: "4 m³/h @ 128 meter" },
-        "CDLF 8-50 (3-Phase)": { model: "CNP CDLF 8-50", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "8 m³/h @ 50 meter" },
-        "CDLF 12-50 (3-Phase)": { model: "CNP CDLF 12-50", kw: 4.0, hp: 5.5, phase: 3, volt: "380V", cos: 0.85, head: "12 m³/h @ 60 meter" },
-        "CDLF 16-40 (3-Phase)": { model: "CNP CDLF 16-40", kw: 4.0, hp: 5.5, phase: 3, volt: "380V", cos: 0.85, head: "16 m³/h @ 45 meter" },
-        "CDLF 32-40 (3-Phase)": { model: "CNP CDLF 32-40", kw: 7.5, hp: 10.0, phase: 3, volt: "380V", cos: 0.85, head: "32 m³/h @ 55 meter" },
-        "CDLF 42-30 (3-Phase)": { model: "CNP CDLF 42-30", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.85, head: "42 m³/h @ 65 meter" },
-        "CDLF 65-30 (3-Phase)": { model: "CNP CDLF 65-30", kw: 18.5, hp: 25.0, phase: 3, volt: "380V", cos: 0.85, head: "65 m³/h @ 75 meter" },
+        "XM 1-2": { model: "Floteq XM/XMI/XMN 1-2", kw: 0.37, hp: 0.5, phase: 3, volt: "380V", cos: 0.85, head: "1 m³/h @ 11m" }, //
+        "XM 1-3": { model: "Floteq XM/XMI/XMN 1-3", kw: 0.37, hp: 0.5, phase: 3, volt: "380V", cos: 0.85, head: "1 m³/h @ 16m" }, //[cite: 6]
+        "XM 1-5": { model: "Floteq XM/XMI/XMN 1-5", kw: 0.37, hp: 0.5, phase: 3, volt: "380V", cos: 0.85, head: "1 m³/h @ 27m" }, //[cite: 6]
+        "XM 1-8": { model: "Floteq XM/XMI/XMN 1-8", kw: 0.55, hp: 0.75, phase: 3, volt: "380V", cos: 0.85, head: "1 m³/h @ 43m" }, //[cite: 6]
+        "XM 1-12": { model: "Floteq XM/XMI/XMN 1-12", kw: 0.75, hp: 1.0, phase: 3, volt: "380V", cos: 0.85, head: "1 m³/h @ 64m" }, //[cite: 6]
+        "XM 1-17": { model: "Floteq XM/XMI/XMN 1-17", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.85, head: "1 m³/h @ 91m" }, //[cite: 6]
+        
+        "XM 3-2": { model: "Floteq XM/XMI/XMN 3-2", kw: 0.37, hp: 0.5, phase: 3, volt: "380V", cos: 0.85, head: "3 m³/h @ 10m" }, //[cite: 6]
+        "XM 3-5": { model: "Floteq XM/XMI/XMN 3-5", kw: 0.37, hp: 0.5, phase: 3, volt: "380V", cos: 0.85, head: "3 m³/h @ 24m" }, //[cite: 6]
+        "XM 3-8": { model: "Floteq XM/XMI/XMN 3-8", kw: 0.75, hp: 1.0, phase: 3, volt: "380V", cos: 0.85, head: "3 m³/h @ 38m" }, //[cite: 6]
+        "XM 3-12": { model: "Floteq XM/XMI/XMN 3-12", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.85, head: "3 m³/h @ 56m" }, //[cite: 6]
+        "XM 3-17": { model: "Floteq XM/XMI/XMN 3-17", kw: 1.5, hp: 2.0, phase: 3, volt: "380V", cos: 0.85, head: "3 m³/h @ 78m" }, //[cite: 6]
+        
+        "XM 5-2": { model: "Floteq XM/XMI/XMN 5-2", kw: 0.37, hp: 0.5, phase: 3, volt: "380V", cos: 0.85, head: "5 m³/h @ 9m" }, //[cite: 6]
+        "XM 5-4": { model: "Floteq XM/XMI/XMN 5-4", kw: 0.55, hp: 0.75, phase: 3, volt: "380V", cos: 0.85, head: "5 m³/h @ 19m" }, //[cite: 6]
+        "XM 5-6": { model: "Floteq XM/XMI/XMN 5-6", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.85, head: "5 m³/h @ 27m" }, //[cite: 6]
+        "XM 5-10": { model: "Floteq XM/XMI/XMN 5-10", kw: 1.5, hp: 2.0, phase: 3, volt: "380V", cos: 0.85, head: "5 m³/h @ 46m" }, //[cite: 6]
+        "XM 5-14": { model: "Floteq XM/XMI/XMN 5-14", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "5 m³/h @ 66m" }, //[cite: 6]
+        "XM 5-20": { model: "Floteq XM/XMI/XMN 5-20", kw: 3.0, hp: 4.0, phase: 3, volt: "380V", cos: 0.85, head: "5 m³/h @ 100m" }, //[cite: 6]
+
+        "XM 10-2": { model: "Floteq XM/XMI/XMN 10-2", kw: 0.75, hp: 1.0, phase: 3, volt: "380V", cos: 0.85, head: "10 m³/h @ 15m" }, //[cite: 6]
+        "XM 10-4": { model: "Floteq XM/XMI/XMN 10-4", kw: 1.5, hp: 2.0, phase: 3, volt: "380V", cos: 0.85, head: "10 m³/h @ 32m" }, //[cite: 6]
+        "XM 10-6": { model: "Floteq XM/XMI/XMN 10-6", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "10 m³/h @ 48m" }, //[cite: 6]
+        "XM 10-10": { model: "Floteq XM/XMI/XMN 10-10", kw: 4.0, hp: 5.5, phase: 3, volt: "380V", cos: 0.85, head: "10 m³/h @ 80m" }, //[cite: 6]
+        "XM 10-14": { model: "Floteq XM/XMI/XMN 10-14", kw: 5.5, hp: 7.5, phase: 3, volt: "380V", cos: 0.85, head: "10 m³/h @ 113m" }, //[cite: 6]
+        "XM 10-20": { model: "Floteq XM/XMI/XMN 10-20", kw: 7.5, hp: 10.0, phase: 3, volt: "380V", cos: 0.85, head: "10 m³/h @ 164m" }, //[cite: 6]
+
+        "XM 15-2": { model: "Floteq XM/XMI/XMN 15-2", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "15 m³/h @ 23m" }, //[cite: 6]
+        "XM 15-4": { model: "Floteq XM/XMI/XMN 15-4", kw: 4.0, hp: 5.5, phase: 3, volt: "380V", cos: 0.85, head: "15 m³/h @ 47m" }, //[cite: 6]
+        "XM 15-6": { model: "Floteq XM/XMI/XMN 15-6", kw: 5.5, hp: 7.5, phase: 3, volt: "380V", cos: 0.85, head: "15 m³/h @ 71m" }, //[cite: 6]
+        "XM 15-10": { model: "Floteq XM/XMI/XMN 15-10", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.85, head: "15 m³/h @ 120m" }, //[cite: 6]
+
+        "XM 32-1-1": { model: "Floteq XM/XMI/XMN 32-1-1", kw: 1.5, hp: 2.0, phase: 3, volt: "380V", cos: 0.85, head: "32 m³/h @ 10m" }, //[cite: 6]
+        "XM 32-2-2": { model: "Floteq XM/XMI/XMN 32-2-2", kw: 3.0, hp: 4.0, phase: 3, volt: "380V", cos: 0.85, head: "32 m³/h @ 20.5m" }, //[cite: 6]
+        "XM 32-4-2": { model: "Floteq XM/XMI/XMN 32-4-2", kw: 7.5, hp: 10.0, phase: 3, volt: "380V", cos: 0.85, head: "32 m³/h @ 49.5m" }, //[cite: 6]
+        "XM 32-6-2": { model: "Floteq XM/XMI/XMN 32-6-2", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.85, head: "32 m³/h @ 79.5m" }, //[cite: 6]
+
+        "XM 64-1-1": { model: "Floteq XM/XMI/XMN 64-1-1", kw: 4.0, hp: 5.5, phase: 3, volt: "380V", cos: 0.85, head: "64 m³/h @ 14m" }, //[cite: 6]
+        "XM 64-3-2": { model: "Floteq XM/XMI/XMN 64-3-2", kw: 15.0, hp: 20.0, phase: 3, volt: "380V", cos: 0.85, head: "64 m³/h @ 52.5m" }, //[cite: 6]
+        "XM 64-5-2": { model: "Floteq XM/XMI/XMN 64-5-2", kw: 30.0, hp: 40.0, phase: 3, volt: "380V", cos: 0.85, head: "64 m³/h @ 101m" }, //[cite: 6]
+
+        "XM 120-1": { model: "Floteq XM/XMI/XMN 120-1", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.85, head: "120 m³/h @ 20m" }, //[cite: 6]
+        "XM 120-3": { model: "Floteq XM/XMI/XMN 120-3", kw: 30.0, hp: 40.0, phase: 3, volt: "380V", cos: 0.85, head: "120 m³/h @ 62.5m" }, //[cite: 6]
+        "XM 120-6-1": { model: "Floteq XM/XMI/XMN 120-6-1", kw: 55.0, hp: 75.0, phase: 3, volt: "380V", cos: 0.85, head: "120 m³/h @ 130m" }, //[cite: 6]
 
         // ==========================================
-        // 3. CNP CDM / CDMF Series (Next Gen Vertical)
+        // 5. FLOTEC PUMPS (UTILITY, SEWAGE, SPRINKLER, CENTRIFUGAL)
         // ==========================================
-        "CDMF 1-5 (3-Phase)": { model: "CNP CDMF 1-5", kw: 0.37, hp: 0.5, phase: 3, volt: "380V", cos: 0.85, head: "1 m³/h @ 30 meter" },
-        "CDMF 3-5 (3-Phase)": { model: "CNP CDMF 3-5", kw: 0.55, hp: 0.75, phase: 3, volt: "380V", cos: 0.85, head: "3 m³/h @ 36 meter" },
-        "CDMF 5-5 (3-Phase)": { model: "CNP CDMF 5-5", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.85, head: "5 m³/h @ 38 meter" },
-        "CDMF 10-6 (3-Phase)": { model: "CNP CDMF 10-6", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "10 m³/h @ 60 meter" },
-        "CDMF 15-4 (3-Phase)": { model: "CNP CDMF 15-4", kw: 4.0, hp: 5.5, phase: 3, volt: "380V", cos: 0.85, head: "15 m³/h @ 55 meter" },
-        "CDMF 20-5 (3-Phase)": { model: "CNP CDMF 20-5", kw: 5.5, hp: 7.5, phase: 3, volt: "380V", cos: 0.85, head: "20 m³/h @ 65 meter" },
-        "CDMF 32-3 (3-Phase)": { model: "CNP CDMF 32-3", kw: 5.5, hp: 7.5, phase: 3, volt: "380V", cos: 0.85, head: "32 m³/h @ 45 meter" },
-        "CDMF 42-3 (3-Phase)": { model: "CNP CDMF 42-3", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.85, head: "42 m³/h @ 65 meter" },
-        "CDMF 65-2 (3-Phase)": { model: "CNP CDMF 65-2", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.85, head: "65 m³/h @ 55 meter" },
+        "FPZS50T": { model: "Flotec FPZS50T (Sump Pump)", kw: 0.37, hp: 0.5, phase: 1, volt: "115V", cos: 0.85, head: "Maks 3000 GPH @ 10ft Lift" }, //
+        "FPSE3200A": { model: "Flotec FPSE3200A (Sewage Pump)", kw: 0.30, hp: 0.4, phase: 1, volt: "115V", cos: 0.85, head: "Maks 2550 GPH @ 10ft Lift" }, //[cite: 7]
+        "FPSE3601A": { model: "Flotec FPSE3601A (Sewage Pump)", kw: 0.37, hp: 0.5, phase: 1, volt: "115V", cos: 0.85, head: "Maks 5400 GPH @ 10ft Lift" }, //[cite: 7]
+        
+        "FP5112": { model: "Flotec FP5112 (Utility/Transfer)", kw: 0.37, hp: 0.5, phase: 1, volt: "115V", cos: 0.85, head: "Maks 62 PSI" }, //[cite: 7]
+        "FP5455": { model: "Flotec FP5455 (Gas Engine)", kw: 4.8, hp: 6.5, phase: 1, volt: "Gasoline", cos: 1.0, head: "Maks 55 PSI" }, //[cite: 7]
+        
+        "FP4155": { model: "Flotec FP4155 (Shallow Well Jet)", kw: 0.37, hp: 0.5, phase: 1, volt: "115V/230V", cos: 0.85, head: "Maks 65 PSI" }, //[cite: 7]
+        "FP4157": { model: "Flotec FP4157 (Shallow Well Jet)", kw: 0.55, hp: 0.75, phase: 1, volt: "115V/230V", cos: 0.85, head: "Maks 67 PSI" }, //[cite: 7]
+        "FP4150": { model: "Flotec FP4150 (Shallow Well Jet)", kw: 0.75, hp: 1.0, phase: 1, volt: "115V/230V", cos: 0.85, head: "Maks 70 PSI" }, //[cite: 7]
 
+        "FP5512": { model: "Flotec FP5512 (Centrifugal)", kw: 0.37, hp: 0.5, phase: 1, volt: "115V/230V", cos: 0.85, head: "22 GPM @ 25 PSI" }, //[cite: 7]
+        "FP5522": { model: "Flotec FP5522 (Centrifugal)", kw: 0.55, hp: 0.75, phase: 1, volt: "115V/230V", cos: 0.85, head: "31 GPM @ 25 PSI" }, //[cite: 7]
+        "FP5532": { model: "Flotec FP5532 (Centrifugal)", kw: 0.75, hp: 1.0, phase: 1, volt: "115V/230V", cos: 0.85, head: "47 GPM @ 25 PSI" }, //[cite: 7]
+        "FP5542": { model: "Flotec FP5542 (Centrifugal)", kw: 1.1, hp: 1.5, phase: 1, volt: "115V/230V", cos: 0.85, head: "59 GPM @ 25 PSI" }, //[cite: 7]
+        "FP5552": { model: "Flotec FP5552 (Centrifugal)", kw: 1.5, hp: 2.0, phase: 1, volt: "115V/230V", cos: 0.85, head: "68 GPM @ 25 PSI" }, //[cite: 7]
+
+        "FP5242": { model: "Flotec FP5242 (Sprinkler Pump)", kw: 1.1, hp: 1.5, phase: 1, volt: "115V/230V", cos: 0.85, head: "55 GPM @ 20 PSI" }, //[cite: 7]
+        "FP5252": { model: "Flotec FP5252 (Sprinkler Pump)", kw: 1.5, hp: 2.0, phase: 1, volt: "230V", cos: 0.85, head: "64 GPM @ 20 PSI" }, //[cite: 7]
+        "FP5162": { model: "Flotec FP5162 (Sprinkler Pump)", kw: 0.75, hp: 1.0, phase: 1, volt: "115V/230V", cos: 0.85, head: "55 GPM @ 5ft Lift" }, //[cite: 7]
+        "FP5182": { model: "Flotec FP5182 (Sprinkler Pump)", kw: 1.5, hp: 2.0, phase: 1, volt: "115V/230V", cos: 0.85, head: "69 GPM @ 5ft Lift" }, //[cite: 7]
+  
+// ==========================================
+        // 6. FLOTEQ LMH SERIES (Light Multistage Horizontal)
         // ==========================================
-        // 4. Grundfos CM / CMBE / Scala Series
-        // ==========================================
-        "CM1-5": { model: "Grundfos CM 1-5", kw: 0.37, hp: 0.5, phase: 3, volt: "380V", cos: 0.85, head: "1 m³/h @ 35 meter" },
-        "CM1-6": { model: "Grundfos CM 1-6", kw: 0.37, hp: 0.5, phase: 3, volt: "380V", cos: 0.85, head: "1 m³/h @ 42 meter" },
-        "CM3-3": { model: "Grundfos CM 3-3", kw: 0.37, hp: 0.5, phase: 3, volt: "380V", cos: 0.85, head: "3 m³/h @ 21 meter" },
-        "CM3-4": { model: "Grundfos CM 3-4", kw: 0.55, hp: 0.75, phase: 3, volt: "380V", cos: 0.85, head: "3 m³/h @ 28 meter" },
-        "CM3-5": { model: "Grundfos CM 3-5", kw: 0.55, hp: 0.75, phase: 3, volt: "380V", cos: 0.85, head: "3 m³/h @ 35 meter" },
-        "CM3-6": { model: "Grundfos CM 3-6", kw: 0.75, hp: 1.0, phase: 3, volt: "380V", cos: 0.85, head: "3 m³/h @ 42 meter" },
-        "CM3-8": { model: "Grundfos CM 3-8", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.85, head: "3 m³/h @ 56 meter" },
-        "CM3-10": { model: "Grundfos CM 3-10", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.85, head: "3 m³/h @ 70 meter" },
-        "CM5-3": { model: "Grundfos CM 5-3", kw: 0.55, hp: 0.75, phase: 3, volt: "380V", cos: 0.85, head: "5 m³/h @ 21 meter" },
-        "CM5-4": { model: "Grundfos CM 5-4", kw: 0.75, hp: 1.0, phase: 3, volt: "380V", cos: 0.85, head: "5 m³/h @ 28 meter" },
-        "CM5-5": { model: "Grundfos CM 5-5", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.85, head: "5 m³/h @ 35 meter" },
-        "CM5-6": { model: "Grundfos CM 5-6", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.85, head: "5 m³/h @ 42 meter" },
-        "CM5-8": { model: "Grundfos CM 5-8", kw: 1.5, hp: 2.0, phase: 3, volt: "380V", cos: 0.85, head: "5 m³/h @ 56 meter" },
-        "CM10-2": { model: "Grundfos CM 10-2", kw: 1.5, hp: 2.0, phase: 3, volt: "380V", cos: 0.85, head: "10 m³/h @ 20 meter" },
-        "CM10-3": { model: "Grundfos CM 10-3", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "10 m³/h @ 30 meter" },
-        "CM10-4": { model: "Grundfos CM 10-4", kw: 3.0, hp: 4.0, phase: 3, volt: "380V", cos: 0.85, head: "10 m³/h @ 40 meter" },
-        "CM10-5": { model: "Grundfos CM 10-5", kw: 4.0, hp: 5.5, phase: 3, volt: "380V", cos: 0.85, head: "10 m³/h @ 50 meter" },
-        "CM15-1": { model: "Grundfos CM 15-1", kw: 1.5, hp: 2.0, phase: 3, volt: "380V", cos: 0.85, head: "15 m³/h @ 15 meter" },
-        "CM15-2": { model: "Grundfos CM 15-2", kw: 3.0, hp: 4.0, phase: 3, volt: "380V", cos: 0.85, head: "15 m³/h @ 30 meter" },
-        "CMBE 3-62": { model: "Grundfos CMBE 3-62", kw: 1.1, hp: 1.5, phase: 1, volt: "220V", cos: 0.9, head: "3 m³/h @ 62 meter" },
-        "Scala 2 3-45": { model: "Grundfos Scala 2 3-45", kw: 0.55, hp: 0.75, phase: 1, volt: "220V", cos: 0.9, head: "3 m³/h @ 45 meter" },
+        
+        // Floteq LMH 2 Series (Kapasitas ~2 m³/jam)
+        "LMH 2-20": { model: "Floteq LMH 2-20", kw: 0.35, hp: 0.37, phase: 1, volt: "220V", cos: 0.85, head: "2 m³/h (2 Stage) - Dorongan rendah, hemat listrik" },
+        "LMH 2-30": { model: "Floteq LMH 2-30", kw: 0.375, hp: 0.37, phase: 1, volt: "220V", cos: 0.85, head: "2 m³/h (3 Stage) - Tekanan sedang untuk rumah 1-2 lantai" },
+        "LMH 2-40": { model: "Floteq LMH 2-40", kw: 0.55, hp: 0.50, phase: 1, volt: "220V", cos: 0.85, head: "2 m³/h (4 Stage) - Paling populer, sering dipasang otomatis PC" },
+        "LMH 2-50": { model: "Floteq LMH 2-50", kw: 0.60, hp: 0.75, phase: 1, volt: "220V", cos: 0.85, head: "2 m³/h (5 Stage) - Dorongan lebih kuat ke titik keran atas" },
+        "LMH 2-60": { model: "Floteq LMH 2-60", kw: 0.75, hp: 1.00, phase: 1, volt: "220V", cos: 0.85, head: "2 m³/h (6 Stage) - Head tinggi, cocok untuk ruko/gedung 3 lantai" },
 
-        // ==========================================
-        // 5. Grundfos CR / CRE / CRN / SP Series
-        // ==========================================
-        "CR 1-5 (3-Phase)": { model: "Grundfos CR 1-5", kw: 0.37, hp: 0.5, phase: 3, volt: "380V", cos: 0.85, head: "1 m³/h @ 30 meter" },
-        "CR 3-5 (3-Phase)": { model: "Grundfos CR 3-5", kw: 0.37, hp: 0.5, phase: 3, volt: "380V", cos: 0.85, head: "3 m³/h @ 30 meter" },
-        "CR 5-5 (3-Phase)": { model: "Grundfos CR 5-5", kw: 0.75, hp: 1.0, phase: 3, volt: "380V", cos: 0.85, head: "5 m³/h @ 30 meter" },
-        "CR 10-4 (3-Phase)": { model: "Grundfos CR 10-4", kw: 1.5, hp: 2.0, phase: 3, volt: "380V", cos: 0.85, head: "10 m³/h @ 35 meter" },
-        "CR 15-3 (3-Phase)": { model: "Grundfos CR 15-3", kw: 3.0, hp: 4.0, phase: 3, volt: "380V", cos: 0.85, head: "15 m³/h @ 40 meter" },
-        "CR 20-3 (3-Phase)": { model: "Grundfos CR 20-3", kw: 4.0, hp: 5.5, phase: 3, volt: "380V", cos: 0.85, head: "20 m³/h @ 40 meter" },
-        "CR 32-4-2 (3-Phase)": { model: "Grundfos CR 32-4-2", kw: 7.5, hp: 10.0, phase: 3, volt: "380V", cos: 0.85, head: "32 m³/h @ 60 meter" },
-        "CR 45-3-1 (3-Phase)": { model: "Grundfos CR 45-3-1", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.85, head: "45 m³/h @ 55 meter" },
-        "CR 64-4-1 (3-Phase)": { model: "Grundfos CR 64-4-1", kw: 18.5, hp: 25.0, phase: 3, volt: "380V", cos: 0.85, head: "64 m³/h @ 65 meter" },
-        "CH4-60": { model: "Grundfos CH 4-60", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.85, head: "4 m³/h @ 45 meter" },
-        "CR3-25": { model: "Grundfos CR 3-25", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "3 m³/h @ 150 meter" },
-        "CR3-27": { model: "Grundfos CR 3-27", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "3 m³/h @ 165 meter" },
-        "CR90-2": { model: "Grundfos CR 90-2", kw: 7.5, hp: 10.0, phase: 3, volt: "380V", cos: 0.85, head: "90 m³/h @ 40 meter" },
-        "CRN10-20": { model: "Grundfos CRN 10-20", kw: 7.5, hp: 10.0, phase: 3, volt: "380V", cos: 0.85, head: "10 m³/h @ 160 meter" },
-        "CRE 5-9": { model: "Grundfos CRE 5-9", kw: 1.5, hp: 2.0, phase: 3, volt: "380V", cos: 0.85, head: "5 m³/h @ 50 meter" },
-        "CRE 5-10": { model: "Grundfos CRE 5-10", kw: 1.5, hp: 2.0, phase: 3, volt: "380V", cos: 0.85, head: "5 m³/h @ 55 meter" },
-        "SP14-13": { model: "Grundfos SP 14-13", kw: 5.5, hp: 7.5, phase: 3, volt: "380V", cos: 0.85, head: "14 m³/h @ 85 meter" },
+        // Floteq LMH 4 Series (Kapasitas ~4 m³/jam)
+        "LMH 4-20": { model: "Floteq LMH 4-20", kw: 0.55, hp: 0.50, phase: 1, volt: "220V", cos: 0.85, head: "4 m³/h (2 Stage) - Debit besar dengan tekanan rendah" },
+        "LMH 4-30": { model: "Floteq LMH 4-30", kw: 0.60, hp: 0.75, phase: 1, volt: "220V", cos: 0.85, head: "4 m³/h (3 Stage) - Distribusi air lancar untuk debit menengah" },
+        "LMH 4-40": { model: "Floteq LMH 4-40", kw: 0.75, hp: 1.00, phase: 1, volt: "220V", cos: 0.85, head: "4 m³/h (4 Stage) - Pilihan seimbang untuk tekanan & debit besar" },
+        "LMH 4-50": { model: "Floteq LMH 4-50", kw: 1.00, hp: 1.30, phase: 1, volt: "220V", cos: 0.85, head: "4 m³/h (5 Stage) - Daya dorong kuat dengan volume air melimpah" },
+        "LMH 4-60": { model: "Floteq LMH 4-60", kw: 1.10, hp: 1.50, phase: 1, volt: "220V", cos: 0.85, head: "4 m³/h (6 Stage) - Tekanan dan debit maksimal untuk kebutuhan tinggi" },
 
-        // ==========================================
-        // 6. CNP CDLF / CDMF Series (Tambahan)
-        // ==========================================
-        "CDLF 2-22 (1-Phase)": { model: "CNP CDLF 2-22", kw: 2.2, hp: 3.0, phase: 1, volt: "220V", cos: 0.9, head: "2 m³/h @ 160 meter" },
-        "CDLF 4-10 (1-Phase)": { model: "CNP CDLF 4-10", kw: 1.5, hp: 2.0, phase: 1, volt: "220V", cos: 0.9, head: "4 m³/h @ 80 meter" },
-        "CDLF 4-16 (3-Phase)": { model: "CNP CDLF 4-16", kw: 3.0, hp: 4.0, phase: 3, volt: "380V", cos: 0.85, head: "4 m³/h @ 128 meter" },
-        "CDLF 4-22 (3-Phase)": { model: "CNP CDLF 4-22", kw: 4.0, hp: 5.5, phase: 3, volt: "380V", cos: 0.85, head: "4 m³/h @ 176 meter" },
-        "CDLF 5-12 (3-Phase)": { model: "CNP CDLF 5-12", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "5 m³/h @ 96 meter" },
-        "CDMF 3-8 (1-Phase)": { model: "CNP CDMF 3-8", kw: 0.75, hp: 1.0, phase: 1, volt: "220V", cos: 0.9, head: "3 m³/h @ 60 meter" },
-        "CDMF 5-12 (3-Phase)": { model: "CNP CDMF 5-12", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "5 m³/h @ 96 meter" },
-        "CDMF 5-13 (3-Phase)": { model: "CNP CDMF 5-13", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "5 m³/h @ 104 meter" },
-        "CDMF 5-25 (3-Phase)": { model: "CNP CDMF 5-25", kw: 4.0, hp: 5.5, phase: 3, volt: "380V", cos: 0.85, head: "5 m³/h @ 200 meter" },
+  };
 
-        // ==========================================
-        // 7. CNP CHLF / CHLF(T) Series (Tambahan)
-        // ==========================================
-        "CHLF 2-3 (1-Phase)": { model: "CNP CHLF 2-3", kw: 0.37, hp: 0.5, phase: 1, volt: "220V", cos: 0.9, head: "2 m³/h @ 22 meter" },
-        "CHLF 2-15 (1-Phase)": { model: "CNP CHLF 2-15", kw: 0.37, hp: 0.5, phase: 1, volt: "220V", cos: 0.9, head: "2 m³/h @ 15 meter" },
-        "CHLF 2-20 (1-Phase)": { model: "CNP CHLF 2-20", kw: 0.37, hp: 0.5, phase: 1, volt: "220V", cos: 0.9, head: "2 m³/h @ 15 meter" },
-        "CHLF 2-30 (1-Phase)": { model: "CNP CHLF 2-30", kw: 0.37, hp: 0.5, phase: 1, volt: "220V", cos: 0.9, head: "2 m³/h @ 22 meter" },
-        "CHLF 2-60 (1-Phase)": { model: "CNP CHLF 2-60", kw: 0.75, hp: 1.0, phase: 1, volt: "220V", cos: 0.9, head: "2 m³/h @ 45 meter" },
-        "CHLF 4-50 (1-Phase)": { model: "CNP CHLF 4-50", kw: 1.1, hp: 1.5, phase: 1, volt: "220V", cos: 0.9, head: "4 m³/h @ 40 meter" },
-        "CHLF 4-60 (1-Phase)": { model: "CNP CHLF 4-60", kw: 1.1, hp: 1.5, phase: 1, volt: "220V", cos: 0.9, head: "4 m³/h @ 48 meter" },
-        "CHLF 8-40 (3-Phase)": { model: "CNP CHLF 8-40", kw: 1.5, hp: 2.0, phase: 3, volt: "380V", cos: 0.85, head: "8 m³/h @ 36 meter" },
-        "CHLF 12-20 (1-Phase)": { model: "CNP CHLF 12-20", kw: 1.5, hp: 2.0, phase: 1, volt: "220V", cos: 0.9, head: "12 m³/h @ 25 meter" },
-        "CHLF(T) 2-40": { model: "CNP CHLF(T) 2-40", kw: 0.55, hp: 0.75, phase: 3, volt: "380V", cos: 0.85, head: "2 m³/h @ 30 meter" },
-        "CHLF(T) 2-60": { model: "CNP CHLF(T) 2-60", kw: 0.75, hp: 1.0, phase: 3, volt: "380V", cos: 0.85, head: "2 m³/h @ 45 meter" },
-        "CHLF(T) 4-60": { model: "CNP CHLF(T) 4-60", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.85, head: "4 m³/h @ 48 meter" },
+function initPumpDropdown() {
+        const dropdown = document.getElementById('pumpSelectDropdown');
+        if (!dropdown) return;
+        
+        dropdown.innerHTML = '<option value="">-- Atau Pilih Model dari Katalog --</option>';
+        
+        let currentGroupLabel = "";
+        let currentOptGroup = null;
 
-        // ==========================================
-        // 8. Floteq XM / XMI / XMN Series 1 - 150
-        // ==========================================
-        "XM 1-2": { model: "Floteq XM 1-2", kw: 0.37, hp: 0.5, phase: 3, volt: "380V", cos: 0.85, head: "1 m³/h @ 12 meter" },
-        "XM 1-3": { model: "Floteq XM 1-3", kw: 0.37, hp: 0.5, phase: 3, volt: "380V", cos: 0.85, head: "1 m³/h @ 17 meter" },
-        "XM 1-4": { model: "Floteq XM 1-4", kw: 0.37, hp: 0.5, phase: 3, volt: "380V", cos: 0.85, head: "1 m³/h @ 22 meter" },
-        "XM 1-5": { model: "Floteq XM 1-5", kw: 0.37, hp: 0.5, phase: 3, volt: "380V", cos: 0.85, head: "1 m³/h @ 28 meter" },
-        "XM 1-6": { model: "Floteq XM 1-6", kw: 0.37, hp: 0.5, phase: 3, volt: "380V", cos: 0.85, head: "1 m³/h @ 34 meter" },
-        "XM 1-7": { model: "Floteq XM 1-7", kw: 0.37, hp: 0.5, phase: 3, volt: "380V", cos: 0.85, head: "1 m³/h @ 39 meter" },
-        "XM 1-8": { model: "Floteq XM 1-8", kw: 0.55, hp: 0.75, phase: 3, volt: "380V", cos: 0.85, head: "1 m³/h @ 45 meter" },
-        "XM 1-9": { model: "Floteq XM 1-9", kw: 0.55, hp: 0.75, phase: 3, volt: "380V", cos: 0.85, head: "1 m³/h @ 50 meter" },
-        "XM 1-10": { model: "Floteq XM 1-10", kw: 0.55, hp: 0.75, phase: 3, volt: "380V", cos: 0.85, head: "1 m³/h @ 55 meter" },
-        "XM 1-11": { model: "Floteq XM 1-11", kw: 0.55, hp: 0.75, phase: 3, volt: "380V", cos: 0.85, head: "1 m³/h @ 61 meter" },
-        "XM 1-12": { model: "Floteq XM 1-12", kw: 0.75, hp: 1.0, phase: 3, volt: "380V", cos: 0.85, head: "1 m³/h @ 67 meter" },
-        "XM 1-13": { model: "Floteq XM 1-13", kw: 0.75, hp: 1.0, phase: 3, volt: "380V", cos: 0.85, head: "1 m³/h @ 73 meter" },
-        "XM 1-15": { model: "Floteq XM 1-15", kw: 0.75, hp: 1.0, phase: 3, volt: "380V", cos: 0.85, head: "1 m³/h @ 83 meter" },
-        "XM 1-17": { model: "Floteq XM 1-17", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.85, head: "1 m³/h @ 95 meter" },
-        "XM 1-19": { model: "Floteq XM 1-19", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.85, head: "1 m³/h @ 106 meter" },
-        "XM 1-21": { model: "Floteq XM 1-21", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.85, head: "1 m³/h @ 116 meter" },
-        "XM 1-23": { model: "Floteq XM 1-23", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.85, head: "1 m³/h @ 126 meter" },
-        "XM 1-25": { model: "Floteq XM 1-25", kw: 1.5, hp: 2.0, phase: 3, volt: "380V", cos: 0.85, head: "1 m³/h @ 142 meter" },
-        "XM 1-27": { model: "Floteq XM 1-27", kw: 1.5, hp: 2.0, phase: 3, volt: "380V", cos: 0.85, head: "1 m³/h @ 153 meter" },
-        "XM 1-30": { model: "Floteq XM 1-30", kw: 1.5, hp: 2.0, phase: 3, volt: "380V", cos: 0.85, head: "1 m³/h @ 169 meter" },
-        "XM 1-33": { model: "Floteq XM 1-33", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "1 m³/h @ 189 meter" },
-        "XM 1-36": { model: "Floteq XM 1-36", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "1 m³/h @ 208 meter" },
+        for (const key in pumpDatabase) {
+            const pump = pumpDatabase[key];
+            
+            // Logika Pintar untuk Membuat Kategori (Folder) Otomatis
+            let groupLabel = "Lain-lain";
+            if (pump.model.includes("Grundfos")) {
+                groupLabel = "Grundfos CR / CRN Series";
+            } else if (pump.model.includes("CNP CDL") || pump.model.includes("CNP CDM")) {
+                const match = pump.model.match(/(CNP CD[LM]\/CDM?F \d+)/);
+                if (match) {
+                    groupLabel = match[1] + " Series";
+                } else {
+                    groupLabel = "CNP Vertical Multistage";
+                }
+            } else if (pump.model.includes("Floteq XM")) {
+                const match = pump.model.match(/(Floteq XM\/XMI\/XMN \d+)/);
+                if (match) {
+                    groupLabel = match[1] + " Series";
+                } else {
+                    groupLabel = "Floteq Vertical Multistage";
+                }
+            } else if (pump.model.includes("Floteq LMH")) { // <--- TAMBAHAN UNTUK SERI LMH
+                const match = pump.model.match(/(Floteq LMH \d+)/);
+                if (match) {
+                    groupLabel = match[1] + " Series";
+                } else {
+                    groupLabel = "Floteq Horizontal Multistage";
+                }
+            } else if (pump.model.includes("Flotec")) {
+                groupLabel = "Flotec Residential / Utility";
+            }
 
-        "XM 3-2": { model: "Floteq XM 3-2", kw: 0.37, hp: 0.5, phase: 3, volt: "380V", cos: 0.85, head: "3 m³/h @ 11 meter" },
-        "XM 3-3": { model: "Floteq XM 3-3", kw: 0.37, hp: 0.5, phase: 3, volt: "380V", cos: 0.85, head: "3 m³/h @ 16 meter" },
-        "XM 3-4": { model: "Floteq XM 3-4", kw: 0.37, hp: 0.5, phase: 3, volt: "380V", cos: 0.85, head: "3 m³/h @ 20 meter" },
-        "XM 3-5": { model: "Floteq XM 3-5", kw: 0.37, hp: 0.5, phase: 3, volt: "380V", cos: 0.85, head: "3 m³/h @ 25 meter" },
-        "XM 3-6": { model: "Floteq XM 3-6", kw: 0.55, hp: 0.75, phase: 3, volt: "380V", cos: 0.85, head: "3 m³/h @ 30 meter" },
-        "XM 3-7": { model: "Floteq XM 3-7", kw: 0.55, hp: 0.75, phase: 3, volt: "380V", cos: 0.85, head: "3 m³/h @ 35 meter" },
-        "XM 3-8": { model: "Floteq XM 3-8", kw: 0.75, hp: 1.0, phase: 3, volt: "380V", cos: 0.85, head: "3 m³/h @ 41 meter" },
-        "XM 3-9": { model: "Floteq XM 3-9", kw: 0.75, hp: 1.0, phase: 3, volt: "380V", cos: 0.85, head: "3 m³/h @ 45 meter" },
-        "XM 3-10": { model: "Floteq XM 3-10", kw: 0.75, hp: 1.0, phase: 3, volt: "380V", cos: 0.85, head: "3 m³/h @ 50 meter" },
-        "XM 3-11": { model: "Floteq XM 3-11", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.85, head: "3 m³/h @ 56 meter" },
-        "XM 3-12": { model: "Floteq XM 3-12", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.85, head: "3 m³/h @ 61 meter" },
-        "XM 3-13": { model: "Floteq XM 3-13", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.85, head: "3 m³/h @ 69 meter" },
-        "XM 3-15": { model: "Floteq XM 3-15", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.85, head: "3 m³/h @ 73 meter" },
-        "XM 3-17": { model: "Floteq XM 3-17", kw: 1.5, hp: 2.0, phase: 3, volt: "380V", cos: 0.85, head: "3 m³/h @ 87 meter" },
-        "XM 3-19": { model: "Floteq XM 3-19", kw: 1.5, hp: 2.0, phase: 3, volt: "380V", cos: 0.85, head: "3 m³/h @ 97 meter" },
-        "XM 3-21": { model: "Floteq XM 3-21", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "3 m³/h @ 109 meter" },
-        "XM 3-23": { model: "Floteq XM 3-23", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "3 m³/h @ 119 meter" },
-        "XM 3-25": { model: "Floteq XM 3-25", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "3 m³/h @ 128 meter" },
-        "XM 3-27": { model: "Floteq XM 3-27", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "3 m³/h @ 138 meter" },
-        "XM 3-29": { model: "Floteq XM 3-29", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "3 m³/h @ 147 meter" },
-        "XM 3-31": { model: "Floteq XM 3-31", kw: 3.0, hp: 4.0, phase: 3, volt: "380V", cos: 0.85, head: "3 m³/h @ 161 meter" },
-        "XM 3-33": { model: "Floteq XM 3-33", kw: 3.0, hp: 4.0, phase: 3, volt: "380V", cos: 0.85, head: "3 m³/h @ 170 meter" },
-        "XM 3-36": { model: "Floteq XM 3-36", kw: 3.0, hp: 4.0, phase: 3, volt: "380V", cos: 0.85, head: "3 m³/h @ 185 meter" },
+            if (groupLabel !== currentGroupLabel) {
+                currentOptGroup = document.createElement('optgroup');
+                currentOptGroup.label = groupLabel;
+                dropdown.appendChild(currentOptGroup);
+                currentGroupLabel = groupLabel;
+            }
 
-        "XM 5-2": { model: "Floteq XM 5-2", kw: 0.37, hp: 0.5, phase: 3, volt: "380V", cos: 0.85, head: "5 m³/h @ 9 meter" },
-        "XM 5-3": { model: "Floteq XM 5-3", kw: 0.55, hp: 0.75, phase: 3, volt: "380V", cos: 0.85, head: "5 m³/h @ 15 meter" },
-        "XM 5-4": { model: "Floteq XM 5-4", kw: 0.55, hp: 0.75, phase: 3, volt: "380V", cos: 0.85, head: "5 m³/h @ 19 meter" },
-        "XM 5-5": { model: "Floteq XM 5-5", kw: 0.75, hp: 1.0, phase: 3, volt: "380V", cos: 0.85, head: "5 m³/h @ 24 meter" },
-        "XM 5-6": { model: "Floteq XM 5-6", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.85, head: "5 m³/h @ 28 meter" },
-        "XM 5-7": { model: "Floteq XM 5-7", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.85, head: "5 m³/h @ 32 meter" },
-        "XM 5-8": { model: "Floteq XM 5-8", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.85, head: "5 m³/h @ 36 meter" },
-        "XM 5-9": { model: "Floteq XM 5-9", kw: 1.5, hp: 2.0, phase: 3, volt: "380V", cos: 0.85, head: "5 m³/h @ 44 meter" },
-        "XM 5-10": { model: "Floteq XM 5-10", kw: 1.5, hp: 2.0, phase: 3, volt: "380V", cos: 0.85, head: "5 m³/h @ 53 meter" },
-        "XM 5-11": { model: "Floteq XM 5-11", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "5 m³/h @ 59 meter" },
-        "XM 5-12": { model: "Floteq XM 5-12", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "5 m³/h @ 63 meter" },
-        "XM 5-13": { model: "Floteq XM 5-13", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "5 m³/h @ 68 meter" },
-        "XM 5-14": { model: "Floteq XM 5-14", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "5 m³/h @ 74 meter" },
-        "XM 5-15": { model: "Floteq XM 5-15", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "5 m³/h @ 79 meter" },
-        "XM 5-16": { model: "Floteq XM 5-16", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "5 m³/h @ 85 meter" },
-        "XM 5-18": { model: "Floteq XM 5-18", kw: 3.0, hp: 4.0, phase: 3, volt: "380V", cos: 0.85, head: "5 m³/h @ 98 meter" },
-        "XM 5-20": { model: "Floteq XM 5-20", kw: 3.0, hp: 4.0, phase: 3, volt: "380V", cos: 0.85, head: "5 m³/h @ 108 meter" },
-        "XM 5-22": { model: "Floteq XM 5-22", kw: 4.0, hp: 5.5, phase: 3, volt: "380V", cos: 0.85, head: "5 m³/h @ 120 meter" },
-        "XM 5-24": { model: "Floteq XM 5-24", kw: 4.0, hp: 5.5, phase: 3, volt: "380V", cos: 0.85, head: "5 m³/h @ 132 meter" },
-        "XM 5-26": { model: "Floteq XM 5-26", kw: 4.0, hp: 5.5, phase: 3, volt: "380V", cos: 0.85, head: "5 m³/h @ 145 meter" },
-        "XM 5-29": { model: "Floteq XM 5-29", kw: 4.0, hp: 5.5, phase: 3, volt: "380V", cos: 0.85, head: "5 m³/h @ 155 meter" },
-
-        "XM 10-2": { model: "Floteq XM 10-2", kw: 0.75, hp: 1.0, phase: 3, volt: "380V", cos: 0.85, head: "10 m³/h @ 15 meter" },
-        "XM 10-3": { model: "Floteq XM 10-3", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.85, head: "10 m³/h @ 23 meter" },
-        "XM 10-4": { model: "Floteq XM 10-4", kw: 1.5, hp: 2.0, phase: 3, volt: "380V", cos: 0.85, head: "10 m³/h @ 32 meter" },
-        "XM 10-5": { model: "Floteq XM 10-5", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "10 m³/h @ 40 meter" },
-        "XM 10-6": { model: "Floteq XM 10-6", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "10 m³/h @ 48 meter" },
-        "XM 10-7": { model: "Floteq XM 10-7", kw: 3.0, hp: 4.0, phase: 3, volt: "380V", cos: 0.85, head: "10 m³/h @ 56 meter" },
-        "XM 10-8": { model: "Floteq XM 10-8", kw: 3.0, hp: 4.0, phase: 3, volt: "380V", cos: 0.85, head: "10 m³/h @ 64 meter" },
-        "XM 10-9": { model: "Floteq XM 10-9", kw: 3.0, hp: 4.0, phase: 3, volt: "380V", cos: 0.85, head: "10 m³/h @ 70 meter" },
-        "XM 10-10": { model: "Floteq XM 10-10", kw: 4.0, hp: 5.5, phase: 3, volt: "380V", cos: 0.85, head: "10 m³/h @ 80 meter" },
-        "XM 10-12": { model: "Floteq XM 10-12", kw: 4.0, hp: 5.5, phase: 3, volt: "380V", cos: 0.85, head: "10 m³/h @ 95 meter" },
-        "XM 10-14": { model: "Floteq XM 10-14", kw: 5.5, hp: 7.5, phase: 3, volt: "380V", cos: 0.85, head: "10 m³/h @ 113 meter" },
-        "XM 10-16": { model: "Floteq XM 10-16", kw: 5.5, hp: 7.5, phase: 3, volt: "380V", cos: 0.85, head: "10 m³/h @ 128 meter" },
-        "XM 10-18": { model: "Floteq XM 10-18", kw: 7.5, hp: 10.0, phase: 3, volt: "380V", cos: 0.85, head: "10 m³/h @ 147 meter" },
-        "XM 10-20": { model: "Floteq XM 10-20", kw: 7.5, hp: 10.0, phase: 3, volt: "380V", cos: 0.85, head: "10 m³/h @ 164 meter" },
-        "XM 10-22": { model: "Floteq XM 10-22", kw: 7.5, hp: 10.0, phase: 3, volt: "380V", cos: 0.85, head: "10 m³/h @ 178 meter" },
-
-        "XM 15-1": { model: "Floteq XM 15-1", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.85, head: "15 m³/h @ 10 meter" },
-        "XM 15-2": { model: "Floteq XM 15-2", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "15 m³/h @ 21 meter" },
-        "XM 15-3": { model: "Floteq XM 15-3", kw: 3.0, hp: 4.0, phase: 3, volt: "380V", cos: 0.85, head: "15 m³/h @ 32 meter" },
-        "XM 15-4": { model: "Floteq XM 15-4", kw: 4.0, hp: 5.5, phase: 3, volt: "380V", cos: 0.85, head: "15 m³/h @ 43 meter" },
-        "XM 15-5": { model: "Floteq XM 15-5", kw: 4.0, hp: 5.5, phase: 3, volt: "380V", cos: 0.85, head: "15 m³/h @ 53 meter" },
-        "XM 15-6": { model: "Floteq XM 15-6", kw: 5.5, hp: 7.5, phase: 3, volt: "380V", cos: 0.85, head: "15 m³/h @ 64 meter" },
-        "XM 15-7": { model: "Floteq XM 15-7", kw: 5.5, hp: 7.5, phase: 3, volt: "380V", cos: 0.85, head: "15 m³/h @ 75 meter" },
-        "XM 15-8": { model: "Floteq XM 15-8", kw: 7.5, hp: 10.0, phase: 3, volt: "380V", cos: 0.85, head: "15 m³/h @ 86 meter" },
-        "XM 15-9": { model: "Floteq XM 15-9", kw: 7.5, hp: 10.0, phase: 3, volt: "380V", cos: 0.85, head: "15 m³/h @ 97 meter" },
-        "XM 15-10": { model: "Floteq XM 15-10", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.85, head: "15 m³/h @ 109 meter" },
-        "XM 15-12": { model: "Floteq XM 15-12", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.85, head: "15 m³/h @ 130 meter" },
-        "XM 15-14": { model: "Floteq XM 15-14", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.85, head: "15 m³/h @ 151 meter" },
-        "XM 15-17": { model: "Floteq XM 15-17", kw: 15.0, hp: 20.0, phase: 3, volt: "380V", cos: 0.85, head: "15 m³/h @ 185 meter" },
-
-        "XM 20-1": { model: "Floteq XM 20-1", kw: 1.1, hp: 1.5, phase: 3, volt: "380V", cos: 0.85, head: "20 m³/h @ 10.5 meter" },
-        "XM 20-2": { model: "Floteq XM 20-2", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "20 m³/h @ 22.5 meter" },
-        "XM 20-3": { model: "Floteq XM 20-3", kw: 4.0, hp: 5.5, phase: 3, volt: "380V", cos: 0.85, head: "20 m³/h @ 36 meter" },
-        "XM 20-4": { model: "Floteq XM 20-4", kw: 5.5, hp: 7.5, phase: 3, volt: "380V", cos: 0.85, head: "20 m³/h @ 48 meter" },
-        "XM 20-5": { model: "Floteq XM 20-5", kw: 5.5, hp: 7.5, phase: 3, volt: "380V", cos: 0.85, head: "20 m³/h @ 60 meter" },
-        "XM 20-6": { model: "Floteq XM 20-6", kw: 7.5, hp: 10.0, phase: 3, volt: "380V", cos: 0.85, head: "20 m³/h @ 72 meter" },
-        "XM 20-7": { model: "Floteq XM 20-7", kw: 7.5, hp: 10.0, phase: 3, volt: "380V", cos: 0.85, head: "20 m³/h @ 84 meter" },
-        "XM 20-8": { model: "Floteq XM 20-8", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.85, head: "20 m³/h @ 96 meter" },
-        "XM 20-10": { model: "Floteq XM 20-10", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.85, head: "20 m³/h @ 120 meter" },
-        "XM 20-12": { model: "Floteq XM 20-12", kw: 15.0, hp: 20.0, phase: 3, volt: "380V", cos: 0.85, head: "20 m³/h @ 144 meter" },
-        "XM 20-14": { model: "Floteq XM 20-14", kw: 15.0, hp: 20.0, phase: 3, volt: "380V", cos: 0.85, head: "20 m³/h @ 168 meter" },
-        "XM 20-17": { model: "Floteq XM 20-17", kw: 18.5, hp: 25.0, phase: 3, volt: "380V", cos: 0.85, head: "20 m³/h @ 205 meter" },
-
-        "XM 32-1-1": { model: "Floteq XM 32-1-1", kw: 1.5, hp: 2.0, phase: 3, volt: "380V", cos: 0.85, head: "32 m³/h @ 10 meter" },
-        "XM 32-1": { model: "Floteq XM 32-1", kw: 2.2, hp: 3.0, phase: 3, volt: "380V", cos: 0.85, head: "32 m³/h @ 13 meter" },
-        "XM 32-2-2": { model: "Floteq XM 32-2-2", kw: 3.0, hp: 4.0, phase: 3, volt: "380V", cos: 0.85, head: "32 m³/h @ 20.5 meter" },
-        "XM 32-2": { model: "Floteq XM 32-2", kw: 4.0, hp: 5.5, phase: 3, volt: "380V", cos: 0.85, head: "32 m³/h @ 27.5 meter" },
-        "XM 32-3-2": { model: "Floteq XM 32-3-2", kw: 5.5, hp: 7.5, phase: 3, volt: "380V", cos: 0.85, head: "32 m³/h @ 35.5 meter" },
-        "XM 32-3": { model: "Floteq XM 32-3", kw: 5.5, hp: 7.5, phase: 3, volt: "380V", cos: 0.85, head: "32 m³/h @ 41.5 meter" },
-        "XM 32-4-2": { model: "Floteq XM 32-4-2", kw: 7.5, hp: 10.0, phase: 3, volt: "380V", cos: 0.85, head: "32 m³/h @ 49.5 meter" },
-        "XM 32-4": { model: "Floteq XM 32-4", kw: 7.5, hp: 10.0, phase: 3, volt: "380V", cos: 0.85, head: "32 m³/h @ 56 meter" },
-        "XM 32-5-2": { model: "Floteq XM 32-5-2", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.85, head: "32 m³/h @ 65.5 meter" },
-        "XM 32-5": { model: "Floteq XM 32-5", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.85, head: "32 m³/h @ 72 meter" },
-        "XM 32-6-2": { model: "Floteq XM 32-6-2", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.85, head: "32 m³/h @ 79.5 meter" },
-        "XM 32-6": { model: "Floteq XM 32-6", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.85, head: "32 m³/h @ 85.5 meter" },
-        "XM 32-7-2": { model: "Floteq XM 32-7-2", kw: 15.0, hp: 20.0, phase: 3, volt: "380V", cos: 0.85, head: "32 m³/h @ 94.5 meter" },
-        "XM 32-7": { model: "Floteq XM 32-7", kw: 15.0, hp: 20.0, phase: 3, volt: "380V", cos: 0.85, head: "32 m³/h @ 101 meter" },
-        "XM 32-8-2": { model: "Floteq XM 32-8-2", kw: 15.0, hp: 20.0, phase: 3, volt: "380V", cos: 0.85, head: "32 m³/h @ 108 meter" },
-        "XM 32-8": { model: "Floteq XM 32-8", kw: 15.0, hp: 20.0, phase: 3, volt: "380V", cos: 0.85, head: "32 m³/h @ 116 meter" },
-        "XM 32-9-2": { model: "Floteq XM 32-9-2", kw: 18.5, hp: 25.0, phase: 3, volt: "380V", cos: 0.85, head: "32 m³/h @ 124 meter" },
-        "XM 32-9": { model: "Floteq XM 32-9", kw: 18.5, hp: 25.0, phase: 3, volt: "380V", cos: 0.85, head: "32 m³/h @ 131 meter" },
-        "XM 32-10-2": { model: "Floteq XM 32-10-2", kw: 18.5, hp: 25.0, phase: 3, volt: "380V", cos: 0.85, head: "32 m³/h @ 138 meter" },
-        "XM 32-10": { model: "Floteq XM 32-10", kw: 18.5, hp: 25.0, phase: 3, volt: "380V", cos: 0.85, head: "32 m³/h @ 145 meter" },
-        "XM 32-11-2": { model: "Floteq XM 32-11-2", kw: 22.0, hp: 30.0, phase: 3, volt: "380V", cos: 0.85, head: "32 m³/h @ 154 meter" },
-        "XM 32-11": { model: "Floteq XM 32-11", kw: 22.0, hp: 30.0, phase: 3, volt: "380V", cos: 0.85, head: "32 m³/h @ 161 meter" },
-        "XM 32-12-2": { model: "Floteq XM 32-12-2", kw: 22.0, hp: 30.0, phase: 3, volt: "380V", cos: 0.85, head: "32 m³/h @ 168 meter" },
-        "XM 32-12": { model: "Floteq XM 32-12", kw: 22.0, hp: 30.0, phase: 3, volt: "380V", cos: 0.85, head: "32 m³/h @ 176 meter" },
-        "XM 32-13-2": { model: "Floteq XM 32-13-2", kw: 30.0, hp: 40.0, phase: 3, volt: "380V", cos: 0.85, head: "32 m³/h @ 187 meter" },
-        "XM 32-13": { model: "Floteq XM 32-13", kw: 30.0, hp: 40.0, phase: 3, volt: "380V", cos: 0.85, head: "32 m³/h @ 193 meter" },
-        "XM 32-14-2": { model: "Floteq XM 32-14-2", kw: 30.0, hp: 40.0, phase: 3, volt: "380V", cos: 0.85, head: "32 m³/h @ 201 meter" },
-        "XM 32-14": { model: "Floteq XM 32-14", kw: 30.0, hp: 40.0, phase: 3, volt: "380V", cos: 0.85, head: "32 m³/h @ 207 meter" },
-
-        "XM 45-1-1": { model: "Floteq XM 45-1-1", kw: 3.0, hp: 4.0, phase: 3, volt: "380V", cos: 0.85, head: "45 m³/h @ 15 meter" },
-        "XM 45-1": { model: "Floteq XM 45-1", kw: 4.0, hp: 5.5, phase: 3, volt: "380V", cos: 0.85, head: "45 m³/h @ 19 meter" },
-        "XM 45-2-2": { model: "Floteq XM 45-2-2", kw: 5.5, hp: 7.5, phase: 3, volt: "380V", cos: 0.85, head: "45 m³/h @ 30.5 meter" },
-        "XM 45-2": { model: "Floteq XM 45-2", kw: 7.5, hp: 10.0, phase: 3, volt: "380V", cos: 0.85, head: "45 m³/h @ 39 meter" },
-        "XM 45-3-2": { model: "Floteq XM 45-3-2", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.85, head: "45 m³/h @ 52 meter" },
-        "XM 45-3": { model: "Floteq XM 45-3", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.85, head: "45 m³/h @ 59.5 meter" },
-        "XM 45-4-2": { model: "Floteq XM 45-4-2", kw: 15.0, hp: 20.0, phase: 3, volt: "380V", cos: 0.85, head: "45 m³/h @ 72 meter" },
-        "XM 45-4": { model: "Floteq XM 45-4", kw: 15.0, hp: 20.0, phase: 3, volt: "380V", cos: 0.85, head: "45 m³/h @ 79.5 meter" },
-        "XM 45-5-2": { model: "Floteq XM 45-5-2", kw: 18.5, hp: 25.0, phase: 3, volt: "380V", cos: 0.85, head: "45 m³/h @ 92.5 meter" },
-        "XM 45-5": { model: "Floteq XM 45-5", kw: 18.5, hp: 25.0, phase: 3, volt: "380V", cos: 0.85, head: "45 m³/h @ 100 meter" },
-        "XM 45-6-2": { model: "Floteq XM 45-6-2", kw: 22.0, hp: 30.0, phase: 3, volt: "380V", cos: 0.85, head: "45 m³/h @ 113 meter" },
-        "XM 45-6": { model: "Floteq XM 45-6", kw: 22.0, hp: 30.0, phase: 3, volt: "380V", cos: 0.85, head: "45 m³/h @ 121 meter" },
-        "XM 45-7-2": { model: "Floteq XM 45-7-2", kw: 30.0, hp: 40.0, phase: 3, volt: "380V", cos: 0.85, head: "45 m³/h @ 135 meter" },
-        "XM 45-7": { model: "Floteq XM 45-7", kw: 30.0, hp: 40.0, phase: 3, volt: "380V", cos: 0.85, head: "45 m³/h @ 144 meter" },
-        "XM 45-8-2": { model: "Floteq XM 45-8-2", kw: 30.0, hp: 40.0, phase: 3, volt: "380V", cos: 0.85, head: "45 m³/h @ 155 meter" },
-        "XM 45-8": { model: "Floteq XM 45-8", kw: 30.0, hp: 40.0, phase: 3, volt: "380V", cos: 0.85, head: "45 m³/h @ 164 meter" },
-        "XM 45-9-2": { model: "Floteq XM 45-9-2", kw: 30.0, hp: 40.0, phase: 3, volt: "380V", cos: 0.85, head: "45 m³/h @ 175 meter" },
-        "XM 45-9": { model: "Floteq XM 45-9", kw: 37.0, hp: 50.0, phase: 3, volt: "380V", cos: 0.85, head: "45 m³/h @ 185 meter" },
-        "XM 45-10-2": { model: "Floteq XM 45-10-2", kw: 37.0, hp: 50.0, phase: 3, volt: "380V", cos: 0.85, head: "45 m³/h @ 196 meter" },
-        "XM 45-10": { model: "Floteq XM 45-10", kw: 37.0, hp: 50.0, phase: 3, volt: "380V", cos: 0.85, head: "45 m³/h @ 206 meter" },
-        "XM 45-11-2": { model: "Floteq XM 45-11-2", kw: 45.0, hp: 60.0, phase: 3, volt: "380V", cos: 0.85, head: "45 m³/h @ 222 meter" },
-        "XM 45-11": { model: "Floteq XM 45-11", kw: 45.0, hp: 60.0, phase: 3, volt: "380V", cos: 0.85, head: "45 m³/h @ 230 meter" },
-        "XM 45-12-2": { model: "Floteq XM 45-12-2", kw: 45.0, hp: 60.0, phase: 3, volt: "380V", cos: 0.85, head: "45 m³/h @ 242 meter" },
-        "XM 45-12": { model: "Floteq XM 45-12", kw: 45.0, hp: 60.0, phase: 3, volt: "380V", cos: 0.85, head: "45 m³/h @ 251 meter" },
-        "XM 45-13-2": { model: "Floteq XM 45-13-2", kw: 45.0, hp: 60.0, phase: 3, volt: "380V", cos: 0.85, head: "45 m³/h @ 263 meter" },
-
-        "XM 64-1-1": { model: "Floteq XM 64-1-1", kw: 4.0, hp: 5.5, phase: 3, volt: "380V", cos: 0.85, head: "64 m³/h @ 14 meter" },
-        "XM 64-1": { model: "Floteq XM 64-1", kw: 5.5, hp: 7.5, phase: 3, volt: "380V", cos: 0.85, head: "64 m³/h @ 21 meter" },
-        "XM 64-2-2": { model: "Floteq XM 64-2-2", kw: 7.5, hp: 10.0, phase: 3, volt: "380V", cos: 0.85, head: "64 m³/h @ 30 meter" },
-        "XM 64-2-1": { model: "Floteq XM 64-2-1", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.85, head: "64 m³/h @ 37 meter" },
-        "XM 64-2": { model: "Floteq XM 64-2", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.85, head: "64 m³/h @ 44 meter" },
-        "XM 64-3-2": { model: "Floteq XM 64-3-2", kw: 15.0, hp: 20.0, phase: 3, volt: "380V", cos: 0.85, head: "64 m³/h @ 52.5 meter" },
-        "XM 64-3-1": { model: "Floteq XM 64-3-1", kw: 15.0, hp: 20.0, phase: 3, volt: "380V", cos: 0.85, head: "64 m³/h @ 59.5 meter" },
-        "XM 64-3": { model: "Floteq XM 64-3", kw: 18.5, hp: 25.0, phase: 3, volt: "380V", cos: 0.85, head: "64 m³/h @ 68 meter" },
-        "XM 64-4-2": { model: "Floteq XM 64-4-2", kw: 18.5, hp: 25.0, phase: 3, volt: "380V", cos: 0.85, head: "64 m³/h @ 75.5 meter" },
-        "XM 64-4-1": { model: "Floteq XM 64-4-1", kw: 22.0, hp: 30.0, phase: 3, volt: "380V", cos: 0.85, head: "64 m³/h @ 83.5 meter" },
-        "XM 64-4": { model: "Floteq XM 64-4", kw: 22.0, hp: 30.0, phase: 3, volt: "380V", cos: 0.85, head: "64 m³/h @ 91 meter" },
-        "XM 64-5-2": { model: "Floteq XM 64-5-2", kw: 30.0, hp: 40.0, phase: 3, volt: "380V", cos: 0.85, head: "64 m³/h @ 101 meter" },
-        "XM 64-5-1": { model: "Floteq XM 64-5-1", kw: 30.0, hp: 40.0, phase: 3, volt: "380V", cos: 0.85, head: "64 m³/h @ 109 meter" },
-        "XM 64-5": { model: "Floteq XM 64-5", kw: 30.0, hp: 40.0, phase: 3, volt: "380V", cos: 0.85, head: "64 m³/h @ 116 meter" },
-        "XM 64-6-2": { model: "Floteq XM 64-6-2", kw: 30.0, hp: 40.0, phase: 3, volt: "380V", cos: 0.85, head: "64 m³/h @ 124 meter" },
-        "XM 64-6-1": { model: "Floteq XM 64-6-1", kw: 37.0, hp: 50.0, phase: 3, volt: "380V", cos: 0.85, head: "64 m³/h @ 132 meter" },
-        "XM 64-6": { model: "Floteq XM 64-6", kw: 37.0, hp: 50.0, phase: 3, volt: "380V", cos: 0.85, head: "64 m³/h @ 139 meter" },
-        "XM 64-7-2": { model: "Floteq XM 64-7-2", kw: 37.0, hp: 50.0, phase: 3, volt: "380V", cos: 0.85, head: "64 m³/h @ 147 meter" },
-        "XM 64-7-1": { model: "Floteq XM 64-7-1", kw: 37.0, hp: 50.0, phase: 3, volt: "380V", cos: 0.85, head: "64 m³/h @ 155 meter" },
-        "XM 64-7": { model: "Floteq XM 64-7", kw: 45.0, hp: 60.0, phase: 3, volt: "380V", cos: 0.85, head: "64 m³/h @ 165 meter" },
-        "XM 64-8-2": { model: "Floteq XM 64-8-2", kw: 45.0, hp: 60.0, phase: 3, volt: "380V", cos: 0.85, head: "64 m³/h @ 174 meter" },
-        "XM 64-8-1": { model: "Floteq XM 64-8-1", kw: 45.0, hp: 60.0, phase: 3, volt: "380V", cos: 0.85, head: "64 m³/h @ 181 meter" },
-
-        "XM 90-1-1": { model: "Floteq XM 90-1-1", kw: 5.5, hp: 7.5, phase: 3, volt: "380V", cos: 0.85, head: "90 m³/h @ 16 meter" },
-        "XM 90-1": { model: "Floteq XM 90-1", kw: 7.5, hp: 10.0, phase: 3, volt: "380V", cos: 0.85, head: "90 m³/h @ 22 meter" },
-        "XM 90-2-2": { model: "Floteq XM 90-2-2", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.85, head: "90 m³/h @ 34.5 meter" },
-        "XM 90-2": { model: "Floteq XM 90-2", kw: 15.0, hp: 20.0, phase: 3, volt: "380V", cos: 0.85, head: "90 m³/h @ 46 meter" },
-        "XM 90-3-2": { model: "Floteq XM 90-3-2", kw: 18.5, hp: 25.0, phase: 3, volt: "380V", cos: 0.85, head: "90 m³/h @ 58 meter" },
-        "XM 90-3": { model: "Floteq XM 90-3", kw: 22.0, hp: 30.0, phase: 3, volt: "380V", cos: 0.85, head: "90 m³/h @ 70.5 meter" },
-        "XM 90-4-2": { model: "Floteq XM 90-4-2", kw: 30.0, hp: 40.0, phase: 3, volt: "380V", cos: 0.85, head: "90 m³/h @ 84.5 meter" },
-        "XM 90-4": { model: "Floteq XM 90-4", kw: 30.0, hp: 40.0, phase: 3, volt: "380V", cos: 0.85, head: "90 m³/h @ 96 meter" },
-        "XM 90-5-2": { model: "Floteq XM 90-5-2", kw: 37.0, hp: 50.0, phase: 3, volt: "380V", cos: 0.85, head: "90 m³/h @ 109 meter" },
-        "XM 90-5": { model: "Floteq XM 90-5", kw: 37.0, hp: 50.0, phase: 3, volt: "380V", cos: 0.85, head: "90 m³/h @ 121 meter" },
-        "XM 90-6-2": { model: "Floteq XM 90-6-2", kw: 45.0, hp: 60.0, phase: 3, volt: "380V", cos: 0.85, head: "90 m³/h @ 135 meter" },
-        "XM 90-6": { model: "Floteq XM 90-6", kw: 45.0, hp: 60.0, phase: 3, volt: "380V", cos: 0.85, head: "90 m³/h @ 146 meter" },
-
-        "XM 120-1": { model: "Floteq XM 120-1", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.85, head: "120 m³/h @ 20 meter" },
-        "XM 120-2-1": { model: "Floteq XM 120-2-1", kw: 18.5, hp: 25.0, phase: 3, volt: "380V", cos: 0.85, head: "120 m³/h @ 36 meter" },
-        "XM 120-2": { model: "Floteq XM 120-2", kw: 22.0, hp: 30.0, phase: 3, volt: "380V", cos: 0.85, head: "120 m³/h @ 41.5 meter" },
-        "XM 120-3": { model: "Floteq XM 120-3", kw: 30.0, hp: 40.0, phase: 3, volt: "380V", cos: 0.85, head: "120 m³/h @ 62.5 meter" },
-        "XM 120-4-1": { model: "Floteq XM 120-4-1", kw: 37.0, hp: 50.0, phase: 3, volt: "380V", cos: 0.85, head: "120 m³/h @ 82 meter" },
-        "XM 120-5-1": { model: "Floteq XM 120-5-1", kw: 45.0, hp: 60.0, phase: 3, volt: "380V", cos: 0.85, head: "120 m³/h @ 107 meter" },
-        "XM 120-6-1": { model: "Floteq XM 120-6-1", kw: 55.0, hp: 75.0, phase: 3, volt: "380V", cos: 0.85, head: "120 m³/h @ 130 meter" },
-        "XM 120-7": { model: "Floteq XM 120-7", kw: 75.0, hp: 100.0, phase: 3, volt: "380V", cos: 0.85, head: "120 m³/h @ 152 meter" },
-
-        "XM 150-1-1": { model: "Floteq XM 150-1-1", kw: 11.0, hp: 15.0, phase: 3, volt: "380V", cos: 0.85, head: "150 m³/h @ 13.5 meter" },
-        "XM 150-1": { model: "Floteq XM 150-1", kw: 15.0, hp: 20.0, phase: 3, volt: "380V", cos: 0.85, head: "150 m³/h @ 19.5 meter" },
-        "XM 150-2-1": { model: "Floteq XM 150-2-1", kw: 22.0, hp: 30.0, phase: 3, volt: "380V", cos: 0.85, head: "150 m³/h @ 34 meter" },
-        "XM 150-3-2": { model: "Floteq XM 150-3-2", kw: 30.0, hp: 40.0, phase: 3, volt: "380V", cos: 0.85, head: "150 m³/h @ 49 meter" },
-        "XM 150-3": { model: "Floteq XM 150-3", kw: 37.0, hp: 50.0, phase: 3, volt: "380V", cos: 0.85, head: "150 m³/h @ 60 meter" },
-        "XM 150-4-1": { model: "Floteq XM 150-4-1", kw: 45.0, hp: 60.0, phase: 3, volt: "380V", cos: 0.85, head: "150 m³/h @ 75 meter" },
-        "XM 150-5-2": { model: "Floteq XM 150-5-2", kw: 55.0, hp: 75.0, phase: 3, volt: "380V", cos: 0.85, head: "150 m³/h @ 94 meter" },
-        "XM 150-6": { model: "Floteq XM 150-6", kw: 75.0, hp: 100.0, phase: 3, volt: "380V", cos: 0.85, head: "150 m³/h @ 120 meter" },
-
-    };
+            const opt = document.createElement('option');
+            opt.value = key;
+            opt.textContent = `${pump.model} | ${pump.kw} kW (${pump.hp} HP) | ${pump.phase}-Ph`;
+            
+            if (currentOptGroup) {
+                currentOptGroup.appendChild(opt);
+            } else {
+                dropdown.appendChild(opt);
+            }
+        }
+    }
 
     let selectedPumpData = null;
 
@@ -6526,6 +6494,7 @@ updateTerminalStates();            }
     window.onload = function() {
         updateClock();
         fetchData();
+	initPumpDropdown();
         hitungKelistrikan();
         initDatalistBarang();
         refreshBpmtDropdown();
